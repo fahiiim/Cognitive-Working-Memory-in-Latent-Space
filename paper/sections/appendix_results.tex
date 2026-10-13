@@ -70,12 +70,28 @@ wave, after the bound.
   \label{fig:donespread}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig5_tradeoff.pdf}
+  \caption{Accuracy against mean steps on OOD-depth for every threshold of every rule.}
+  \label{fig:tradeoff}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig6_premature_vs_depth.pdf}
+  \caption{Premature-stop rate against depth; the dotted line is the training maximum.}
+  \label{fig:premature_depth}
+\end{figure}
+
 \paragraph{Linear probes.} A linear probe fitted on ID-val hidden states decodes whether a position is
 still pending ($t < \rho_i$) from $h_i^{(t)}$, and transfers to OOD-depth and OOD-both without refitting
 (\cref{tab:probes}). The backbone therefore represents the pending bit of the automaton in
 \cref{prop:automaton}; whether a stopping rule uses it is a separate question.
 
 \IfFileExists{tables/probes_ablations.tex}{\input{tables/probes_ablations}}{}
+
+\input{sections/related_table}
 
 \paragraph{Measured compute.} \Cref{fig:compute} plots measured FLOPs per instance (from
 \texttt{FlopCounterMode}, at the mean length of each split) against accuracy. The completion heads add

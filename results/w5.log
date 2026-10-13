@@ -1,0 +1,6 @@
+main_parity: 8 runs, 6 finished
+[14:21:01] start parity-done_prop_joint-fixed_prior-s0-33eee06d
+[14:28:04] ok parity-done_prop_joint-fixed_prior-s0-33eee06d (423s)
+ablations: 3 runs, 2 finished
+[14:28:04] start addition-base-fixed_prior-s0-a56f86a9
+[14:35:20] ok addition-base-fixed_prior-s0-a56f86a9 (437s)

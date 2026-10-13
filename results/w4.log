@@ -4,3 +4,13 @@ main_gates: 12 runs, 2 finished
 [12:29:17] start parity-act-own-s0-4363ccbf
 [12:55:34] ok parity-act-own-s0-4363ccbf (1577s)
 [12:55:34] start parity-act-own-s1-e0d7f6b9
+[13:25:30] ok parity-act-own-s1-e0d7f6b9 (1796s)
+[13:25:30] start addition-ponder-own-s1-fb985c65
+[13:59:25] ok addition-ponder-own-s1-fb985c65 (2034s)
+[13:59:25] start parity-ponder-own-s0-b3812a5a
+[14:04:53] ok parity-ponder-own-s0-b3812a5a (329s)
+[14:04:53] start parity-ponder-own-s1-246a04ec
+[14:29:19] ok parity-ponder-own-s1-246a04ec (1466s)
+main_parity: 8 runs, 8 finished
+main_addition: 8 runs, 7 finished
+ablations: 3 runs, 2 finished

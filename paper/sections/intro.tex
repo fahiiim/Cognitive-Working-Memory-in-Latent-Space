@@ -37,12 +37,14 @@ achieve it.
 
 \paragraph{Findings.} (i) Jointly trained pooled gates leak length: on addition, ACT is 99.8\% accurate on
 deeper inputs while using fewer steps than the bound allows, by reading a global shortcut, and falls to
-35.6\% once inputs are both deeper and longer. (ii) Premature stopping and premature error are different
+35.9\% once inputs are both deeper and longer. (ii) Premature stopping and premature error are different
 things: global convergence rules halt before the bound on most deep addition inputs and are still
 right, because a travelling carry keeps the state moving. (iii) When pending positions are genuinely
 ambiguous, as in addition, per-position confidence is already a certificate: max-softmax halts at
 exactly $\mathrm{LB}(x)$ on every split, and our completion heads match it without improving on it.
-(iv) When they are not, as in parity, every learned signal we tried, including completion heads designed
-after the automaton, learns the training clock and halts at the training depth. Taken together, the
-results say that the difficulty of termination detection lies less in the readout architecture than in
+(iv) When they are not, as in parity, the completion heads, although designed after the automaton,
+learn the training clock and halt at the training depth, and pooled gates extrapolate in depth but
+fall below 1\% once inputs are also longer. (v) Jointly trained completion heads leave the backbone's
+solution unchanged, whereas gates that reweight the task loss degrade it. Taken together, the results
+say that the difficulty of termination detection lies less in the readout architecture than in
 training data that never shows a computation unfinished at a late step.

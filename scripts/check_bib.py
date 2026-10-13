@@ -23,7 +23,7 @@ CITE_RE = re.compile(r"\\(?:cite|citet|citep|citealp|citeauthor|citeyear)\*?(?:\
 
 def cited_keys() -> set[str]:
     keys = set()
-    for tex in (ROOT / "paper").rglob("*.tex"):
+    for tex in [ROOT / "paper" / "main.tex", *(ROOT / "paper" / "sections").glob("*.tex")]:
         for m in CITE_RE.finditer(tex.read_text(encoding="utf-8")):
             keys |= {k.strip() for k in m.group(1).split(",") if k.strip()}
     return keys

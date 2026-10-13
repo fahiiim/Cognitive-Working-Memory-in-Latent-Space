@@ -6,3 +6,10 @@ main_parity: 8 runs, 2 finished
 [12:36:18] start parity-done_joint-fixed_prior-s0-86b6b864
 [12:59:03] ok parity-done_joint-fixed_prior-s0-86b6b864 (1366s)
 [12:59:03] start parity-done_joint-fixed_prior-s1-a1d07249
+[13:27:44] ok parity-done_joint-fixed_prior-s1-a1d07249 (1721s)
+[13:27:44] start parity-trm_joint-fixed_prior-s0-e17d4cbd
+[13:59:27] ok parity-trm_joint-fixed_prior-s0-e17d4cbd (1903s)
+[13:59:27] start parity-trm_joint-fixed_prior-s1-f4fdd648
+[14:23:34] ok parity-trm_joint-fixed_prior-s1-f4fdd648 (1447s)
+main_gates: 12 runs, 10 finished
+main_addition: 8 runs, 7 finished

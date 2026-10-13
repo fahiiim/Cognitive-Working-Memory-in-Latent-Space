@@ -7,3 +7,12 @@ ablations: 3 runs, 0 finished
 [12:41:27] ok addition-base-fixed_prior-s0-647caf4a (1156s)
 main_gates: 12 runs, 3 finished
 [12:41:27] start parity-v1gate-own-s1-bdf046a1
+[13:07:22] ok parity-v1gate-own-s1-bdf046a1 (1555s)
+[13:07:22] start parity-v1gate-own-s0-6584ccbd
+[13:43:49] ok parity-v1gate-own-s0-6584ccbd (2187s)
+[13:43:49] start addition-v1gate-own-s1-79865170
+[14:11:24] ok addition-v1gate-own-s1-79865170 (1654s)
+[14:11:24] start addition-v1gate-own-s0-565b75e2
+[14:34:59] ok addition-v1gate-own-s0-565b75e2 (1415s)
+main_parity: 8 runs, 8 finished
+main_addition: 8 runs, 8 finished

@@ -1,0 +1,29 @@
+\begin{table}[h]
+  \centering
+  \caption{Closest works by property: per-instance depth (PD), depth/length separation (DL), halting
+  tested deeper than training (OOD-H), local halting signal (Loc), formal stopping result (Th), halting
+  signal decoupled from the task-loss weighting (Dec). \textsf{Y} yes, $\sim$ partial, -- no.
+  Full matrix and search protocol: \texttt{paper/related\_work\_matrix.md}.}
+  \label{tab:related}
+  \small
+  \begin{tabular}{lcccccc}
+    \toprule
+    Work & PD & DL & OOD-H & Loc & Th & Dec \\
+    \midrule
+    ACT \citep{graves2016act} & -- & -- & -- & $\sim$ & -- & -- \\
+    PonderNet \citep{banino2021pondernet} & -- & -- & $\sim$ & -- & -- & -- \\
+    Neural GPU limits \citep{price2016extensions} & $\sim$ & $\sim$ & -- & -- & -- & -- \\
+    DT-recall \citep{bansal2022endtoend} & -- & -- & -- & -- & -- & -- \\
+    AdRNN \citep{veerabadran2023adaptive} & $\sim$ & -- & \textsf{Y} & -- & -- & -- \\
+    Looped TF \citep{fan2025looped} & $\sim$ & -- & $\sim$ & -- & -- & -- \\
+    Recurrent depth \citep{geiping2025scaling} & -- & -- & -- & \textsf{Y} & -- & \textsf{Y} \\
+    TRM \citep{jolicoeur2025trm} & -- & -- & -- & -- & -- & $\sim$ \\
+    ANIRA \citep{moosa2026anira} & $\sim$ & -- & $\sim$ & -- & -- & -- \\
+    Stochastic stopping \citep{kuo2026stochastic} & -- & $\sim$ & $\sim$ & -- & -- & -- \\
+    Halting diagnosis \citep{popescu2026halting} & -- & -- & -- & -- & -- & \textsf{Y} \\
+    Finish detection \citep{krishna2026finish} & -- & -- & $\sim$ & -- & -- & \textsf{Y} \\
+    \midrule
+    This work & \textsf{Y} & \textsf{Y} & \textsf{Y} & \textsf{Y} & \textsf{Y} & \textsf{Y} \\
+    \bottomrule
+  \end{tabular}
+\end{table}

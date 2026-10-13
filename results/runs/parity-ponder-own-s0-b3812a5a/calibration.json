@@ -1,0 +1,26 @@
+{
+  "id_val": {
+    "done_post": 0.03927479172005409,
+    "done_prop_post": 0.04681907861785693
+  },
+  "id_test": {
+    "done_post": 0.042604438617636714,
+    "done_prop_post": 0.05004819997954695
+  },
+  "ood_val": {
+    "done_post": 0.06762256894073823,
+    "done_prop_post": 0.04476722619191906
+  },
+  "ood_depth": {
+    "done_post": 0.11341339967289096,
+    "done_prop_post": 0.08449042129292712
+  },
+  "ood_length": {
+    "done_post": 0.03753626981850911,
+    "done_prop_post": 0.042287964368001266
+  },
+  "ood_both": {
+    "done_post": 0.07561894328837274,
+    "done_prop_post": 0.10375230692510859
+  }
+}

@@ -5,55 +5,109 @@
         "entry": "act",
         "split": "id_test",
         "acc": 0.999,
-        "mean_steps": 2.372,
-        "premature": 0.6625,
-        "rho_depth": 0.2653435588386568,
-        "rho_length_given_depth": 0.25736024419224385
+        "mean_steps": 2.601,
+        "premature": 0.6455,
+        "rho_depth": 0.2990261232841943,
+        "rho_length_given_depth": 0.20827623414399393
       },
       {
         "entry": "act",
         "split": "id_val",
         "acc": 0.998,
-        "mean_steps": 2.31,
-        "premature": 0.658,
-        "rho_depth": 0.22446205966178168,
-        "rho_length_given_depth": 0.3240232322458634
+        "mean_steps": 2.5477499999999997,
+        "premature": 0.6425000000000001,
+        "rho_depth": 0.26069114290082274,
+        "rho_length_given_depth": 0.2740092881812966
       },
       {
         "entry": "act",
         "split": "ood_both",
-        "acc": 0.356,
-        "mean_steps": 2.932,
+        "acc": 0.3595,
+        "mean_steps": 2.9945,
         "premature": 1.0,
-        "rho_depth": -0.27512268390245725,
-        "rho_length_given_depth": 0.2311272511802511
+        "rho_depth": -0.25179510553024465,
+        "rho_length_given_depth": 0.18697042957802218
       },
       {
         "entry": "act",
         "split": "ood_depth",
         "acc": 0.9975,
-        "mean_steps": 2.1025,
+        "mean_steps": 2.4405,
         "premature": 1.0,
-        "rho_depth": -0.017018792246606292,
-        "rho_length_given_depth": 0.3711395704709408
+        "rho_depth": -0.007946118012715397,
+        "rho_length_given_depth": 0.3292582227931498
       },
       {
         "entry": "act",
         "split": "ood_length",
-        "acc": 0.437,
-        "mean_steps": 2.717,
-        "premature": 0.698,
-        "rho_depth": 0.4977657100189019,
-        "rho_length_given_depth": -0.030492455351538644
+        "acc": 0.432,
+        "mean_steps": 2.762,
+        "premature": 0.703,
+        "rho_depth": 0.4534663162354921,
+        "rho_length_given_depth": -0.022981635121895657
       },
       {
         "entry": "act",
         "split": "ood_val",
         "acc": 0.978,
-        "mean_steps": 3.343,
+        "mean_steps": 3.4215,
         "premature": 1.0,
-        "rho_depth": -0.00429915148982698,
-        "rho_length_given_depth": 0.05950549098732532
+        "rho_depth": 0.004378202869367046,
+        "rho_length_given_depth": 0.047543164912503794
+      },
+      {
+        "entry": "done_joint",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 5.093,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_joint",
+        "split": "id_val",
+        "acc": 1.0,
+        "mean_steps": 5.0905,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_both",
+        "acc": 0.9904999999999999,
+        "mean_steps": 75.356,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_depth",
+        "acc": 1.0,
+        "mean_steps": 13.496,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_length",
+        "acc": 1.0,
+        "mean_steps": 5.472,
+        "premature": 0.0,
+        "rho_depth": 0.9999999999999998,
+        "rho_length_given_depth": 3.469446951953614e-12
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_val",
+        "acc": 1.0,
+        "mean_steps": 14.041,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
       },
       {
         "entry": "done_post",
@@ -102,6 +156,60 @@
       },
       {
         "entry": "done_post",
+        "split": "ood_val",
+        "acc": 1.0,
+        "mean_steps": 14.041,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 5.093,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "id_val",
+        "acc": 1.0,
+        "mean_steps": 5.0905,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_both",
+        "acc": 1.0,
+        "mean_steps": 75.356,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_depth",
+        "acc": 1.0,
+        "mean_steps": 13.496,
+        "premature": 0.0,
+        "rho_depth": 1.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_length",
+        "acc": 1.0,
+        "mean_steps": 5.472,
+        "premature": 0.0,
+        "rho_depth": 0.9999999999999998,
+        "rho_length_given_depth": 3.469446951953614e-12
+      },
+      {
+        "entry": "done_prop_joint",
         "split": "ood_val",
         "acc": 1.0,
         "mean_steps": 14.041,
@@ -653,55 +761,55 @@
         "entry": "ponder",
         "split": "id_test",
         "acc": 1.0,
-        "mean_steps": 4.9715,
-        "premature": 0.361,
-        "rho_depth": 0.26221242182679,
-        "rho_length_given_depth": 0.2653908735918868
+        "mean_steps": 4.968999999999999,
+        "premature": 0.36224999999999996,
+        "rho_depth": 0.2702162022722246,
+        "rho_length_given_depth": 0.263638421366608
       },
       {
         "entry": "ponder",
         "split": "id_val",
         "acc": 1.0,
-        "mean_steps": 4.8785,
-        "premature": 0.3755,
-        "rho_depth": 0.20820322344817513,
-        "rho_length_given_depth": 0.31768184936507593
+        "mean_steps": 4.872249999999999,
+        "premature": 0.37375,
+        "rho_depth": 0.21411526102873676,
+        "rho_length_given_depth": 0.3231208355661545
       },
       {
         "entry": "ponder",
         "split": "ood_both",
-        "acc": 0.475,
-        "mean_steps": 5.432,
+        "acc": 0.476,
+        "mean_steps": 5.5465,
         "premature": 1.0,
-        "rho_depth": -0.11326945658042868,
-        "rho_length_given_depth": -0.0766056308484067
+        "rho_depth": -0.10980932226835746,
+        "rho_length_given_depth": -0.11473823144585193
       },
       {
         "entry": "ponder",
         "split": "ood_depth",
-        "acc": 0.9915,
-        "mean_steps": 6.477,
-        "premature": 0.755,
-        "rho_depth": 0.28755671484746104,
-        "rho_length_given_depth": 0.28975811446425725
+        "acc": 0.9950000000000001,
+        "mean_steps": 6.471,
+        "premature": 0.75075,
+        "rho_depth": 0.2924476953592786,
+        "rho_length_given_depth": 0.285851815535188
       },
       {
         "entry": "ponder",
         "split": "ood_length",
-        "acc": 0.813,
-        "mean_steps": 5.255,
-        "premature": 0.413,
-        "rho_depth": 0.5563598822761442,
-        "rho_length_given_depth": -0.08656071410342728
+        "acc": 0.8134999999999999,
+        "mean_steps": 5.247,
+        "premature": 0.4135,
+        "rho_depth": 0.5667904913868012,
+        "rho_length_given_depth": -0.08050168875965369
       },
       {
         "entry": "ponder",
         "split": "ood_val",
-        "acc": 0.999,
-        "mean_steps": 9.036,
-        "premature": 0.557,
-        "rho_depth": 0.2147851440209514,
-        "rho_length_given_depth": 0.027303596806815995
+        "acc": 0.9995,
+        "mean_steps": 9.0625,
+        "premature": 0.5565,
+        "rho_depth": 0.21376071167429267,
+        "rho_length_given_depth": 0.03406758121200272
       },
       {
         "entry": "stability",
@@ -758,6 +866,60 @@
         "rho_length_given_depth": 0.05676803237835645
       },
       {
+        "entry": "trm_joint",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 2.85575,
+        "premature": 0.49,
+        "rho_depth": 0.2904203948838377,
+        "rho_length_given_depth": 0.26074857892485626
+      },
+      {
+        "entry": "trm_joint",
+        "split": "id_val",
+        "acc": 1.0,
+        "mean_steps": 2.7535,
+        "premature": 0.505,
+        "rho_depth": 0.2462580406188555,
+        "rho_length_given_depth": 0.3262740714640183
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_both",
+        "acc": 0.319,
+        "mean_steps": 15.1065,
+        "premature": 1.0,
+        "rho_depth": -0.06736326444278623,
+        "rho_length_given_depth": 0.08602149026276668
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_depth",
+        "acc": 1.0,
+        "mean_steps": 4.24775,
+        "premature": 0.7465,
+        "rho_depth": 0.055623791767166156,
+        "rho_length_given_depth": 0.35774784250047326
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_length",
+        "acc": 0.489,
+        "mean_steps": 2.99,
+        "premature": 0.673,
+        "rho_depth": 0.577208706077049,
+        "rho_length_given_depth": -0.010839671951682723
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_val",
+        "acc": 1.0,
+        "mean_steps": 7.414,
+        "premature": 0.556,
+        "rho_depth": 0.190761106317008,
+        "rho_length_given_depth": 0.05890207540292276
+      },
+      {
         "entry": "trm_post",
         "split": "id_test",
         "acc": 0.99575,
@@ -810,9 +972,171 @@
         "premature": 0.6465,
         "rho_depth": 0.23916212732233133,
         "rho_length_given_depth": 0.07750125642974348
+      },
+      {
+        "entry": "v1gate",
+        "split": "id_test",
+        "acc": 0.99875,
+        "mean_steps": 2.3715,
+        "premature": 0.6625,
+        "rho_depth": 0.26537698272976684,
+        "rho_length_given_depth": 0.2570488385339457
+      },
+      {
+        "entry": "v1gate",
+        "split": "id_val",
+        "acc": 0.9975,
+        "mean_steps": 2.3095,
+        "premature": 0.658,
+        "rho_depth": 0.2244861087227185,
+        "rho_length_given_depth": 0.3239021511931094
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_both",
+        "acc": 0.6965,
+        "mean_steps": 4.0075,
+        "premature": 1.0,
+        "rho_depth": 0.12503002832975907,
+        "rho_length_given_depth": -0.026133523936666576
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_depth",
+        "acc": 0.9975,
+        "mean_steps": 2.102,
+        "premature": 1.0,
+        "rho_depth": -0.016666547318206843,
+        "rho_length_given_depth": 0.37040304599552704
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_length",
+        "acc": 0.496,
+        "mean_steps": 4.3885000000000005,
+        "premature": 0.6125,
+        "rho_depth": 0.5385961903232453,
+        "rho_length_given_depth": -0.022108017410083933
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_val",
+        "acc": 0.978,
+        "mean_steps": 3.3434999999999997,
+        "premature": 1.0,
+        "rho_depth": -0.0022672421406568564,
+        "rho_length_given_depth": 0.059378864652960196
       }
     ],
     "parity": [
+      {
+        "entry": "act",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 3.5227500000000003,
+        "premature": 0.8875,
+        "rho_depth": 0.9122656945659671,
+        "rho_length_given_depth": 0.14426514923064782
+      },
+      {
+        "entry": "act",
+        "split": "id_val",
+        "acc": 1.0,
+        "mean_steps": 3.4565,
+        "premature": 0.8625,
+        "rho_depth": 0.9237105898678408,
+        "rho_length_given_depth": 0.1305873892418556
+      },
+      {
+        "entry": "act",
+        "split": "ood_both",
+        "acc": 0.007,
+        "mean_steps": 52.352500000000006,
+        "premature": 1.0,
+        "rho_depth": 0.8735844717973478,
+        "rho_length_given_depth": -0.452814817742054
+      },
+      {
+        "entry": "act",
+        "split": "ood_depth",
+        "acc": 0.98925,
+        "mean_steps": 11.37575,
+        "premature": 0.97575,
+        "rho_depth": 0.8502529971046288,
+        "rho_length_given_depth": 0.024934971696250745
+      },
+      {
+        "entry": "act",
+        "split": "ood_length",
+        "acc": 0.862,
+        "mean_steps": 4.3435,
+        "premature": 0.886,
+        "rho_depth": 0.975031260640415,
+        "rho_length_given_depth": 0.03116883370955407
+      },
+      {
+        "entry": "act",
+        "split": "ood_val",
+        "acc": 0.974,
+        "mean_steps": 12.074,
+        "premature": 0.994,
+        "rho_depth": 0.7562782861387599,
+        "rho_length_given_depth": -0.024714462288812487
+      },
+      {
+        "entry": "done_joint",
+        "split": "id_test",
+        "acc": 0.9984999999999999,
+        "mean_steps": 4.903499999999999,
+        "premature": 0.07325000000000001,
+        "rho_depth": 0.998527690636175,
+        "rho_length_given_depth": -0.029889288934912803
+      },
+      {
+        "entry": "done_joint",
+        "split": "id_val",
+        "acc": 0.99875,
+        "mean_steps": 4.798,
+        "premature": 0.069,
+        "rho_depth": 0.9986316266916426,
+        "rho_length_given_depth": -0.04168031763712947
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_both",
+        "acc": 0.0,
+        "mean_steps": 8.8895,
+        "premature": 1.0,
+        "rho_depth": -0.01072943890401758,
+        "rho_length_given_depth": 0.11050362267925534
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_depth",
+        "acc": 0.3225,
+        "mean_steps": 8.9915,
+        "premature": 1.0,
+        "rho_depth": 0.04828516601532629,
+        "rho_length_given_depth": -0.17804535433056629
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_length",
+        "acc": 0.9975,
+        "mean_steps": 5.369999999999999,
+        "premature": 0.08549999999999999,
+        "rho_depth": 0.9965595450201616,
+        "rho_length_given_depth": -0.023458412520028303
+      },
+      {
+        "entry": "done_joint",
+        "split": "ood_val",
+        "acc": 0.21100000000000002,
+        "mean_steps": 8.827,
+        "premature": 1.0,
+        "rho_depth": -0.02078590881251698,
+        "rho_length_given_depth": -0.09499379105746526
+      },
       {
         "entry": "done_post",
         "split": "id_test",
@@ -866,6 +1190,60 @@
         "premature": 1.0,
         "rho_depth": -0.05993166189569088,
         "rho_length_given_depth": -0.054451088379297796
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 4.9079999999999995,
+        "premature": 0.07100000000000001,
+        "rho_depth": 0.998832027931438,
+        "rho_length_given_depth": -0.011105953888301816
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "id_val",
+        "acc": 0.99925,
+        "mean_steps": 4.80225,
+        "premature": 0.066,
+        "rho_depth": 0.9988229965592761,
+        "rho_length_given_depth": -0.021861885946833026
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_both",
+        "acc": 0.0,
+        "mean_steps": 8.969999999999999,
+        "premature": 1.0,
+        "rho_depth": 0.01431406337432099,
+        "rho_length_given_depth": 0.05272907678604927
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_depth",
+        "acc": 0.34225,
+        "mean_steps": 8.9955,
+        "premature": 1.0,
+        "rho_depth": 0.013163485332245433,
+        "rho_length_given_depth": -0.09095808151247994
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_length",
+        "acc": 1.0,
+        "mean_steps": 5.378,
+        "premature": 0.0815,
+        "rho_depth": 0.9976023058716199,
+        "rho_length_given_depth": -0.03222812418319384
+      },
+      {
+        "entry": "done_prop_joint",
+        "split": "ood_val",
+        "acc": 0.2525,
+        "mean_steps": 8.949,
+        "premature": 1.0,
+        "rho_depth": 0.035036843016705094,
+        "rho_length_given_depth": -0.015330119300416238
       },
       {
         "entry": "done_prop_post",
@@ -1408,6 +1786,60 @@
         "rho_length_given_depth": -0.05099664397961692
       },
       {
+        "entry": "ponder",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 5.5495,
+        "premature": 0.14325,
+        "rho_depth": 0.9067357523267645,
+        "rho_length_given_depth": 0.13427682974400484
+      },
+      {
+        "entry": "ponder",
+        "split": "id_val",
+        "acc": 1.0,
+        "mean_steps": 5.481,
+        "premature": 0.13525,
+        "rho_depth": 0.9177607237754144,
+        "rho_length_given_depth": 0.12994217200812094
+      },
+      {
+        "entry": "ponder",
+        "split": "ood_both",
+        "acc": 0.0005,
+        "mean_steps": 58.89,
+        "premature": 0.9225,
+        "rho_depth": 0.9401823051038332,
+        "rho_length_given_depth": -0.6398894100887311
+      },
+      {
+        "entry": "ponder",
+        "split": "ood_depth",
+        "acc": 0.96675,
+        "mean_steps": 13.1105,
+        "premature": 0.303,
+        "rho_depth": 0.842838427315203,
+        "rho_length_given_depth": 0.006379170934962864
+      },
+      {
+        "entry": "ponder",
+        "split": "ood_length",
+        "acc": 1.0,
+        "mean_steps": 6.4415,
+        "premature": 0.0205,
+        "rho_depth": 0.9858152396838133,
+        "rho_length_given_depth": 0.02381511378560425
+      },
+      {
+        "entry": "ponder",
+        "split": "ood_val",
+        "acc": 0.9645,
+        "mean_steps": 13.68,
+        "premature": 0.34650000000000003,
+        "rho_depth": 0.7308391618609111,
+        "rho_length_given_depth": -0.037686227812550495
+      },
+      {
         "entry": "stability",
         "split": "id_test",
         "acc": 1.0,
@@ -1462,6 +1894,60 @@
         "rho_length_given_depth": 0.019212458223980912
       },
       {
+        "entry": "trm_joint",
+        "split": "id_test",
+        "acc": 1.0,
+        "mean_steps": 3.5162500000000003,
+        "premature": 0.89,
+        "rho_depth": 0.912534080390564,
+        "rho_length_given_depth": 0.12736042078764154
+      },
+      {
+        "entry": "trm_joint",
+        "split": "id_val",
+        "acc": 1.0,
+        "mean_steps": 3.451,
+        "premature": 0.866,
+        "rho_depth": 0.9238594471715211,
+        "rho_length_given_depth": 0.11823933320072505
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_both",
+        "acc": 0.0015,
+        "mean_steps": 26.9715,
+        "premature": 1.0,
+        "rho_depth": 0.6521020360585779,
+        "rho_length_given_depth": -0.5202372070595644
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_depth",
+        "acc": 0.90875,
+        "mean_steps": 11.277000000000001,
+        "premature": 0.92625,
+        "rho_depth": 0.8335527009958392,
+        "rho_length_given_depth": -0.006064302569049534
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_length",
+        "acc": 0.8105,
+        "mean_steps": 4.2605,
+        "premature": 0.886,
+        "rho_depth": 0.9662247387542006,
+        "rho_length_given_depth": 0.026650677488291113
+      },
+      {
+        "entry": "trm_joint",
+        "split": "ood_val",
+        "acc": 0.7204999999999999,
+        "mean_steps": 11.732500000000002,
+        "premature": 0.9655,
+        "rho_depth": 0.643812677570164,
+        "rho_length_given_depth": -0.07289246083770408
+      },
+      {
         "entry": "trm_post",
         "split": "id_test",
         "acc": 0.9984999999999999,
@@ -1514,6 +2000,60 @@
         "premature": 1.0,
         "rho_depth": 0.19502162586235652,
         "rho_length_given_depth": -0.26059868487958543
+      },
+      {
+        "entry": "v1gate",
+        "split": "id_test",
+        "acc": 0.03,
+        "mean_steps": 26.0,
+        "premature": 0.0,
+        "rho_depth": 0.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "v1gate",
+        "split": "id_val",
+        "acc": 0.0345,
+        "mean_steps": 26.0,
+        "premature": 0.0,
+        "rho_depth": 0.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_both",
+        "acc": 0.0,
+        "mean_steps": 144.0,
+        "premature": 0.0,
+        "rho_depth": 0.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_depth",
+        "acc": 0.0,
+        "mean_steps": 36.0,
+        "premature": 0.0,
+        "rho_depth": 0.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_length",
+        "acc": 0.0,
+        "mean_steps": 26.0,
+        "premature": 0.0,
+        "rho_depth": 0.0,
+        "rho_length_given_depth": 0.0
+      },
+      {
+        "entry": "v1gate",
+        "split": "ood_val",
+        "acc": 0.0,
+        "mean_steps": 32.0,
+        "premature": 0.0,
+        "rho_depth": 0.0,
+        "rho_length_given_depth": 0.0
       }
     ]
   },
@@ -1530,6 +2070,21 @@
         "reject": false
       },
       "done_post vs trm_post": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_post vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_post vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_post vs v1gate": {
         "p": 0.5,
         "p_adj": 1.0,
         "reject": false
@@ -1554,6 +2109,81 @@
         "p_adj": 1.0,
         "reject": false
       },
+      "done_prop_post vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs trm_joint": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs stability": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs kl": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs trm_post": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs stability": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs kl": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs trm_post": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
       "done_post vs max_softmax": {
         "p": 1.0,
         "p_adj": 1.0,
@@ -1574,6 +2204,11 @@
         "p_adj": 1.0,
         "reject": false
       },
+      "done_post vs trm_joint": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
       "done_prop_post vs stability": {
         "p": 1.0,
         "p_adj": 1.0,
@@ -1585,6 +2220,61 @@
         "reject": false
       },
       "done_prop_post vs trm_post": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs ponder": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs max_softmax": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs entropy": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs hidden_change": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs max_conf_fan": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs trm_joint": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs max_softmax": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs entropy": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs hidden_change": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs max_conf_fan": {
+        "p": 1.0,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs trm_joint": {
         "p": 1.0,
         "p_adj": 1.0,
         "reject": false
@@ -1626,6 +2316,26 @@
         "p_adj": 1.0,
         "reject": false
       },
+      "done_post vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_post vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_post vs trm_joint": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_post vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
       "done_prop_post vs max_softmax": {
         "p": 0.5,
         "p_adj": 1.0,
@@ -1658,6 +2368,136 @@
       },
       "done_prop_post vs trm_post": {
         "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs trm_joint": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_post vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs max_softmax": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs entropy": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs stability": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs kl": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs hidden_change": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs max_conf_fan": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs trm_joint": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs max_softmax": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs entropy": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs stability": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs kl": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs hidden_change": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs max_conf_fan": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs trm_post": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs act": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs ponder": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs trm_joint": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_prop_joint vs v1gate": {
+        "p": 0.5,
+        "p_adj": 1.0,
+        "reject": false
+      },
+      "done_joint vs trm_post": {
+        "p": 1.0,
         "p_adj": 1.0,
         "reject": false
       }

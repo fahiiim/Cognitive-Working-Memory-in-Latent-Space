@@ -17,7 +17,7 @@
 \item {\bf Limitations}
     \item[] Question: Does the paper discuss the limitations of the work performed by the authors?
     \item[] Answer: \answerYes{} % Replace by \answerYes{}, \answerNo{}, or \answerNA{}.
-    \item[] Justification: \Cref{sec:limitations} discusses the tasks, the architecture class, the loose maze bound, and the cases where simple confidence rules suffice.
+    \item[] Justification: \Cref{sec:limitations} discusses the tasks, the architecture class, the reduced scale, the maze negative result, and the cases where simple confidence rules suffice.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer NA means that the paper has no limitation while the answer No means that the paper has limitations, but those are not discussed in the paper. 
@@ -95,7 +95,7 @@
 \item {\bf Experiment statistical significance}
     \item[] Question: Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?
     \item[] Answer: \answerYes{} % Replace by \answerYes{}, \answerNo{}, or \answerNA{}.
-    \item[] Justification: 95\% bootstrap confidence intervals over instances (clustered by seed), Wilcoxon tests across seeds and Holm correction; \cref{sec:experiments}.
+    \item[] Justification: Bootstrap intervals over seeds (accuracy) and over instances (premature rates); with only two seeds the intervals are close to the seed range and Wilcoxon/Holm tests cannot reach significance, which \cref{sec:experiments,sec:limitations} state explicitly.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer NA means that the paper does not include experiments.

@@ -4,3 +4,13 @@ main_addition: 8 runs, 2 finished
 [12:16:58] start addition-done_prop_joint-fixed_prior-s1-6928232f
 [12:45:13] ok addition-done_prop_joint-fixed_prior-s1-6928232f (1695s)
 [12:45:13] start addition-done_joint-fixed_prior-s0-7396e081
+[13:08:51] ok addition-done_joint-fixed_prior-s0-7396e081 (1417s)
+[13:08:51] start addition-done_joint-fixed_prior-s1-af5359a3
+[13:44:12] ok addition-done_joint-fixed_prior-s1-af5359a3 (2121s)
+[13:44:12] start addition-trm_joint-fixed_prior-s0-195f0103
+[14:10:41] ok addition-trm_joint-fixed_prior-s0-195f0103 (1590s)
+[14:10:41] start addition-trm_joint-fixed_prior-s1-f87be9fb
+[14:34:15] ok addition-trm_joint-fixed_prior-s1-f87be9fb (1413s)
+main_parity: 8 runs, 8 finished
+main_gates: 12 runs, 11 finished
+ablations: 3 runs, 2 finished

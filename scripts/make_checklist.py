@@ -14,8 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ANSWERS = [
     ("Yes", "The abstract and \\cref{sec:intro} state each claim with the experiment that tests it; "
             "\\texttt{paper/claims\\_map.md} maps every number to its source file."),
-    ("Yes", "\\Cref{sec:limitations} discusses the tasks, the architecture class, the loose maze bound, "
-            "and the cases where simple confidence rules suffice."),
+    ("Yes", "\\Cref{sec:limitations} discusses the tasks, the architecture class, the reduced scale, "
+            "the maze negative result, and the cases where simple confidence rules suffice."),
     ("Yes", "Assumptions are stated in \\cref{sec:theory}; full proofs are in \\cref{app:proofs}, and each "
             "result has an executable check in \\texttt{tests/test\\_theory.py}."),
     ("Yes", "\\Cref{app:details} lists every hyperparameter, split and selection rule; one YAML config per run "
@@ -24,8 +24,9 @@ ANSWERS = [
             "generated from fixed seeds."),
     ("Yes", "\\Cref{sec:benchmark,sec:method} and \\cref{app:details} give splits, objectives, optimiser, "
             "schedules, threshold grids and the ID-val selection rule."),
-    ("Yes", "95\\% bootstrap confidence intervals over instances (clustered by seed), Wilcoxon tests across "
-            "seeds and Holm correction; \\cref{sec:experiments}."),
+    ("Yes", "Bootstrap intervals over seeds (accuracy) and over instances (premature rates); with only two "
+            "seeds the intervals are close to the seed range and Wilcoxon/Holm tests cannot reach significance, "
+            "which \\cref{sec:experiments,sec:limitations} state explicitly."),
     ("Yes", "One RTX 5070; GPU-hours per sweep are reported in \\cref{app:details}."),
     ("Yes", "The work uses synthetic data only and follows the NeurIPS Code of Ethics."),
     ("NA", "Foundational research on halting in small synthetic-task models; we see no direct societal "

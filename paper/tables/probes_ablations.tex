@@ -1,0 +1,40 @@
+\begin{table}[h]
+\centering
+\caption{Left: linear probe for the pending state (fitted on ID-val, seed-0 base model on addition). Middle: ablations on addition (seed 0; accuracy in \%). Right: CUDA-event latency for 512 OOD-depth instances with online early exit (median ms).}
+\label{tab:probes}
+\small
+\begin{tabular}{lrr}
+\toprule
+Split & Acc. & AUC \\
+\midrule
+id-test & 100.0 & 1.000 \\
+ood-depth & 100.0 & 1.000 \\
+ood-both & 100.0 & 1.000 \\
+\bottomrule
+\end{tabular}\quad
+\begin{tabular}{llrr}
+\toprule
+Ablation & Rule & OOD-depth & OOD-both \\
+\midrule
+main & max softmax & 100.0 & 99.8 \\
+main & oracle stable & 100.0 & 99.6 \\
+no recall & max softmax & 100.0 & 7.5 \\
+no recall & oracle stable & 100.0 & 0.6 \\
+r 2 & max softmax & 100.0 & 100.0 \\
+r 2 & oracle stable & 100.0 & 100.0 \\
+width 64 & max softmax & 100.0 & 48.0 \\
+width 64 & oracle stable & 100.0 & 95.2 \\
+\bottomrule
+\end{tabular}\quad
+\begin{tabular}{lr}
+\toprule
+Rule & ms \\
+\midrule
+fixed T (val-selected) & 7.4 \\
+fixed T = T max & 23.8 \\
+max softmax & 19.8 \\
+done post & 23.8 \\
+done prop post & 28.3 \\
+\bottomrule
+\end{tabular}
+\end{table}

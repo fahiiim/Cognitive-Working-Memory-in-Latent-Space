@@ -1,0 +1,41 @@
+{
+  "status": [
+    {
+      "config": "configs/pilot_addition.yaml",
+      "runs": 8,
+      "finished": 8,
+      "gpu_hours": 3.47
+    },
+    {
+      "config": "configs/tune_gates.yaml",
+      "runs": 6,
+      "finished": 2,
+      "gpu_hours": 1.35
+    },
+    {
+      "config": "configs/main_addition.yaml",
+      "runs": 8,
+      "finished": 8,
+      "gpu_hours": 3.22
+    },
+    {
+      "config": "configs/main_parity.yaml",
+      "runs": 8,
+      "finished": 8,
+      "gpu_hours": 3.69
+    },
+    {
+      "config": "configs/main_gates.yaml",
+      "runs": 12,
+      "finished": 12,
+      "gpu_hours": 6.49
+    },
+    {
+      "config": "configs/ablations.yaml",
+      "runs": 3,
+      "finished": 3,
+      "gpu_hours": 0.83
+    }
+  ],
+  "total_gpu_hours": 19.049999999999997
+}

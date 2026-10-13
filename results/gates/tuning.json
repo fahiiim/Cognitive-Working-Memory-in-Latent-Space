@@ -5,5 +5,8 @@
   "ponder": {
     "ponder_beta": 0.01,
     "ponder_lambda_p": 0.1
+  },
+  "v1gate": {
+    "v1_lambda": 0.01
   }
 }

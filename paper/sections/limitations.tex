@@ -4,9 +4,10 @@
 \paragraph{Scale.} Every experiment runs on one consumer GPU (RTX 5070, 12\,GB). The preregistered grid
 (five seeds per cell, full maze grid) was cut to fit a five-hour training budget: two seeds per
 method, three single-seed ablations, and a smaller gate-tuning budget than pre-registered for PonderNet
-and the v1 gate (\texttt{PREREGISTRATION.md}, deviations). Our confidence intervals are bootstrapped over
-test instances within each run and therefore understate seed variance; several comparisons that we
-report as ties may separate with more seeds.
+and the v1 gate (\texttt{PREREGISTRATION.md}, deviations). With two seeds, the accuracy intervals are
+little more than the seed range and the pre-registered Wilcoxon tests cannot reach significance; several
+comparisons that we report as ties may separate with more seeds, and small differences should not be
+read as effects.
 
 \paragraph{Mazes.} We could not train a maze backbone that passes Gate G1 within the budget (3\% exact
 match on training-size mazes when stopped), so we make no stopping-rule claims on mazes. Whether local

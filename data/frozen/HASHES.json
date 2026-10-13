@@ -1,0 +1,78 @@
+{
+  "addition/id_val": {
+    "sha256": "45f4dec5e66f2f86371bec398c423bff26c09d3166adbeaae1eca4afafcb2f95",
+    "n": 2000
+  },
+  "addition/id_test": {
+    "sha256": "db668e78b458dda53d8f492df70d348674e8d348537cb777b4577545575b34d8",
+    "n": 2000
+  },
+  "addition/ood_val": {
+    "sha256": "e3acab6322af5c2953eefa45ffed3844f9826067407cb9638b7de55157622f9e",
+    "n": 1000
+  },
+  "addition/ood_depth": {
+    "sha256": "e161402e6fe80231ec74cfbf923e16ca3dcb8d476b8e8ad58315a45bdf770f79",
+    "n": 2000
+  },
+  "addition/ood_length": {
+    "sha256": "ec44602a2c909766a222bb88572e4d4aeb393ca89ef5df7e27d6d1909f761481",
+    "n": 1000
+  },
+  "addition/ood_both": {
+    "sha256": "6beb5d695d4225ac49600f142afc1e5b80ccc020761848cdc4fc3f2870004ad3",
+    "n": 1000
+  },
+  "parity/id_val": {
+    "sha256": "feae2a162a163dbceaaff1910160cd953ee8f998da4aa675d407de5f8a00ce4c",
+    "n": 2000
+  },
+  "parity/id_test": {
+    "sha256": "ced3e2104bc7d20a4163a4949b4a87cf38ba0cf6f2e0528a4bdc2c686fd8168e",
+    "n": 2000
+  },
+  "parity/ood_val": {
+    "sha256": "35c551ff2b55a28182ef8acdf17dcc1f6a282ed924843a695e8633f0ccf55f28",
+    "n": 1000
+  },
+  "parity/ood_depth": {
+    "sha256": "ae11527b2806a63e145e859286680db18203b6ad735a13c313e517af138d996d",
+    "n": 2000
+  },
+  "parity/ood_length": {
+    "sha256": "3193825dbfb0669ce977c6fa9b5b7b9a63f9fb48d5f3a959f38ce06e81bc1948",
+    "n": 1000
+  },
+  "parity/ood_both": {
+    "sha256": "611e50f54fc01aadd42c5e616b5fdcd54efd6a9317ff1b442073f703efec2f57",
+    "n": 1000
+  },
+  "mazes/id_val": {
+    "sha256": "a1836025fa7b24ae393ab4a9991c65b452d0791248dcb1b6b5db07e0db313bc2",
+    "n": 1000
+  },
+  "mazes/id_test": {
+    "sha256": "ef02f208194bb92948f39381037510991c7fa4e28552adef0912d9683d5c5b75",
+    "n": 1000
+  },
+  "mazes/ood_13": {
+    "sha256": "a30b126a4cb569dd0748e2d28071fc0712d944fdd0aa2907dbcecb7ea3b17ad1",
+    "n": 500
+  },
+  "mazes/ood_17": {
+    "sha256": "842fe7d9447e41f1e6b9e3147d309b66836dd2be5d8c489027db189aaaae8ea0",
+    "n": 500
+  },
+  "mazes/ood_21": {
+    "sha256": "2ac44213fc2f4a3e5d956eea83dc4a4a1c5c453edc246bc524e1d615de6ef2fe",
+    "n": 500
+  },
+  "mazes/ood_25": {
+    "sha256": "ba978f50a092a49f1eb54297f9817117c4c7d0c9d8b3f675e97db1548fb520c8",
+    "n": 500
+  },
+  "mazes/ood_33": {
+    "sha256": "a6f9452e3e191dcb15b7029e52a39fce106014abc72485f0e1669881ebe5b948",
+    "n": 500
+  }
+}

@@ -1,0 +1,11 @@
+# Jointly trained pooled gates (ACT, PonderNet, v1 GLWM gate). Their task loss is weighted by
+# their own halting distribution, so the backbone objective does not apply ("own").
+base:
+  objective: own
+  iters: 8000
+  batch_size: 512
+  t_train: 20
+grid:
+  task: [addition, parity]
+  method: [act, ponder, v1gate]
+  seed: [0, 1, 2, 3, 4]

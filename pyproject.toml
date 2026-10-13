@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glwm2"
+version = "0.1.0"
+description = "Learned termination detection for recurrent latent reasoners under depth shift"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.7",
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "pyyaml",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ipykernel", "nbformat", "nbclient", "nbconvert", "requests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["gpu: needs a CUDA device", "slow: takes more than a few seconds"]

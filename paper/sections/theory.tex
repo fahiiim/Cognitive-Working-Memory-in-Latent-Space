@@ -1,0 +1,103 @@
+\section{Setup and theory}
+\label{sec:theory}
+
+\paragraph{Local recurrent reasoners.}
+An input is a sequence $x = (x_0,\dots,x_{P-1})$ over an alphabet $\Sigma$, and the task assigns an
+output $y_i(x)\in\Gamma$ to every position. Positions outside $\{0,\dots,P-1\}$ hold a fixed padding
+symbol $\bot$; we write $\tilde x$ for the padded sequence. A \emph{local recurrent reasoner} with
+growth rate $r$ keeps one latent vector per position and computes
+\begin{equation}
+  e_i = E(x_i),\quad h_i^{(0)} = H(e_i),\quad
+  h_i^{(t+1)} = U\big(h^{(t)}_{i-r:i+r},\, e_{i-r:i+r}\big),\quad
+  \hat y_i^{(t)} = D\big(h_i^{(t)}\big),
+  \label{eq:local}
+\end{equation}
+where $E, H, D$ are pointwise, $U$ is shared across positions and steps, and $h_j, e_j$ outside the
+input take fixed padding values. Our backbone (\cref{sec:method}) is an instance with
+$r$ kernel-3 convolutions per step. Write $W_i^{\rho}(x) = (\tilde x_{i-\rho},\dots,\tilde x_{i+\rho})$
+for the window of radius $\rho$ around $i$, including padding symbols.
+
+\begin{lemma}[Light cone]\label{lem:cone}
+For every $t\ge 0$, $h_i^{(t)}$ is a function of $W_i^{rt}(x)$ only, and this function does not
+depend on $i$. Hence if $W_i^{rt}(x) = W_{i'}^{rt}(x')$ then $\hat y_i^{(s)}(x) = \hat y_{i'}^{(s)}(x')$
+for all $s\le t$.
+\end{lemma}
+
+\paragraph{Per-instance depth.}
+The window is all a position can have seen, so the right notion of difficulty is how large a window
+must be before the answer is pinned down.
+
+\begin{definition}[Determining radius and depth]\label{def:depth}
+Position $i$ of $x$ is \emph{$\rho$-determined} if every pair $(x', i')$ with
+$W_{i'}^{\rho}(x') = W_i^{\rho}(x)$ has $y_{i'}(x') = y_i(x)$. The determining radius
+$\rho_i(x)$ is the smallest such $\rho$, and the depth of the instance is
+$d^*(x) = \max_i \rho_i(x)$.
+\end{definition}
+
+Because windows are compared at any position $i'$, the definition matches what a
+translation-equivariant model can know: it can see the input boundary only once $\bot$ enters its
+window.
+
+\begin{theorem}[Light-cone lower bound and unsoundness]\label{thm:lb}
+Let $f$ be any local recurrent reasoner with growth rate $r$, and let $t < \lceil \rho_i(x)/r\rceil$.
+Then there is a pair $(x', i')$ with $\hat y_{i'}^{(t)}(x') = \hat y_i^{(t)}(x)$ but
+$y_{i'}(x') \ne y_i(x)$. So at step $t$ the model is wrong at position $i$ of $x$ or at position $i'$
+of $x'$. In particular, no local reasoner can be correct on every input at a step earlier than
+$\mathrm{LB}(x) = \lceil d^*(x)/r\rceil$.
+\end{theorem}
+
+The theorem constrains what any \emph{stopping rule} can achieve: halting $x$ at step
+$\tau(x) < \mathrm{LB}(x)$ returns an answer that is not certified by the information the model holds.
+Whether that answer is wrong depends on which member of the pair the data contain. Two consequences
+make this concrete.
+
+\begin{corollary}[Commit-on-done local rules]\label{cor:local}
+Suppose each position $i$ raises a done flag that depends only on its own history
+$h_i^{(0)},\dots,h_i^{(t)}$, and commits $\hat y_i^{(t)}$ when it does. If the system is correct on
+every input, then position $i$ of $x$ commits no earlier than $\lceil \rho_i(x)/r\rceil$, and the input
+halts no earlier than $\mathrm{LB}(x)$.
+\end{corollary}
+
+\begin{corollary}[Rules that see only the length]\label{cor:length}
+For addition, $d^*$ ranges over $\{1,\dots,L+1\}$ at length $L$. A rule whose halting step depends
+only on $L$ is correct on every input of length $L$ only if $\tau(L)\ge \lceil (L+1)/r\rceil$.
+It then spends $\lceil (L+1)/r\rceil - \mathrm{LB}(x)$ extra steps on every input; for uniformly random
+digits $d^* = O(\log L)$ with high probability, so the waste is $\Theta(L)$ steps.
+A length-only rule fitted on training depths ($\tau(L) < \lceil (L+1)/r\rceil$) is instead wrong on
+one member of every flip pair with $d^* > r\,\tau(L)$.
+\end{corollary}
+
+\paragraph{The bound is achievable with local, size-invariant signals.}
+For our two exact tasks, the determining radius has a closed form, and a local automaton reaches
+the bound for every input length.
+
+\begin{proposition}[Depth oracles]\label{prop:oracles}
+\emph{Addition} (digits least-significant first, outputs at positions $0,\dots,L$ with position $L$ the
+carry): let a \emph{stop} be a position $j<L$ with $a_j+b_j\ne 9$. Then
+$\rho_i(x) = i - s_i$, where $s_i$ is the nearest stop before $i$, or $-1$ if there is none.
+Thus $d^*(x)$ is the largest gap between consecutive elements of $\{-1\}\cup\{\text{stops}\}\cup\{L\}$.
+\emph{Segmented parity}: $\rho_i(x) = i - s_i$ for non-delimiter $i$, where $s_i$ is the previous
+delimiter or $-1$; $d^*(x)$ is the longest run of non-delimiters.
+\end{proposition}
+
+\begin{proposition}[Achievability]\label{prop:automaton}
+For addition and segmented parity there is a local reasoner with $r=1$ and a commit-on-done local
+flag such that, for every input of every length, every committed answer is correct and the input
+halts at exactly $\mathrm{LB}(x) = d^*(x)$ steps.
+\end{proposition}
+
+The automaton behind \cref{prop:automaton} stores one bit of \emph{pending} state per position (is my
+carry-in, or my segment prefix, known yet?) and flips it when a resolved neighbour passes its value
+along. Its done flag is a pointwise function of its state, and the same rule works at every length.
+This is the inductive bias our completion heads target. A pooled gate or a global confidence
+statistic, in contrast, has no reason to wait for the slowest pending chain. \Cref{sec:experiments}
+tests whether learned signals behave like the automaton beyond the training depth.
+
+\paragraph{Mazes.} For mazes the determining radius has no closed form, and information must travel
+along corridors rather than straight lines, so the light cone gives only a loose bound. We use the
+optimal path length and the dead-end-filling depth as empirical depth proxies.
+
+All proofs are in \cref{app:proofs}. Each result has an executable check in
+\texttt{tests/test\_theory.py}: the flip test for \cref{lem:cone} on random backbones, the pair
+construction of \cref{thm:lb}, brute-force verification of \cref{prop:oracles}, and the automata
+of \cref{prop:automaton} on lengths up to 512.

@@ -1,0 +1,65 @@
+\section{Backbone and completion heads}
+\label{sec:method}
+
+\paragraph{Backbone.} GLWM-2 is an instance of \cref{eq:local}: a pointwise embedding $E$, a
+pointwise initial state $H = \mathrm{LN}$, and the shared step
+\begin{equation}
+  h^{(t+1)} = \mathrm{LN}\Big(h^{(t)} + W_{\mathrm{out}}\,
+  \mathrm{GELU}\big(\mathrm{Conv}^{(r)}_{3}\cdots \mathrm{GELU}(\mathrm{Conv}^{(1)}_{3}[h^{(t)}; e])\big)\Big),
+  \label{eq:step}
+\end{equation}
+with $r$ kernel-3 convolutions per step, input re-injection (``recall''), a residual connection, and a
+LayerNorm over channels at every position. The decoder is a pointwise two-layer MLP. The growth rate
+is therefore exactly $r$ positions per step (checked by the flip test). We use width 128 and $r=1$ on
+T1/T2, and width 64 with $r=4$ on mazes. The backbone is trained with a per-step cross-entropy
+averaged uniformly over $T_{\text{train}}=20$ steps (``fixed prior'') or with the progressive loss of
+\citet{bansal2022endtoend}; the pilot (\cref{sec:experiments}) selects the objective per task.
+
+\paragraph{Completion heads.} A completion head reads each position's latent state and predicts
+whether that position is \emph{done}: correct now and at every later step. The target is computed from
+the model's own trajectory,
+\begin{equation}
+  z_i^{(t)} = \prod_{s=t}^{T} \mathbb{1}\big[\hat y_i^{(s)} = y_i\big],
+  \label{eq:done}
+\end{equation}
+i.e.\ a reversed cumulative minimum of per-position correctness, and the head is trained with binary
+cross-entropy. We study three variants. \emph{Post hoc}: a pointwise MLP on $h_i^{(t)}$, fitted after the
+backbone is frozen (rollouts to $2T_{\text{train}}$). \emph{Joint}: the same head trained alongside the
+backbone with an auxiliary binary cross-entropy (weight 1). Unlike ACT and PonderNet, the head never
+reweights the per-step task loss: the backbone still receives the same task gradient at every step,
+so the head is a separate prediction problem rather than a halting distribution over the task loss. \emph{Propagating}: the head also reads its
+neighbours' previous done probabilities through a kernel-3 convolution,
+$p_i^{(t)} = \sigma\big(g(h_i^{(t)}) + \mathrm{Conv}_3[p^{(t-1)}, \mathbf 1]_i\big)$, which mirrors the
+pending-bit automaton of \cref{prop:automaton}: a position can learn to wait until its left neighbour
+reports done.
+
+\paragraph{Halting rule.} An instance halts at the first step where every valid position is done with
+probability above $\tau$ (\cref{alg:halt}); $\tau$ is selected on ID-val as the cheapest threshold whose
+accuracy is within 0.5 points of the best. Because the rule takes a minimum over positions, its cost
+grows with the slowest position, not with the input length.
+
+\begin{algorithm}[t]
+  \caption{Halting with local completion heads (batched; halted instances leave the batch).}
+  \label{alg:halt}
+  \begin{algorithmic}[1]
+    \Require input $x$, backbone $(E,H,U,D)$, completion head $c$, threshold $\tau$, budget $T_{\max}$
+    \State $e \gets E(x)$;\quad $h \gets H(e)$;\quad $p \gets \mathbf 0$
+    \For{$t = 1,\dots,T_{\max}$}
+      \State $h \gets U(h, e)$;\quad $\hat y \gets \arg\max D(h)$
+      \State $p \gets \sigma\big(c(h, p)\big)$ \Comment{per position; the pointwise head ignores $p$}
+      \If{$\min_{i\ \text{valid}} p_i > \tau$ \textbf{or} $t = T_{\max}$}
+        \State \Return $(\hat y, t)$
+      \EndIf
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+\paragraph{Baselines.} All baselines use the same backbone and selection protocol. \emph{References}:
+fixed $T$ (selected on ID-val), the oracle lower bound $\mathrm{LB}(x)$, the any-step oracle (first
+step with the right answer), and the stable oracle (first step from which the answer stays right).
+\emph{Post hoc}: max-softmax and entropy (minimum confidence over positions), $k$-step prediction
+stability \citep{zhou2020pabee}, KL between consecutive steps and hidden-state change (maxima over
+positions), maximum confidence over steps \citep{fan2025looped}, and a pooled correctness head in the
+style of TRM \citep{jolicoeur2025trm} fitted post hoc. \emph{Jointly trained}: ACT
+\citep{graves2016act}, PonderNet with its KL to a geometric prior \citep{banino2021pondernet}, a joint
+pooled correctness head, and the v1 GLWM pooled gate with its initialisation fixed.

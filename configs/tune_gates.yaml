@@ -1,0 +1,17 @@
+# Equal tuning budget for the jointly trained gates: 3 settings each (the default from
+# main_gates.yaml plus the two below), addition, seed 0. The setting with the fewest mean steps
+# whose ID-val accuracy is within 0.5 points of the best is used for main_gates (notebook 04).
+base:
+  task: addition
+  objective: own
+  iters: 8000
+  batch_size: 512
+  t_train: 20
+  seed: 0
+runs:
+  - {method: act, act_tau: 0.01}
+  - {method: act, act_tau: 0.1}
+  - {method: ponder, ponder_lambda_p: 0.2}
+  - {method: ponder, ponder_lambda_p: 0.05, ponder_beta: 0.1}
+  - {method: v1gate, v1_lambda: 0.001}
+  - {method: v1gate, v1_lambda: 0.1}

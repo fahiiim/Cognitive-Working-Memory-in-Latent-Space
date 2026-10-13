@@ -1,0 +1,19 @@
+# Ablations on T1 addition (notebook 08). Every entry changes one component of the main setup.
+base:
+  task: addition
+  objective: fixed_prior
+  iters: 8000
+  batch_size: 512
+  t_train: 20
+runs:
+  - {method: base, recall: false, tags: {ablation: no_recall}}
+  - {method: base, norm: none, tags: {ablation: no_norm}}
+  - {method: base, width: 64, tags: {ablation: width_64}}
+  - {method: base, width: 256, tags: {ablation: width_256}}
+  - {method: base, t_train: 12, tags: {ablation: t_train_12}}
+  - {method: base, t_train: 32, tags: {ablation: t_train_32}}
+  - {method: base, convs_per_step: 2, tags: {ablation: r_2}}
+  - {method: done_joint, aux_weight: 0.1, tags: {ablation: aux_0.1}}
+  - {method: done_joint, aux_weight: 3.0, tags: {ablation: aux_3}}
+grid:
+  seed: [0, 1]

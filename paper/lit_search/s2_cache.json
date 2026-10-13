@@ -1,0 +1,91 @@
+{
+ "1603.08983": {
+  "paperId": "04cca8e341a5da42b29b0bc831cb25a0f784fa01",
+  "publicationVenue": {
+   "id": "1901e811-ee72-4b20-8f7e-de08cd395a10",
+   "name": "arXiv.org",
+   "alternate_names": [
+    "ArXiv"
+   ],
+   "issn": "2331-8422",
+   "url": "https://arxiv.org"
+  },
+  "title": "Adaptive Computation Time for Recurrent Neural Networks",
+  "venue": "arXiv.org",
+  "year": 2016,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/1603.08983"
+  }
+ },
+ "1807.03819": {
+  "paperId": "ac4dafdef1d2b685b7f28a11837414573d39ff4e",
+  "publicationVenue": {
+   "id": "939c6e1d-0d17-4d6e-8a82-66d960df0e40",
+   "name": "International Conference on Learning Representations",
+   "type": "conference",
+   "alternate_names": [
+    "Int Conf Learn Represent",
+    "ICLR"
+   ],
+   "url": "https://iclr.cc/"
+  },
+  "title": "Universal Transformers",
+  "venue": "International Conference on Learning Representations",
+  "year": 2018,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/1807.03819"
+  }
+ },
+ "2108.06011": {
+  "paperId": "1c4dfd55d8289759046417ea5992c6daaa7429f6",
+  "publicationVenue": {
+   "id": "1901e811-ee72-4b20-8f7e-de08cd395a10",
+   "name": "arXiv.org",
+   "alternate_names": [
+    "ArXiv"
+   ],
+   "issn": "2331-8422",
+   "url": "https://arxiv.org"
+  },
+  "title": "Datasets for Studying Generalization from Easy to Hard Examples",
+  "venue": "arXiv.org",
+  "year": 2021,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/2108.06011"
+  }
+ },
+ "1611.00736": {
+  "paperId": "0bb487b9cfefd56e79be0a5be5f1e05742683301",
+  "publicationVenue": {
+   "id": "1901e811-ee72-4b20-8f7e-de08cd395a10",
+   "name": "arXiv.org",
+   "alternate_names": [
+    "ArXiv"
+   ],
+   "issn": "2331-8422",
+   "url": "https://arxiv.org"
+  },
+  "title": "Extensions and Limitations of the Neural GPU",
+  "venue": "arXiv.org",
+  "year": 2016,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/1611.00736"
+  }
+ }
+}

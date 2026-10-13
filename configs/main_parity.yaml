@@ -1,0 +1,14 @@
+# Main grid for T2 segmented parity: backbone objective chosen in the pilot (notebook 03).
+base:
+  task: parity
+  objective: fixed_prior
+  iters: 8000
+  batch_size: 512
+  t_train: 20
+runs:
+  - {method: base}
+  - {method: trm_joint}
+  - {method: done_joint}
+  - {method: done_prop_joint}
+grid:
+  seed: [0, 1, 2, 3, 4]

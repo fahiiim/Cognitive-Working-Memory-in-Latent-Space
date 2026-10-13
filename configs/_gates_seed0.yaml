@@ -1,0 +1,15 @@
+base:
+  batch_size: 512
+  iters: 8000
+  objective: own
+  t_train: 20
+grid:
+  method:
+  - act
+  - ponder
+  - v1gate
+  seed:
+  - 0
+  task:
+  - addition
+  - parity

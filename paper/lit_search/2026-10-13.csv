@@ -1,0 +1,316 @@
+arxiv_id,published,n_queries,title,first_author
+2601.07675,2026-01-12,3,Tab-TRM: Tiny Recursive Model for Insurance Pricing on Tabular Data,Kishan Padayachy
+2509.23314,2025-09-27,2,Two-Scale Latent Dynamics for Recurrent-Depth Transformers,Francesco Pappone
+2510.04871,2025-10-06,2,Less is More: Recursive Reasoning with Tiny Networks,Alexia Jolicoeur-Martineau
+2510.10103,2025-10-11,2,Stop When Enough: Adaptive Early-Stopping for Chain-of-Thought Reasoning,Renliang Sun
+2602.07845,2026-02-08,2,Recurrent-Depth VLA: Implicit Test-Time Compute Scaling of Vision-Language-Action Models via Latent Iterative Reasoning,Yalcin Tur
+2603.01914,2026-03-02,2,AdaPonderLM: Gated Pondering Language Models with Token-Wise Adaptive Depth,Shixiang Song
+2603.02193,2026-03-02,2,Symbol-Equivariant Recurrent Reasoning Models,Richard Freinschlag
+2603.15641,2026-03-03,2,Form Follows Function: Recursive Stem Model,Navid Hakimi
+2603.12529,2026-03-13,2,TERMINATOR: Learning Optimal Exit Points for Early Stopping in Chain-of-Thought Reasoning,Alliot Nagle
+2603.14251,2026-03-15,2,Mitigating Overthinking in Large Reasoning Language Models via Reasoning Path Deviation Monitoring,Weixin Guan
+2603.22871,2026-03-24,2,Dynamical Systems Theory Behind a Hierarchical Reasoning Model,Vasiliy A. Es'kin
+2604.06787,2026-04-08,2,When Is Thinking Enough? Early Exit via Sufficiency Assessment for Efficient Reasoning,Yang Xiang
+2604.21999,2026-04-23,2,Universal Transformers Need Memory: Depth-State Trade-offs in Adaptive Recursive Reasoning,Grigory Sapunov
+2605.03999,2026-05-05,2,RD-ViT: Recurrent-Depth Vision Transformer for Semantic Segmentation with Reduced Data Dependence Extending the Recurrent-Depth Transformer Architecture to Dense Prediction,Renjie He
+2606.03741,2026-06-02,2,When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning,Ayushi Chadha
+2606.15099,2026-06-13,2,"Think Less, Act Early: Reinforced Latent Reasoning with Early Exit in Vision-Language-Action Models",Dianqiao Lei
+2606.29983,2026-06-29,2,Stabilizing Extrapolation in Looped Transformers via Learned Stochastic Stopping,Hsun-Yu Kuo
+2608.01534,2026-08-02,2,Recursive Vision Language Models for General Symbolic Reasoning,Omid Nejati Manzari
+2609.05988,2026-09-05,2,DART: Distributional Adversarial Recurrent Training for Algorithm Learning,Hieu Tran Bao
+physics/0104026,2001-04-05,1,New stopping criteria for segmenting DNA sequences,Wentian Li
+astro-ph/0503062,2005-03-03,1,Spatially Resolved Spectroscopy of the E+A Galaxies in the z=0.32 Cluster AC114,M. B. Pracy
+1205.4043,2012-05-17,1,Gradient-based stopping rules for maximum-likelihood quantum-state tomography,Scott Glancy
+1307.7785,2013-07-30,1,Potentiation Decay of Synapses and the Length Distributions of Synfire Chains Self-organized in Recurrent Neural Networks,Aaron Miller
+1511.08228,2015-11-25,1,Neural GPUs Learn Algorithms,Łukasz Kaiser
+1603.08983,2016-03-29,1,Adaptive Computation Time for Recurrent Neural Networks,Alex Graves
+1610.07647,2016-10-24,1,Learning to Reason With Adaptive Computation,Mark Neumann
+1611.00736,2016-11-02,1,Extensions and Limitations of the Neural GPU,Eric Price
+1702.08727,2017-02-28,1,Improving the Neural GPU Architecture for Algorithm Learning,Karlis Freivalds
+1708.04116,2017-08-14,1,Early Improving Recurrent Elastic Highway Network,Hyunsin Park
+1712.00386,2017-12-01,1,Probabilistic Adaptive Computation Time,Michael Figurnov
+1803.08165,2018-03-21,1,Comparing Fixed and Adaptive Computation Time for Recurrent Neural Networks,Daniel Fojo
+1803.09831,2018-03-26,1,Multiphysics Lattice Discrete Particle Modeling (M-LDPM) for the Simulation of Shale Fracture Permeability,Weixin Li
+1804.10123,2018-04-26,1,IamNN: Iterative and Adaptive Mobile Neural Network for Efficient Image Classification,Sam Leroux
+1806.02813,2018-06-07,1,Self-Consistent Trajectory Autoencoder: Hierarchical Reinforcement Learning with Trajectory Embeddings,John D. Co-Reyes
+1808.03863,2018-08-11,1,Finding Exact Forms on Thermodynamic Manifolds,Chao Ju
+1810.01480,2018-10-02,1,Learning to Segment Inputs for NMT Favors Character-Level Processing,Julia Kreutzer
+1812.02825,2018-12-05,1,Attending to Mathematical Language with Transformers,Artit Wangperawong
+1812.02335,2018-12-06,1,Layer Flexible Adaptive Computational Time,Lida Zhang
+1901.03429,2019-01-10,1,On the Turing Completeness of Modern Neural Network Architectures,Jorge Pérez
+1901.03842,2019-01-12,1,Summarization and Visualization of Large Volumes of Broadcast Video Data,Kumar Abhishek
+1911.10333,2019-11-23,1,The generalised buoyancy/inertial forces and available energy of axisymmetric compressible stratified vortex motions,Remi Tailleux
+2002.10306,2020-02-24,1,Adaptive Propagation Graph Convolutional Network,Indro Spinelli
+2003.10520,2020-03-23,1,Neural Game Engine: Accurate learning of generalizable forward models from pixels,Chris Bamford
+2007.05404,2020-07-10,1,Competitive sorption of mono- versus di-valent ions by highly charged globular macromolecules,Rohit Nikam
+2009.05888,2020-09-13,1,A variational asymmetric phase-field model of quasi-brittle fracture: Energetic solutions and their computation,Mariela Luege
+2009.07465,2020-09-16,1,Answering Any-hop Open-domain Questions with Iterative Document Reranking,Ping Nie
+2010.07620,2020-10-15,1,GMH: A General Multi-hop Reasoning Model for KG Completion,Yao Zhang
+2102.03157,2021-02-05,1,"When to Quit Gambling, if You Must!",Sang Hu
+2103.04374,2021-03-07,1,Learning When to Quit: Meta-Reasoning for Motion Planning,Yoonchang Sung
+2106.11730,2021-06-22,1,Learning to Inference with Early Exit in the Progressive Speech Enhancement,Andong Li
+2106.14821,2021-06-28,1,Martingale-induced local invariance in Progressive Quenching,Charles Moslonka
+2109.00273,2021-09-01,1,Probing quantum many-body correlations by universal ramping dynamics,Libo Liang
+2109.11745,2021-09-24,1,DACT-BERT: Differentiable Adaptive Computation Time for an Efficient BERT Inference,Cristóbal Eyzaguirre
+2112.07658,2021-12-14,1,AdaViT: Adaptive Tokens for Efficient Vision Transformer,Hongxu Yin
+2202.05826,2022-02-11,1,End-to-end Algorithm Synthesis with Recurrent Networks: Logical Extrapolation Without Overthinking,Arpit Bansal
+2202.10610,2022-02-22,1,Knowledge Base Question Answering by Case-based Reasoning over Subgraphs,Rajarshi Das
+2204.03276,2022-04-07,1,PALBERT: Teaching ALBERT to Ponder,Nikita Balagansky
+2210.04929,2022-10-10,1,Augmenting Batch Exchanges with Constant Function Market Makers,Geoffrey Ramseyer
+2211.09961,2022-11-18,1,Path Independent Equilibrium Models Can Better Exploit Test-Time Computation,Cem Anil
+2306.14630,2023-06-26,1,The action principle for equilibrium thermodynamics,Sikarin Yoo-Kong
+2308.10379,2023-08-20,1,Algorithm of Thoughts: Enhancing Exploration of Ideas in Large Language Models,Bilgehan Sel
+2311.06964,2023-11-12,1,Adaptive recurrent vision performs zero-shot computation scaling to unseen difficulty levels,Vijay Veerabadran
+2401.13444,2024-01-24,1,Fine-grained Stateful Knowledge Exploration: Effective and Efficient Graph Retrieval with Large Language Models,Dehao Tao
+2402.01750,2024-01-30,1,PACE: A Pragmatic Agent for Enhancing Communication Efficiency Using Large Language Models,Jiaxuan Li
+2402.11900,2024-02-19,1,Investigating Multi-Hop Factual Shortcuts in Knowledge Editing of Large Language Models,Tianjie Ju
+2403.03719,2024-03-06,1,Multimodal Transformer for Comics Text-Cloze,Emanuele Vivoli
+2403.15941,2024-03-23,1,Explore until Confident: Efficient Exploration for Embodied Question Answering,Allen Z. Ren
+2405.14791,2024-05-23,1,Recurrent Early Exits for Federated Learning with Heterogeneous Clients,Royson Lee
+2407.19724,2024-07-29,1,Constructing artificial life and materials scientists with accelerated AI using Deep AndersoNN,Saleem Abdul Fattah Ahmed Al Dajani
+2408.12293,2024-08-22,1,AT-SNN: Adaptive Tokens for Vision Transformer on Spiking Neural Network,Donghwa Kang
+2409.12618,2024-09-19,1,Iteration of Thought: Leveraging Inner Dialogue for Autonomous Large Language Model Reasoning,Santosh Kumar Radha
+2409.15647,2024-09-24,1,Looped Transformers for Length Generalization,Ying Fan
+2412.01417,2024-12-02,1,Learning Elementary Cellular Automata with Transformers,Mikhail Burtsev
+2501.19201,2025-01-31,1,Efficient Reasoning with Hidden Thinking,Xuan Shen
+2502.06813,2025-02-04,1,Policy Guided Tree Search for Enhanced LLM Reasoning,Yang Li
+2502.02542,2025-02-04,1,OverThink: Slowdown Attacks on Reasoning LLMs,Abhinav Kumar
+2502.08482,2025-02-12,1,Enhancing Auto-regressive Chain-of-Thought through Loop-Aligned Reasoning,Qifan Yu
+2502.08235,2025-02-12,1,The Danger of Overthinking: Examining the Reasoning-Action Dilemma in Agentic Tasks,Alejandro Cuadron
+2502.10954,2025-02-16,1,Learning to Stop Overthinking at Test Time,Hieu Tran Bao
+2502.19613,2025-02-26,1,Self-rewarding correction for mathematical reasoning,Wei Xiong
+2503.04472,2025-03-06,1,DAST: Difficulty-Adaptive Slow-Thinking for Large Reasoning Models,Yi Shen
+2503.11074,2025-03-14,1,Exploring the Necessity of Reasoning in LLM-based Agent Scenarios,Xueyang Zhou
+2504.06514,2025-04-09,1,Missing Premise exacerbates Overthinking: Are Reasoning Models losing Critical Thinking Skill?,Chenrui Fan
+2504.09777,2025-04-14,1,Reasoning without Regret,Tarun Chitra
+2504.15895,2025-04-22,1,Dynamic Early Exit in Reasoning Models,Chenxu Yang
+2505.03469,2025-05-06,1,Long-Short Chain-of-Thought Mixture Supervised Fine-Tuning Eliciting Efficient Reasoning in Large Language Models,Bin Yu
+2505.04881,2025-05-08,1,ConCISE: Confidence-guided Compression in Step-by-step Efficient Reasoning,Ziqing Qiao
+2505.07686,2025-05-12,1,S-GRPO: Early Exit via Reinforcement Learning in Reasoning Models,Muzhi Dai
+2505.14604,2025-05-20,1,Let LRMs Break Free from Overthinking via Self-Braking Tuning,Haoran Zhao
+2505.15684,2025-05-21,1,ThinkLess: A Training-Free Inference-Efficient Method for Reducing Reasoning Redundancy,Gengyang Li
+2505.17115,2025-05-21,1,Swarm Intelligence Enhanced Reasoning: A Density-Driven Framework for LLM-Based Multi-Agent Optimization,Ying Zhu
+2505.16448,2025-05-22,1,The First Impression Problem: Internal Bias Triggers Overthinking in Reasoning Models,Renfei Dang
+2505.17941,2025-05-23,1,VeriThinker: Learning to Verify Makes Reasoning Model Efficient,Zigeng Chen
+2505.18962,2025-05-25,1,System-1.5 Reasoning: Traversal in Language and Latent Spaces with Dynamic Shortcuts,Xiaoqiang Wang
+2505.22113,2025-05-28,1,THINK-Bench: Evaluating Thinking Efficiency and Chain-of-Thought Quality of Large Reasoning Models,Zhiyuan Li
+2505.23480,2025-05-29,1,Revisiting Overthinking in Long Chain-of-Thought from the Perspective of Self-Doubt,Keqin Peng
+2505.24362,2025-05-30,1,Knowing Before Saying: LLM Representations Encode Information About Chain-of-Thought Success Before Completion,Anum Afzal
+2506.01215,2025-06-01,1,"Compress, Gather, and Recompute: REFORMing Long-Context Processing in Transformers",Woomin Song
+2506.02536,2025-06-03,1,Answer Convergence as a Signal for Early Stopping in Reasoning,Xin Liu
+2506.07240,2025-06-08,1,Overclocking LLM Reasoning: Monitoring and Controlling Thinking Path Lengths in LLMs,Roy Eisenstadt
+2506.21093,2025-06-26,1,Chain-of-Thought Enhanced Shallow Transformers for Wireless Symbol Detection,Li Fan
+2506.21734,2025-06-26,1,Hierarchical Reasoning Model,Guan Wang
+2506.21655,2025-06-26,1,APO: Enhancing Reasoning Ability of MLLMs via Asymmetric Policy Optimization,Minjie Hong
+2507.02663,2025-07-03,1,Think How to Think: Mitigating Overthinking with Autonomous Difficulty Cognition in Large Reasoning Models,Yongjiang Liu
+2507.06087,2025-07-08,1,CoRE: Enhancing Metacognition with Label-free Self-evaluation in LRMs,Haoxi Li
+2507.06829,2025-07-09,1,Adaptive Termination for Multi-round Parallel Reasoning: An Universal Semantic Entropy-Guided Framework,Zenan Xu
+2507.07996,2025-07-10,1,Skip a Layer or Loop it? Test-Time Depth Adaptation of Pretrained LLMs,Ziyue Li
+2507.07995,2025-07-10,1,Single-pass Adaptive Image Tokenization for Minimum Program Search,Shivam Duggal
+2507.12846,2025-07-17,1,Enter the Mind Palace: Reasoning and Planning for Long-term Active Embodied Question Answering,Muhammad Fadhil Ginting
+2508.02178,2025-08-04,1,Reconsidering Overthinking: Penalizing Internal and External Redundancy in CoT Reasoning,Taihang Zhen
+2508.10293,2025-08-14,1,Promoting Efficient Reasoning with Verifiable Stepwise Reward,Chuhuai Yue
+2508.12604,2025-08-18,1,SSPO: Self-traced Step-wise Preference Optimization for Process Supervision and Reasoning Compression,Yuyang Xu
+2508.14138,2025-08-19,1,STAS: Spatio-Temporal Adaptive Computation Time for Spiking Transformers,Donghwa Kang
+2508.19277,2025-08-23,1,POT: Inducing Overthinking in LLMs via Black-Box Iterative Optimization,Xinyu Li
+2508.17803,2025-08-25,1,DRQA: Dynamic Reasoning Quota Allocation for Controlling Overthinking in Reasoning Large Language Models,Kaiwen Yan
+2509.12291,2025-09-15,1,Collaborative P4-SDN DDoS Detection and Mitigation with Early-Exit Neural Networks,Ouassim Karrakchou
+2509.17000,2025-09-21,1,Adaptive Overclocking: Dynamic Control of Thinking Path Length via Real-Time Reasoning Signals,Shuhao Jiang
+2509.21035,2025-09-25,1,CLAUSE: Agentic Neuro-Symbolic Knowledge Graph Reasoning via Dynamic Learnable Context Engineering,Yang Zhao
+2509.24238,2025-09-29,1,Learning to Ponder: Adaptive Reasoning in Latent Space,Yixin He
+2509.24251,2025-09-29,1,Latent Visual Reasoning,Bangzheng Li
+2509.24957,2025-09-29,1,Intra-request branch orchestration for efficient LLM reasoning,Weifan Jiang
+2510.00355,2025-09-30,1,Hierarchical Reasoning Models: Perspectives and Misconceptions,Renee Ge
+2510.01279,2025-09-30,1,TUMIX: Multi-Agent Test-Time Scaling with Tool-Use Mixture,Yongchao Chen
+2510.00546,2025-10-01,1,ThinkBrake: Efficient Reasoning via Log-Probability Margin Guided Decoding,Sangjun Song
+2510.02249,2025-10-02,1,"Explore Briefly, Then Decide: Mitigating LLM Overthinking via Cumulative Entropy Regulation",Yi Bin
+2510.03598,2025-10-04,1,Exploring the Hierarchical Reasoning Model for Small Natural-Image Classification Without Augmentation,Alexander V. Mantzaris
+2510.04573,2025-10-06,1,LaDiR: Latent Diffusion Enhances LLMs for Text Reasoning,Haoqiang Kang
+2510.05498,2025-10-07,1,Prototype-Based Dynamic Steering for Large Language Models,Ceyhun Efe Kayan
+2510.07358,2025-10-08,1,"Encode, Think, Decode: Scaling test-time reasoning with recursive latent thoughts",Yeskendir Koishekenov
+2510.07414,2025-10-08,1,Haystack Engineering: Context Engineering for Heterogeneous and Agentic Long-Context Evaluation,Mufei Li
+2510.06750,2025-10-08,1,Gold-Switch: Training-Free Superposition of Slow- and Fast- Thinking LLMs,Jaeseong Lee
+2510.08517,2025-10-09,1,CaRT: Teaching LLM Agents to Know When They Know Enough,Grace Liu
+2510.08525,2025-10-09,1,Which Heads Matter for Reasoning? RL-Guided KV Cache Compression,Wenjie Du
+2510.07880,2025-10-09,1,"Do LLMs Really Need 10+ Thoughts for ""Find the Time 1000 Days Later""? Towards Structural Understanding of LLM Overthinking",Xinliang Frederick Zhang
+2510.22832,2025-10-26,1,HRM-Agent: Training a recurrent reasoning model in dynamic environments using reinforcement learning,Long H Dang
+2511.01170,2025-11-03,1,DART: Difficulty-Adaptive Reasoning Truncation for Efficient Large Language Models,Ruofan Zhang
+2511.02886,2025-11-04,1,Test-time Adaptation of Tiny Recursive Models,Ronan Killian McGovern
+2511.04654,2025-11-06,1,Logit-Entropy Adaptive Stopping Heuristic for Efficient Chain-of-Thought Reasoning,Mohammad Atif Quamar
+2511.04108,2025-11-06,1,Batch Prompting Suppresses Overthinking Reasoning Under Constraint: How Batch Prompting Suppresses Overthinking in Reasoning Models,Saurabh Srivastava
+2511.16697,2025-11-17,1,Operational Regimes of Ternary $Γ$-Semiring Chemical Systems,Chandrasekhar Gokavarapu
+2511.16886,2025-11-21,1,Latent Reasoning in TRMs is Secretly a Policy Improvement Operator,Arip Asadulaev
+2511.21581,2025-11-26,1,Learning When to Stop: Adaptive Latent Reasoning via Reinforcement Learning,Alex Ning
+2511.22018,2025-11-27,1,MedEyes: Learning Dynamic Visual Focus for Medical Progressive Diagnosis,Chunzheng Zhu
+2512.01457,2025-12-01,1,Zero-Overhead Introspection for Adaptive Test-Time Compute,Rohin Manvi
+2512.02892,2025-12-02,1,Fast-Decoding Diffusion Language Models via Progress-Aware Confidence Schedules,Amr Mohamed
+2512.11847,2025-12-04,1,"Tiny Recursive Models on ARC-AGI-1: Inductive Biases, Identity Conditioning, and Test-Time Compute",Antonio Roye-Azar
+2512.07013,2025-12-07,1,Learning Paths to Multi-Sector Equilibrium: Belief Dynamics Under Uncertain Returns to Scale,Stefano Nasini
+2512.07242,2025-12-08,1,The late-time attractor structure of dynamical black branes,Yan Liu
+2512.18605,2025-12-21,1,Reflective Confidence: Correcting Reasoning Flaws via Online Self-Correction,Qinglin Zeng
+2601.03153,2026-01-06,1,Parallel Latent Reasoning for Sequential Recommendation,Jiakai Tang
+2601.02972,2026-01-06,1,"Correct, Concise and Complete: Multi-stage Training For Adaptive Reasoning",Nathanaël Carraz Rakotonirina
+2601.03717,2026-01-07,1,MIND: From Passive Mimicry to Active Reasoning through Capability-Aware Multi-Perspective CoT Distillation,Jin Cui
+2601.03649,2026-01-07,1,SyncThink: A Training-Free Strategy to Align Inference Termination with Reasoning Saturation,Gengyang Li
+2601.03823,2026-01-07,1,Step Potential Advantage Estimation: Harnessing Intermediate Confidence and Correctness for Efficient Mathematical Reasoning,Fei Wu
+2601.07180,2026-01-12,1,Structured Reasoning for Large Language Models,Jinyi Han
+2601.07123,2026-01-12,1,ENTRA: Entropy-Based Redundancy Avoidance in Large Language Model Reasoning,Ruichu Cai
+2601.09708,2026-01-14,1,Fast-ThinkAct: Efficient Vision-Language-Action Reasoning via Verbalizable Latent Planning,Chi-Pin Huang
+2601.10679,2026-01-15,1,Are Your Reasoning Models Reasoning or Guessing? A Mechanistic Analysis of Hierarchical Reasoning Models,Zirui Ren
+2601.09981,2026-01-15,1,DR$^2$Seg: Decomposed Two-Stage Rollouts for Efficient Reasoning Segmentation in Multimodal Large Language Models,Yulin He
+2601.12194,2026-01-17,1,Coherent Comparison as Information Cost: A Cost-First Ledger Framework for Discrete Dynamics,Sebastian Pardo-Guerra
+2601.13358,2026-01-19,1,The Geometry of Thought: How Scale Restructures Reasoning In Large Language Models,Samuel Cyrenius Anderson
+2601.13112,2026-01-19,1,CODE: A Contradiction-Based Deliberation Extension Framework for Overthinking Attacks on Retrieval-Augmented Generation,Xiaolei Zhang
+2601.13533,2026-01-20,1,Reasoning While Recommending: Entropy-Guided Latent Reasoning in Generative Re-ranking Models,Changshuo Zhang
+2601.19085,2026-01-27,1,Speed is Confidence,Joshua V. Dillon
+2601.22617,2026-01-30,1,EntroCut: Entropy-Guided Adaptive Truncation for Efficient Chain-of-Thought Reasoning in Small-scale Large Reasoning Models,Hongxi Yan
+2602.01166,2026-02-01,1,Latent Reasoning VLA: Latent Thinking and Prediction for Vision-Language-Action Models,Shuanghao Bai
+2602.02888,2026-02-02,1,HALT: Hallucination Assessment via Log-probs as Time series,Ahmad Shapiro
+2602.02156,2026-02-02,1,LoopViT: Scaling Visual ARC with Looped Transformers,Wen-Jie Shu
+2602.02010,2026-02-02,1,NEAT: Neuron-Based Early Exit for Large Reasoning Models,Kang Liu
+2602.03304,2026-02-03,1,To Search or Not to Search: Aligning the Decision Boundary of Deep Search Agents via Causal Intervention,Wenlin Zhang
+2602.08100,2026-02-08,1,Emergent Search and Backtracking in Latent Reasoning Models,Jasmine Cui
+2602.09487,2026-02-10,1,Adaptive recurrent flow map operator learning for reaction diffusion dynamics,Huseyin Tunc
+2602.09953,2026-02-10,1,ATTNPO: Attention-Guided Process Supervision for Efficient Reasoning,Shuaiyi Nie
+2602.11451,2026-02-11,1,LoopFormer: Elastic-Depth Looped Transformers for Latent Reasoning via Shortcut Modulation,Ahmadreza Jeddi
+2602.10490,2026-02-11,1,ChainRec: An Agentic Recommender Learning to Route Tool Chains for Diverse and Evolving Interests,Fuchun Li
+2602.14917,2026-02-16,1,BFS-PO: Best-First Search for Large Reasoning Models,Fiorenzo Parascandolo
+2602.16699,2026-02-18,1,Calibrate-Then-Act: Cost-Aware Exploration in LLM Agents,Wenxuan Ding
+2602.20610,2026-02-24,1,"SpecMind: Cognitively Inspired, Interactive Multi-Turn Framework for Postcondition Inference",Cuong Chi Le
+2603.05234,2026-03-05,1,Recursive Inference Machines for Neural Reasoning,Mieszko Komisarczyk
+2603.04751,2026-03-05,1,Evaluating the Search Agent in a Parallel World,Jiawei Chen
+2603.05147,2026-03-05,1,"Act, Think or Abstain: Complexity-Aware Adaptive Inference for Vision-Language-Action Models",Riccardo Andrea Izzo
+2603.08082,2026-03-09,1,Tiny Autoregressive Recursive Models,Paulius Rauba
+2603.11103,2026-03-11,1,Understanding by Reconstruction: Reversing the Software Development Process for LLM Pretraining,Zhiyuan Zeng
+2603.12252,2026-03-12,1,EndoCoT: Scaling Endogenous Chain-of-Thought Reasoning in Diffusion Models,Xuanlang Dai
+2603.12372,2026-03-12,1,Efficient Reasoning with Balanced Thinking,Yulin Li
+2603.14593,2026-03-15,1,Parameter-Efficient Quality Estimation via Frozen Recursive Models,Umar Abubacar
+2603.15051,2026-03-16,1,Thinking in Latents: Adaptive Anchor Refinement for Implicit Reasoning in LLMs,Disha Sheshanarayana
+2603.19503,2026-03-19,1,Vision Tiny Recursion Model (ViTRM): Parameter-Efficient Image Classification via Recursive State Refinement,Ange-Clément Akazan
+2604.03439,2026-04-03,1,Resolution-Independent Machine Learning Heat Flux Closure for ICF Plasmas,M. Luo
+2604.04720,2026-04-06,1,What Makes Good Multilingual Reasoning? Disentangling Traces with Measurable Features,Dayeon Ki
+2604.04930,2026-04-06,1,Early Stopping for Large Reasoning Models via Confidence Dynamics,Parsa Hosseini
+2604.05655,2026-04-07,1,LLM Reasoning as Trajectories: Step-Specific Representation Geometry and Correctness Signals,Lihao Sun
+2604.07146,2026-04-08,1,Learning to Search: A Decision-Based Agent for Knowledge-Based Visual Question Answering,Zhuohong Chen
+2604.08911,2026-04-10,1,"Sampleability transport, nonlinear regularization, and the porous medium flow",Hy P. G. Lam
+2604.10500,2026-04-12,1,Visual Enhanced Depth Scaling for Multimodal Latent Reasoning,Yudong Han
+2604.13521,2026-04-15,1,C-voting: Confidence-Based Test-Time Voting without Explicit Energy Functions,Kenji Kubo
+2604.14568,2026-04-16,1,Learning Adaptive Reasoning Paths for Efficient Visual Reasoning,Yixu Huang
+2604.17224,2026-04-19,1,LASER: Low-Rank Activation SVD for Efficient Recursion,Ege Çakar
+2604.17297,2026-04-19,1,CRISP: Compressing Redundancy in Chain-of-Thought via Intrinsic Saliency Pruning,Yangsong Lan
+2604.17596,2026-04-19,1,"Terminal Wrench: A Dataset of 331 Reward-Hackable Environments and 3,632 Exploit Trajectories",Ivan Bercovich
+2604.18839,2026-04-20,1,One Step Forward and K Steps Back: Better Reasoning with Denoising Recursion Models,Chris Cameron
+2604.18419,2026-04-20,1,Knowing When to Quit: A Principled Framework for Dynamic Abstention in LLM Reasoning,Hen Davidov
+2604.19488,2026-04-21,1,CoDA: Towards Effective Cross-domain Knowledge Transfer via CoT-guided Domain Adaptation,Jianzhi Yan
+2604.19899,2026-04-21,1,A Reproducibility Study of Metacognitive Retrieval-Augmented Generation,Gabriel Iturra-Bocaz
+2604.20022,2026-04-21,1,MoBayes: A Modular Bayesian Framework for Separating Reasoning from Language in Conversational Clinical Decision Support,Yusuf Kesmen
+2604.20328,2026-04-22,1,HyLaR: Hybrid Latent Reasoning with Decoupled Policy Optimization,Tao Cheng
+2604.22273,2026-04-24,1,"Self-Correction as Feedback Control: Error Dynamics, Stability Thresholds, and Prompt Interventions in LLMs",Aofan Liu
+2604.25444,2026-04-28,1,One Refiner to Unlock Them All: Inference-Time Reasoning Elicitation via Reinforcement Query Refinement,Yixiao Zhou
+2604.25458,2026-04-28,1,Benchmarking Stopping Criteria for Evolutionary Multi-objective Optimization,Kenji Kitamura
+2604.28192,2026-04-30,1,LaST-R1: Reinforcing Robotic Manipulation via Adaptive Physical Latent Reasoning,Hao Chen
+2604.27998,2026-04-30,1,Latent-GRPO: Group Relative Policy Optimization for Latent Reasoning,Jingcheng Deng
+2605.06690,2026-05-02,1,State Representation and Termination for Recursive Reasoning Systems,Debashis Guha
+2605.05873,2026-05-07,1,CITE: Anytime-Valid Statistical Inference in LLM Self-Consistency,Hirofumi Ota
+2605.06184,2026-05-07,1,Teaching LLMs Program Semantics via Symbolic Execution Traces,Jonas Bayer
+2605.05863,2026-05-07,1,SOPE: Stabilizing Off-Policy Evaluation for Online RL with Prior Data,Carlo Romeo
+2605.08441,2026-05-08,1,DUET: Optimize Token-Budget Allocation for Reinforcement Learning with Verifiable Rewards,Haoyu Hu
+2605.07316,2026-05-08,1,Implicit Compression Regularization: Concise Reasoning via Internal Shorter Distributions in RL Post-Training,Chen Wang
+2605.11011,2026-05-10,1,LoopUS: Recasting Pretrained LLMs into Looped Latent Refinement Models,Taekhyun Park
+2605.09948,2026-05-11,1,LoopVLA: Learning Sufficiency in Recurrent Refinement for Vision-Language-Action Models,Boyang Shen
+2605.10207,2026-05-11,1,LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation,Yiwen Chen
+2605.10195,2026-05-11,1,Breaking the Reward Barrier: Accelerating Tree-of-Thought Reasoning via Speculative Exploration,Shuzhang Zhong
+2605.13338,2026-05-13,1,Inducing Overthink: Hierarchical Genetic Algorithm-based DoS Attack on Black-Box Large Language Reasoning Models,Shuqiang Wang
+2605.15199,2026-05-14,1,EntityBench: Towards Entity-Consistent Long-Range Multi-Shot Video Generation,Ruozhen He
+2605.17672,2026-05-17,1,Stop When Reasoning Converges: Semantic-Preserving Early Exit for Reasoning Models,Dehai Min
+2605.18464,2026-05-18,1,PERL: Parameter Efficient Reasoning in CLIP Latent Space,Simone Carnemolla
+2605.19943,2026-05-19,1,Probabilistic Tiny Recursive Model,Amin Sghaier
+2605.22504,2026-05-21,1,LACO: Adaptive Latent Communication for Collaborative Driving,Tianhao Chen
+2605.23590,2026-05-22,1,Co-ReAct: Rubrics as Step-Level Collaborators for ReAct Agents,Jiazheng Kang
+2605.25958,2026-05-25,1,PolyGnosis 2.0: Enhancing LLM Reasoning via Agentic Harness Engineering for Polymarket and OSINT Insight Extraction,Daren Wang
+2605.28292,2026-05-27,1,CIRF: Tokenizing Chain-of-Thoughts into Reusable Functional Units for Efficient Latent Reasoning in Large Language Models,Yukyung Lee
+2605.27914,2026-05-27,1,"Does Capability Transfer to Subjective Behavior -- and Would Our Instruments Tell Us? A Self-Evolving, Trust-by-Construction Evaluation Paradigm", Yuming
+2605.29288,2026-05-28,1,Diagnosing Harmful Continuation in Answer-Correct Long-CoT Training Traces,Chen He
+2606.00206,2026-05-29,1,"Quantized Reasoning Models Think They Need to Think Longer, but They Do Not",Sanae Lotfi
+2606.00895,2026-05-30,1,Tiny Recursive Models for Solving the J2-Perturbed Lambert Problem,Minduli Wijayatunga
+2606.02871,2026-06-01,1,Adaptive Latent Agentic Reasoning,Dongwon Jung
+2606.01667,2026-06-01,1,ATLAS: Agentic Test-time Learning-to-Allocate Scaling,Peijia Qin
+2606.02020,2026-06-01,1,Unveiling the Entropy Dynamics of Chain-of-Thought Reasoning,Ting Xu
+2606.02835,2026-06-01,1,Thinking Past the Answer: Evaluating Harmful Overthinking in Large Reasoning Models,Simone Caldarella
+2606.03102,2026-06-02,1,"Small RL Controller, Large Language Model: RL-Guided Adaptive Sampling for Test-Time Scaling",Runpeng Dai
+2606.05859,2026-06-04,1,TARPO: Token-Wise Latent-Explicit Reasoning via Action-Routing Policy Optimization,Liting Zhang
+2606.07720,2026-06-05,1,Why Limit the Residual Stream to Layers and Not Tokens? Persistent Memory for Continuous Latent Reasoning,Mujtaba Farhan
+2606.07071,2026-06-05,1,Decision-Theoretic Stopping Rules for Document Screening,Aaron H. A. Fletcher
+2606.07108,2026-06-05,1,DyCon: Dynamic Reasoning Control via Evolving Difficulty Modeling,Tengyao Tu
+2606.08831,2026-06-07,1,Inference-Time Conformal Reasoning with Valid Factuality Control for Large Language Models,Ting Wang
+2606.10109,2026-06-08,1,When is Enough Enough? A Proposed Termination Point for the Number of Replicates in Computational Simulations,Eric T. Lofgren
+2607.22585,2026-06-08,1,The Scaffold Effect in Coding Agents: Harness Choice as a Hidden Variable in Coding-Agent Evaluation,Naman Vats
+2606.24898,2026-06-12,1,Dense Supervision Is Not Enough: The Readout Blind Spot in Looped Language Models,Rituraj Sharma
+2606.15160,2026-06-13,1,DLWM: Diverse Latent World Models for Efficient Multimodal Reasoning,David Huang
+2606.15874,2026-06-14,1,LLM-as-Code: Agentic Programming for Agent Harness,Junjia Qi
+2606.17524,2026-06-16,1,Learning to Refine Hidden States for Reliable LLM Reasoning,Chia-Hsuan Hsu
+2606.17890,2026-06-16,1,Dynamic Rollout Editing for Reducing Overthinking in RL-Trained Reasoning Models,Zihao Wei
+2606.23685,2026-06-22,1,LaST-HD: Learning Latent Physical Reasoning from Scalable Human Data for Robot Manipulation,Jiaming Liu
+2606.29164,2026-06-28,1,Invariant Reasoning Directions in Latent Trajectories of Language Models,Arun Vignesh Malarkkan
+2607.01077,2026-07-01,1,Message Passing Enables Efficient Reasoning,Xuecheng Liu
+2607.01518,2026-07-01,1,Overthink-Triggered Slowdown Attacks on LVLM-Based Robotic Systems,Qiang Han
+2607.00482,2026-07-01,1,Know When to Stop: Segment-Level Credit Assignment for Reducing Overthinking,Chia-Hsuan Lee
+2607.20519,2026-07-08,1,Adaptive Depth in Looped Transformers: Diagnosing Learned Halting Gates and Trajectory Readouts,Andrei Cristian Popescu
+2607.08724,2026-07-09,1,Latent Memory Palace: Reasoning for Control as Autoregressive Variational Inference,Chuning Zhu
+2607.08173,2026-07-09,1,Overthinking: Amplifying Reasoning Weights to Extract Learned Secrets,Jack Hopkins
+2607.11089,2026-07-13,1,OS-Pruner: Pruning Chains-of-Thought of Reasoning Models via Optimal Stopping,Mohammed Ehab
+2607.13454,2026-07-15,1,GeoAnchor: Collaborative Reasoning via Latent Decomposition for 3D Spatial Understanding,Hao Li
+2607.13753,2026-07-15,1,"Post-Training Shifts Confidence: A Three-Stage Analysis of How SFT, RL, and OPD Shape CoT Calibration",Shuhao Li
+2607.18618,2026-07-21,1,LatentMT: Machine Translation with Latent Reasoning,Wei-Rui Chen
+2607.19691,2026-07-22,1,SLPO: Scaling Latent Reasoning via a Surrogate Policy,Runyang You
+2607.19962,2026-07-22,1,EvoThink: Evolving Thinking in Large Reasoning Models via Self-Pruning and Aha-Moment Preference Optimization,Xinbang Dai
+2607.20594,2026-07-22,1,When Does Recurrence Become an Algorithm? Convergence Selection in Weight-Tied Looped Transformers,Tong Zhang
+2607.21433,2026-07-23,1,Token Budget Saturation and Mechanistic Early Detection of Reasoning Non-Convergence in Chain-of-Thought Models,Renuka Oladri
+2607.23019,2026-07-25,1,Reason Popper-ly: Patching In-Context Reasoning with Inductive Logic Programming,Zirong Chen
+2607.27251,2026-07-28,1,Recursive transformers for semiconductor thermo-mechanical reliability,Kart-leong Lim
+2607.26621,2026-07-29,1,OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models,Hao Jiang
+2607.27656,2026-07-30,1,Looped Transformers with Source-Centered State Evolution,Bum Jun Kim
+2607.29010,2026-07-31,1,EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation,Zhuang Zhuang
+2608.00217,2026-07-31,1,Truncated Differentiation Through Primal-Dual Solvers for Inverse Potential Mean-Field Games,Siting Liu
+2608.01319,2026-08-02,1,Cognitive Demand Steering for Adaptive Meta-Reasoning in Large Language Models,John Scoville
+2608.03450,2026-08-04,1,Balancing Efficiency and Efficacy: Training-Free Attention-Guided Switching Between Explicit and Latent Thoughts for MLLMs,Haoqian Kang
+2608.04124,2026-08-04,1,Perception Before Reasoning: Dynamic Latent Reasoning for Video Understanding and Question Answering,Haotian Xia
+2608.03388,2026-08-04,1,Don't Let Me Ask for It: LLMs Show Deficiencies in Active Multi-Turn Information Acquisition for Abductive Inference,Shahrukh Mohiuddin
+2608.08113,2026-08-08,1,"Think Deep, Speak Once: Relit, A Recursive Latent Implicit Transformer Framework",Abhishek Panwar
+2608.13517,2026-08-13,1,DFM Mimir v1: An Open HRM Delivering Frontier Performance at 1B Parameters Using Only Permissible Post-Training Data,Peter Schneider-Kamp
+2608.13237,2026-08-13,1,When Should Multi-Round RAG Stop? Structured Stopping Judgments and Retrieval Reduction in Search-R1,Weimeng Luo
+2608.22347,2026-08-23,1,Where Cognition Lives: Dissecting Emergent from Computed Function in a Minimal Complete Cognitive Architecture,Francisco M. Arrabal-Campos
+2608.24319,2026-08-25,1,"Can a Dynamic Internal Field Govern a Transformer's Cognition? Certifiability, not Superiority, in Homeostatic Compute Control",Francisco M. Arrabal-Campos
+2608.28859,2026-08-28,1,The Halt Vector: Internalizing a Causal Steering Intervention for Efficient Reasoning,Dylan Jayabahu
+2608.29376,2026-08-29,1,Evaluating Tiny Recursive Models Across Training for Code Generation,Anjani Sirivella
+2609.22197,2026-08-30,1,Dissecting Hierarchical Reasoning Models: A Mechanistic Study,Leo Raphael Rodrigues
+2608.30396,2026-08-31,1,Scaffolding Foundation Models into Physical-World Agents Pushes the Frontier of Long-Horizon Navigation,Zixing Lei
+2609.02783,2026-09-02,1,EarlyEval: Cheaper Agent Evaluation via Early Outcome Prediction,Yuling Shi
+2609.03379,2026-09-03,1,RecurTrace: Adaptive Latent Reasoning with Loop-Time Memory,Yuxiang Wang
+2609.03633,2026-09-03,1,</think> Doesn't Stop Reasoning: Analysis of Spurious CoT Termination,Seunghee Koh
+2609.09928,2026-09-09,1,Structural Process Supervision for Latent Chain-of-Thought Reasoning,Yiqi Li
+2609.11516,2026-09-10,1,LoopVAE: Recurrent Depth Across Scales for Visual Tokenization,Zhiying Lu
+2609.13807,2026-09-12,1,Bypass Observation: A Conceptual Design of a Non-Intrusive Layer-Wise Semantic Extraction Architecture,Haibin Tong
+2609.15606,2026-09-14,1,VideoScout: Learning Agentic Active Exploration with Adaptive Reasoning Pacing for Long Video Understanding,Weixin Xu
+2609.20037,2026-09-17,1,How Often Does Your Program Fail?,Arnab Ray
+2609.21539,2026-09-18,1,Monodromy of Walrasian Equilibrium Prices: A Fixed-Preference Endowment-Redistribution Construction,Andrea Loi
+2609.26487,2026-09-22,1,When Recursive Models Finish Computing,Hare Krishna
+2609.28809,2026-09-23,1,Stream Recursion Model (SRM),Asael Sorensen
+2609.29861,2026-09-24,1,GPT-6-Astra Lights Up Embodied Navigation: Evaluation in Zero-Shot Vision-and-Language Navigation in Continuous Environments,Guangzhao Dai
+2609.33144,2026-09-27,1,Beyond the Training Horizon: Mechanisms and Limits of Length Generalization in Looped Transformers,Jia Liang
+2609.34079,2026-09-28,1,GenoMorph: Pathway-Grounded Genomic Disease Reasoning via Adaptive Latent Computation,Tanmoy Kanti Halder
+2609.34585,2026-09-28,1,Compute Time Scaling with Recursive Models for Combinatorial Optimization,Zhengxi Zhang
+2609.38147,2026-09-29,1,Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning,Paras Dahal
+2609.37432,2026-09-29,1,Looped Actor: Depth-Recurrent Reasoning Models for Reinforcement Learning,T. Konstantin Rusch
+2609.39892,2026-09-30,1,"Shared Weights, Selected Computations: How Looped Transformers Route What Each Loop Does",Jiaju Wu
+2609.38997,2026-09-30,1,Settle: Learning When to Stop Reasoning,Ryan Brown
+2609.39801,2026-09-30,1,RATIO: Reasoning Analysis and Token-level Inference Optimization for Quantized Reasoning Models,Chengzhu Bao
+2610.01560,2026-10-01,1,AURAL: Adaptive Latent Reasoning with Joint Chunk for Speech Language Models,Yuxiang Wang
+2610.06949,2026-10-03,1,AdaLoop: Adaptive-Depth Latent Reasoning for Audio Language Models,Lee Seung-woo
+2610.05538,2026-10-04,1,LiFT: Loop Flow Transformers,Mohammad Mahdi Derakhshani
+2610.05265,2026-10-04,1,Loopy: Low-Bit Quantization Framework for Looped Language Models,Zeyu LI
+2610.06191,2026-10-05,1,"Judged Useless, Queried Anyway: Tool-Using Agents Rarely Turn Their Own Evidence Judgments into Stopping Decisions",Chubin Zhang
+2610.07751,2026-10-06,1,How Well Do LLMs Reason with Noisy Evidence? An Active Visual Reasoning Benchmark,Bach Nguyen
+2610.09876,2026-10-07,1,Think Before You Paint: Recursive Latent Reasoning for Diffusion Models,Paweł Skierś
+2610.12769,2026-10-08,1,REDaCT: Collapse-Free Unlearning in Large Reasoning Models,Joshua Maccoby
+2610.13570,2026-10-09,1,Constructing Pareto Frontiers of Optimal Reasoning Termination Methods for Overthinking in Reasoning Models,Weixin Guan

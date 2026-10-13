@@ -1,0 +1,192 @@
+[
+  {
+    "task": "addition",
+    "split": "id_val",
+    "n": 2000,
+    "L_min": 4,
+    "L_max": 20,
+    "d_min": 1,
+    "d_max": 10,
+    "sha256": "45f4dec5e66f2f86"
+  },
+  {
+    "task": "addition",
+    "split": "id_test",
+    "n": 2000,
+    "L_min": 4,
+    "L_max": 20,
+    "d_min": 1,
+    "d_max": 10,
+    "sha256": "db668e78b458dda5"
+  },
+  {
+    "task": "addition",
+    "split": "ood_val",
+    "n": 1000,
+    "L_min": 24,
+    "L_max": 32,
+    "d_min": 12,
+    "d_max": 16,
+    "sha256": "e3acab6322af5c29"
+  },
+  {
+    "task": "addition",
+    "split": "ood_depth",
+    "n": 2000,
+    "L_min": 10,
+    "L_max": 20,
+    "d_min": 11,
+    "d_max": 20,
+    "sha256": "e161402e6fe80231"
+  },
+  {
+    "task": "addition",
+    "split": "ood_length",
+    "n": 1000,
+    "L_min": 64,
+    "L_max": 256,
+    "d_min": 1,
+    "d_max": 10,
+    "sha256": "ec44602a2c909766"
+  },
+  {
+    "task": "addition",
+    "split": "ood_both",
+    "n": 1000,
+    "L_min": 64,
+    "L_max": 256,
+    "d_min": 32,
+    "d_max": 128,
+    "sha256": "6beb5d695d4225ac"
+  },
+  {
+    "task": "parity",
+    "split": "id_val",
+    "n": 2000,
+    "L_min": 4,
+    "L_max": 20,
+    "d_min": 1,
+    "d_max": 10,
+    "sha256": "feae2a162a163dbc"
+  },
+  {
+    "task": "parity",
+    "split": "id_test",
+    "n": 2000,
+    "L_min": 4,
+    "L_max": 20,
+    "d_min": 1,
+    "d_max": 10,
+    "sha256": "ced3e2104bc7d20a"
+  },
+  {
+    "task": "parity",
+    "split": "ood_val",
+    "n": 1000,
+    "L_min": 24,
+    "L_max": 32,
+    "d_min": 12,
+    "d_max": 16,
+    "sha256": "35c551ff2b55a281"
+  },
+  {
+    "task": "parity",
+    "split": "ood_depth",
+    "n": 2000,
+    "L_min": 11,
+    "L_max": 20,
+    "d_min": 11,
+    "d_max": 20,
+    "sha256": "ae11527b2806a63e"
+  },
+  {
+    "task": "parity",
+    "split": "ood_length",
+    "n": 1000,
+    "L_min": 64,
+    "L_max": 256,
+    "d_min": 1,
+    "d_max": 10,
+    "sha256": "3193825dbfb0669c"
+  },
+  {
+    "task": "parity",
+    "split": "ood_both",
+    "n": 1000,
+    "L_min": 64,
+    "L_max": 256,
+    "d_min": 32,
+    "d_max": 128,
+    "sha256": "611e50f54fc01aad"
+  },
+  {
+    "task": "mazes",
+    "split": "id_val",
+    "n": 1000,
+    "L_min": 9,
+    "L_max": 9,
+    "d_min": 8,
+    "d_max": 126,
+    "sha256": "a1836025fa7b24ae"
+  },
+  {
+    "task": "mazes",
+    "split": "id_test",
+    "n": 1000,
+    "L_min": 9,
+    "L_max": 9,
+    "d_min": 8,
+    "d_max": 124,
+    "sha256": "ef02f208194bb929"
+  },
+  {
+    "task": "mazes",
+    "split": "ood_13",
+    "n": 500,
+    "L_min": 13,
+    "L_max": 13,
+    "d_min": 20,
+    "d_max": 240,
+    "sha256": "a30b126a4cb569dd"
+  },
+  {
+    "task": "mazes",
+    "split": "ood_17",
+    "n": 500,
+    "L_min": 17,
+    "L_max": 17,
+    "d_min": 26,
+    "d_max": 400,
+    "sha256": "842fe7d9447e41f1"
+  },
+  {
+    "task": "mazes",
+    "split": "ood_21",
+    "n": 500,
+    "L_min": 21,
+    "L_max": 21,
+    "d_min": 38,
+    "d_max": 516,
+    "sha256": "2ac44213fc2f4a3e"
+  },
+  {
+    "task": "mazes",
+    "split": "ood_25",
+    "n": 500,
+    "L_min": 25,
+    "L_max": 25,
+    "d_min": 60,
+    "d_max": 726,
+    "sha256": "ba978f50a092a49f"
+  },
+  {
+    "task": "mazes",
+    "split": "ood_33",
+    "n": 500,
+    "L_min": 33,
+    "L_max": 33,
+    "d_min": 106,
+    "d_max": 1140,
+    "sha256": "a6f9452e3e191dcb"
+  }
+]

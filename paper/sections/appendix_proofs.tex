@@ -1,0 +1,70 @@
+\section{Proofs}
+\label{app:proofs}
+
+\begin{proof}[Proof of \cref{lem:cone}]
+By induction on $t$. For $t=0$, $h_i^{(0)} = H(E(x_i))$ depends on $W_i^0(x) = (x_i)$ through a
+function that does not depend on $i$. Assume the claim for $t$. The update for $h_i^{(t+1)}$ reads
+$h_j^{(t)}$ and $e_j$ for $|j-i|\le r$. Each $h_j^{(t)}$ is a fixed function of
+$W_j^{rt}(x) \subseteq W_i^{r(t+1)}(x)$ (padding positions contribute fixed values, which are also
+determined by the window because the window records $\bot$), and each $e_j$ is a function of
+$\tilde x_j\in W_i^{r}(x)$. Since $U$ is shared, $h_i^{(t+1)}$ is a fixed function of
+$W_i^{r(t+1)}(x)$. The decoder is pointwise, which gives the statement about $\hat y$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:lb}]
+Let $\rho = rt < \rho_i(x)$ (because $t < \lceil\rho_i/r\rceil$ implies $rt < \rho_i$). By minimality
+of $\rho_i(x)$, position $i$ is not $\rho$-determined, so there is $(x', i')$ with
+$W_{i'}^{\rho}(x') = W_i^{\rho}(x)$ and $y_{i'}(x')\ne y_i(x)$. By \cref{lem:cone},
+$\hat y_{i'}^{(t)}(x') = \hat y_i^{(t)}(x)$, so this common prediction differs from at least one of the
+two targets. Taking $i$ with $\rho_i(x) = d^*(x)$ gives the statement about $\mathrm{LB}(x)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{cor:local}]
+Suppose position $i$ of $x$ commits at $t < \lceil\rho_i(x)/r\rceil$. Take the pair $(x', i')$ from
+\cref{thm:lb}. The histories $h_i^{(0..t)}(x)$ and $h_{i'}^{(0..t)}(x')$ coincide by
+\cref{lem:cone}, so position $i'$ of $x'$ raises its flag at the same step $t$ (it cannot have
+raised it earlier, since $x$ would then have raised it earlier too) and commits the same prediction,
+which is wrong for one of them. The input halts when all positions have committed, so it halts no
+earlier than $\max_i\lceil\rho_i(x)/r\rceil = \mathrm{LB}(x)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{cor:length}]
+At length $L$ the input with $a_j+b_j = 9$ for all $j<L$ has no stops, so $d^* = L+1$ by
+\cref{prop:oracles}, and \cref{thm:lb} applies to the final carry position. Any $\tau(L)$ below
+$\lceil (L+1)/r\rceil$ is therefore wrong on one member of the corresponding pair, and the same
+argument applies to every input with $d^*(x) > r\tau(L)$. For uniformly random digits each position
+is a non-stop with probability $1/10$, independently, so $d^*-1$ is the longest run of successes in
+$L$ Bernoulli$(1/10)$ trials, which is $\log_{10} L + O_p(1)$ (the Erd\H{o}s--R\'enyi longest-run law).
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:oracles}]
+\emph{Addition.} Output $i$ is $(a_i + b_i + c_i)\bmod 10$ for $i<L$ and $c_L$ for $i=L$, where $c_i$ is
+the carry into $i$. If $s_i\ge 0$ is the nearest stop before $i$, then positions $s_i+1,\dots,i-1$
+all have $a_j+b_j = 9$, so $c_i = c_{s_i+1} = \mathbb 1[a_{s_i}+b_{s_i}\ge 10]$. If there is no stop,
+all positions $0,\dots,i-1$ sum to 9 and $c_i = c_0 = 0$.
+\emph{Upper bound} ($\rho_i \le i - s_i$): the window of radius $i - s_i$ contains position $s_i$ (or the
+boundary symbol $\bot$ at $-1$) and every position between, so it fixes $c_i$ and $(a_i,b_i)$, hence
+$y_i$, for every $(x',i')$ sharing the window. A boundary symbol at relative offset $-(i-s_i)$ in
+$x'$ forces $i' = i$, so the carry is 0 there too.
+\emph{Lower bound} ($\rho_i \ge i - s_i$): take $\rho = i - s_i - 1$. The window contains positions
+$i-\rho,\dots,i-1$, all summing to 9, and no boundary symbol on the left. Build $x'$ by
+taking the window content, placing it at $i' = \rho+1$, and putting one digit pair at
+position $0$ of $x'$ whose sum is $\ge 10$ if $c_i(x) = 0$ and $<9$ if $c_i(x)=1$ (the right-hand
+part of the window is copied unchanged). Then $c_{i'}(x') = 1 - c_i(x)$, so $y_{i'}(x')\ne y_i(x)$.
+\emph{Parity} is identical with ``delimiter'' for ``stop'' and the segment prefix parity for the carry:
+flipping the bit just outside the window changes the parity.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:automaton}]
+\emph{Addition.} Each position stores its pair sum class and a carry-in $c_i\in\{0,1,?\}$, initially
+$?$. Per step, position $i$ reads its left neighbour's carry-out, which is
+$\mathbb 1[a_{i-1}+b_{i-1}\ge 10]$ if $i-1$ is a stop, $c_{i-1}$ if $a_{i-1}+b_{i-1}=9$, and $0$ if
+the neighbour is the boundary $\bot$; it sets $c_i$ to that value if $c_i = ?$ and the value is
+known. This update reads only radius-1 neighbours and is the same at every position and length.
+By induction, $c_i$ becomes known exactly at step $i - s_i = \rho_i$ (step 1 at a stop's right
+neighbour or at position 0, one more step for each 9 in between), and once known it equals the true
+carry. The done flag is $\mathbb 1[c_i\ne ?]$ and the committed output is
+$(a_i+b_i+c_i)\bmod 10$, which is correct. The input halts at $\max_i\rho_i = d^*(x) = \mathrm{LB}(x)$
+for $r=1$. \emph{Parity}: the same construction with the segment prefix parity in place of the carry,
+initialised to $0$ at delimiters.
+\end{proof}

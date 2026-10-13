@@ -1,0 +1,50 @@
+# Every entry of paper/references.bib is generated from this list by scripts/fetch_bib.py
+# (DBLP first, then arXiv / Crossref). Do not edit references.bib by hand; add an identifier here.
+# Then run scripts/check_bib.py, which re-queries arXiv / Crossref and fails on any mismatch.
+graves2016act: {arxiv: "1603.08983"}
+banino2021pondernet: {arxiv: "2107.05407"}
+dehghani2019universal: {arxiv: "1807.03819"}
+figurnov2017sact: {arxiv: "1612.02297"}
+price2016extensions: {arxiv: "1611.00736"}
+kaiser2016neuralgpu: {arxiv: "1511.08228"}
+schwarzschild2021thinking: {arxiv: "2106.04537"}
+schwarzschild2021datasets: {arxiv: "2108.06011"}
+bansal2022endtoend: {arxiv: "2202.05826"}
+anil2022path: {arxiv: "2211.09961"}
+veerabadran2023adaptive: {arxiv: "2311.06964"}
+fan2025looped: {arxiv: "2409.15647"}
+bao2025stop: {arxiv: "2502.10954"}
+geiping2025scaling: {arxiv: "2502.05171"}
+zhu2025ouro: {arxiv: "2510.25741"}
+wang2025hrm: {arxiv: "2506.21734"}
+jolicoeur2025trm: {arxiv: "2510.04871"}
+moosa2026anira: {arxiv: "2602.08864"}
+nagle2026terminator: {arxiv: "2603.12529"}
+kuo2026stochastic: {arxiv: "2606.29983"}
+popescu2026halting: {arxiv: "2607.20519"}
+krishna2026finish: {arxiv: "2609.26487"}
+liang2026horizon: {arxiv: "2609.33144"}
+brown2026settle: {arxiv: "2609.38997"}
+bai2019deq: {arxiv: "1909.01377"}
+giannou2023looped: {arxiv: "2301.13196"}
+yang2024looped: {arxiv: "2311.12424"}
+saunshi2025latent: {arxiv: "2502.17416"}
+hao2024coconut: {arxiv: "2412.06769"}
+ge2025hrm: {arxiv: "2510.00355"}
+teerapittayanon2016branchynet: {arxiv: "1709.01686"}
+elbayad2020depth: {arxiv: "1910.10073"}
+xin2020deebert: {arxiv: "2004.12993"}
+zhou2020pabee: {arxiv: "2006.04152"}
+schuster2022calm: {arxiv: "2207.07061"}
+kadavath2022know: {arxiv: "2207.05221"}
+yang2025dynamic: {arxiv: "2504.15895"}
+liu2025convergence: {arxiv: "2506.02536"}
+nogueira2021arithmetic: {arxiv: "2102.13019"}
+anil2022length: {arxiv: "2207.04901"}
+deletang2023chomsky: {arxiv: "2207.02098"}
+liu2023shortcuts: {arxiv: "2210.10749"}
+zhou2024raspl: {arxiv: "2310.16028"}
+mcleish2024embeddings: {arxiv: "2405.17399"}
+dijkstra1980termination: {doi: "10.1016/0020-0190(80)90021-6"}
+# Holm (1979, Scand. J. Statist.) has no registered DOI or arXiv id, so it cannot be fetched or
+# verified; the paper names the procedure without a citation.

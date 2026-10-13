@@ -1,0 +1,10 @@
+# Backbone pilot (notebook 03, gate G1): fixed-prior vs progressive objective, addition and parity.
+base:
+  method: base
+  iters: 8000
+  batch_size: 512
+  t_train: 20
+grid:
+  task: [addition, parity]
+  objective: [fixed_prior, progressive]
+  seed: [0, 1]

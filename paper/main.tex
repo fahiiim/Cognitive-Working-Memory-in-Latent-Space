@@ -1,0 +1,63 @@
+\documentclass{article}
+
+% Official NeurIPS 2025 style (the 2027 style is not released yet; swap the file and the
+% option when it is). Anonymous submission by default; use [final] or [preprint] otherwise.
+\usepackage[preprint]{neurips_2025}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{Knowing When You're Done: Termination Detection for\\Recurrent Latent Reasoners under Depth Shift}
+
+\author{%
+  Md Fahim Sarker\\
+  \texttt{(affiliation and e-mail)}
+}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/abstract}
+\input{sections/intro}
+\input{sections/theory}
+\input{sections/benchmark}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/related}
+\input{sections/limitations}
+
+\begin{ack}
+Compute: one NVIDIA RTX 5070. GPU-hours are reported in \cref{app:details}.
+\end{ack}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\input{sections/appendix_proofs}
+\input{sections/appendix_details}
+\input{sections/appendix_results}
+
+\input{sections/checklist}
+
+\end{document}

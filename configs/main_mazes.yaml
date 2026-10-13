@@ -1,0 +1,20 @@
+# T3 mazes (notebook 07). r = 4 kernel-3 convolutions per step, as in DT-net's recurrent block;
+# 32 training steps cover the dead-end-filling depth of 9x9 training mazes (max 126 pixels).
+# Reduced scale: 2 seeds. The pooled gates (ACT, PonderNet) use the settings chosen in
+# tune_gates.yaml and are in maze_gates.yaml.
+base:
+  task: mazes
+  objective: fixed_prior
+  width: 64
+  convs_per_step: 4
+  t_train: 32
+  batch_size: 32
+  iters: 5000
+  lr: 0.001
+runs:
+  - {method: base}
+  - {method: done_prop_joint}
+  - {method: done_joint}
+  - {method: trm_joint}
+grid:
+  seed: [0, 1]

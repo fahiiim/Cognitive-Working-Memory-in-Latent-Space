@@ -1,0 +1,120 @@
+"""Build paper/references.bib from paper/bib_sources.yaml.
+
+For arXiv items: look the title up on DBLP and take the published (non-CoRR) version if one
+exists, otherwise the DBLP CoRR record. If DBLP is unreachable (it serves a bot check to scripts),
+the record is generated from the arXiv API metadata, with the venue from Semantic Scholar.
+For DOI items: DBLP by title, otherwise doi.org BibTeX content negotiation. The citation key is
+replaced by ours and the arXiv id is added as `eprint`, so check_bib.py can verify every entry.
+
+    .venv\\Scripts\\python.exe scripts\\fetch_bib.py
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+import yaml
+
+sys.path.insert(0, str(Path(__file__).parent))
+import bibtools  # noqa: E402
+from bibtools import arxiv_meta, crossref_meta, dblp_bibtex, dblp_search, doi_bibtex, norm_title, s2_meta  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "paper" / "bib_sources.yaml"
+OUT = ROOT / "paper" / "references.bib"
+CACHE = ROOT / "paper" / "lit_search" / "s2_cache.json"
+
+
+def rekey(bib: str, key: str) -> str:
+    return re.sub(r"@(\w+)\s*\{\s*[^,]+,", lambda m: f"@{m.group(1)}{{{key},", bib.strip(), count=1)
+
+
+def add_fields(bib: str, fields: dict[str, str]) -> str:
+    bib = bib.rstrip()
+    assert bib.endswith("}")
+    present = {f.lower() for f in re.findall(r"^\s*(\w+)\s*=", bib, re.M)}
+    extra = "".join(f",\n  {k:<13}= {{{v}}}" for k, v in fields.items() if k.lower() not in present)
+    body = bib[:-1].rstrip().rstrip(",")
+    return body + extra + "\n}"
+
+
+def pick_dblp(title: str) -> str | None:
+    hits = [h for h in dblp_search(title) if norm_title(h.get("title", "")) == norm_title(title)]
+    if not hits:
+        return None
+    published = [h for h in hits if h.get("venue") != "CoRR" and h.get("type") != "Informal and Other Publications"]
+    return (published or hits)[0]["key"]
+
+
+def arxiv_record(key: str, aid: str, m: dict, s2: dict) -> tuple[str, str]:
+    """Record from arXiv metadata; venue (if published) from Semantic Scholar."""
+    authors = " and ".join(m["authors"])
+    venue = (s2.get("venue") or "").strip()
+    pv = s2.get("publicationVenue") or {}
+    types = s2.get("publicationTypes") or []
+    journal = ((s2.get("journal") or {}).get("name") or "").strip()
+    fields = [("author", authors), ("title", m["title"])]
+    if venue and "arxiv" not in venue.lower() and (pv.get("type") == "conference" or "Conference" in types):
+        typ, src = "inproceedings", "arxiv-api+s2-conference"
+        fields += [("booktitle", venue), ("year", str(s2.get("year") or m["year"]))]
+    elif journal and "arxiv" not in journal.lower() and (pv.get("type") == "journal" or "JournalArticle" in types):
+        typ, src = "article", "arxiv-api+s2-journal"
+        fields += [("journal", journal), ("year", str(s2.get("year") or m["year"]))]
+    elif m.get("journal_ref"):
+        typ, src = "misc", "arxiv-api+journal_ref"
+        fields += [("year", m["year"]), ("howpublished", m["journal_ref"])]
+    else:
+        typ, src = "misc", "arxiv-api"
+        fields += [("year", m["year"]), ("howpublished", f"arXiv:{aid}")]
+    fields += [("eprint", aid), ("archivePrefix", "arXiv"), ("primaryClass", m["primary"])]
+    body = ",\n".join(f"  {k:<13}= {{{v}}}" for k, v in fields)
+    return f"@{typ}{{{key},\n{body}\n}}", src
+
+
+def main() -> int:
+    if "--quick-s2" in sys.argv:  # one Semantic Scholar attempt per entry (it rate-limits heavily)
+        bibtools.S2_RETRIES = 1
+    src = yaml.safe_load(SRC.read_text(encoding="utf-8"))
+    cache = json.loads(CACHE.read_text(encoding="utf-8")) if CACHE.exists() else {}
+    ids = [v["arxiv"] for v in src.values() if "arxiv" in v]
+    meta = arxiv_meta(ids)
+    missing = [i for i in ids if i not in meta]
+    if missing:
+        print("arXiv ids not found:", missing)
+        return 1
+    out, log = [], []
+    for key, v in src.items():
+        if "arxiv" in v:
+            aid, m = v["arxiv"], meta[v["arxiv"]]
+            dk = pick_dblp(m["title"])
+            if dk:
+                bib = add_fields(rekey(dblp_bibtex(dk), key), {"eprint": aid, "archivePrefix": "arXiv"})
+                log.append((key, "dblp:" + dk))
+            else:
+                bib, how = arxiv_record(key, aid, m, s2_meta(aid, cache))
+                CACHE.write_text(json.dumps(cache, indent=1), encoding="utf-8")
+                log.append((key, how))
+        else:
+            doi = v["doi"]
+            cm = crossref_meta(doi)
+            dk = pick_dblp(cm["title"]) if cm["title"] else None
+            if dk:
+                bib = add_fields(rekey(dblp_bibtex(dk), key), {"doi": doi})
+                log.append((key, "dblp:" + dk))
+            else:
+                bib = add_fields(rekey(doi_bibtex(doi), key), {"doi": doi})
+                log.append((key, "doi.org"))
+        out.append(bib)
+        print(f"{key:<32} {log[-1][1]}", flush=True)
+    header = ("% Generated by scripts/fetch_bib.py from paper/bib_sources.yaml. Do not edit by hand.\n"
+              "% Verify with scripts/check_bib.py.\n\n")
+    OUT.write_text(header + "\n\n".join(out) + "\n", encoding="utf-8")
+    print(f"wrote {OUT.relative_to(ROOT)} ({len(out)} entries)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

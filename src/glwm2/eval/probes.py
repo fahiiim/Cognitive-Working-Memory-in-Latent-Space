@@ -16,6 +16,9 @@ def collect_probe_data(model, task: str, data: dict, t_max: int, max_rows: int =
     device = next(model.parameters()).device
     g = torch.Generator().manual_seed(seed)
     rho_all = per_position_rho(task, data)
+    # keep each (position, step) row with a fixed probability so memory stays near 2 * max_rows rows
+    total = int((data["y"] != IGNORE).sum()) * t_max
+    keep_p = min(1.0, 2.0 * max_rows / max(1, total))
     feats, pend, corr, ts, rhos = [], [], [], [], []
     for s in range(0, data["x"].shape[0], batch):
         x = data["x"][s : s + batch].to(device)
@@ -24,11 +27,12 @@ def collect_probe_data(model, task: str, data: dict, t_max: int, max_rows: int =
         valid = y != IGNORE
         for o in model.rollout(x, t_max, model.valid_mask(x)):
             t = o["t"]
-            h = o["h"].transpose(1, 2)[valid]  # [n, C]
-            r = rho[valid]
+            keep = (torch.rand(valid.shape, generator=g) < keep_p).to(device) & valid
+            h = o["h"].transpose(1, 2)[keep]  # [n, C]
+            r = rho[keep]
             feats.append(h.float().cpu())
             pend.append((t < r).cpu())
-            corr.append((o["logits"].argmax(-1) == y)[valid].cpu())
+            corr.append((o["logits"].argmax(-1) == y)[keep].cpu())
             ts.append(torch.full((h.shape[0],), t))
             rhos.append(r.cpu())
     H, P, C, T, R = (torch.cat(v) for v in (feats, pend, corr, ts, rhos))

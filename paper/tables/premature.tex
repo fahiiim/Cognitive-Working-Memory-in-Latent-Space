@@ -1,0 +1,23 @@
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{2}{c}{addition} & \multicolumn{2}{c}{parity} \\
+ & OOD-depth & OOD-both & OOD-depth & OOD-both \\
+\midrule
+Fixed $T$ & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} \\
+Max-softmax & 0.0 \tiny{[0.0, 0.0]} & 0.0 \tiny{[0.0, 0.0]} & 90.8 \tiny{[89.9, 91.7]} & 98.2 \tiny{[97.5, 98.8]} \\
+Entropy & 0.0 \tiny{[0.0, 0.0]} & 0.0 \tiny{[0.0, 0.0]} & 99.2 \tiny{[98.9, 99.5]} & 100.0 \tiny{[100.0, 100.0]} \\
+$k$-step stability & 74.7 \tiny{[73.3, 76.0]} & 49.7 \tiny{[47.4, 51.9]} & 86.2 \tiny{[85.2, 87.3]} & 85.5 \tiny{[84.0, 87.1]} \\
+KL between steps & 74.7 \tiny{[73.3, 76.0]} & 49.7 \tiny{[47.4, 51.9]} & 49.2 \tiny{[47.7, 50.7]} & 28.5 \tiny{[26.5, 30.6]} \\
+Hidden-state change & 0.0 \tiny{[0.0, 0.0]} & 100.0 \tiny{[100.0, 100.0]} & 81.1 \tiny{[79.9, 82.3]} & 100.0 \tiny{[100.0, 100.0]} \\
+Max confidence (Fan et al.) & 0.0 \tiny{[0.0, 0.0]} & 0.0 \tiny{[0.0, 0.0]} & 0.0 \tiny{[0.0, 0.0]} & 0.0 \tiny{[0.0, 0.0]} \\
+Correctness head (post hoc) & 75.3 \tiny{[73.9, 76.6]} & 99.6 \tiny{[99.3, 99.9]} & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} \\
+ACT & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} & -- & -- \\
+PonderNet & 75.5 \tiny{[73.5, 77.4]} & 100.0 \tiny{[100.0, 100.0]} & -- & -- \\
+Correctness head (joint) & -- & -- & -- & -- \\
+v1 GLWM gate & -- & -- & -- & -- \\
+Completion head (post hoc) & 0.0 \tiny{[0.0, 0.0]} & 0.0 \tiny{[0.0, 0.0]} & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} \\
+Propagating head (post hoc) & 0.7 \tiny{[0.4, 0.9]} & 0.1 \tiny{[0.0, 0.1]} & 100.0 \tiny{[100.0, 100.0]} & 100.0 \tiny{[100.0, 100.0]} \\
+Completion head (joint) & -- & -- & -- & -- \\
+Propagating head (joint) & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}

@@ -103,6 +103,9 @@ def main() -> None:
                                "config": c.to_dict()})
             print(f"[{time.strftime('%H:%M:%S')}] {status} {c.run_id()} ({time.time() - t0:.0f}s)", flush=True)
             (run_dirs(c)[0] / "sweep.lock").unlink(missing_ok=True)
+            if "CUDA" in status:
+                # the CUDA context is unusable after an OOM / device error; stop instead of failing every run
+                sys.exit(3)
             n += 1
 
 

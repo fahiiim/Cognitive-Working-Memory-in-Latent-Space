@@ -1,0 +1,117 @@
+{
+  "G3": false,
+  "detail": {
+    "addition/ood_depth": {
+      "best_ours": "done_post",
+      "best_baseline": "max_softmax",
+      "seeds": [
+        0,
+        1
+      ],
+      "acc_ours": 1.0,
+      "acc_base": 1.0,
+      "acc_diff": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prem_ours": 0.0,
+      "prem_base": 0.0,
+      "prem_diff": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passes_acc": false,
+      "passes_premature": false,
+      "G3": false
+    },
+    "addition/ood_both": {
+      "best_ours": "done_post",
+      "best_baseline": "max_softmax",
+      "seeds": [
+        0,
+        1
+      ],
+      "acc_ours": 0.9955,
+      "acc_base": 0.998,
+      "acc_diff": [
+        -0.0025,
+        -0.0060125,
+        0.0
+      ],
+      "prem_ours": 0.0,
+      "prem_base": 0.0,
+      "prem_diff": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passes_acc": false,
+      "passes_premature": false,
+      "G3": false
+    },
+    "parity/ood_depth": {
+      "best_ours": "done_prop_post",
+      "best_baseline": "kl",
+      "seeds": [
+        0,
+        1
+      ],
+      "acc_ours": 0.306,
+      "acc_base": 0.94025,
+      "acc_diff": [
+        -0.63425,
+        -0.68275625,
+        -0.5840000000000001
+      ],
+      "prem_ours": 1.0,
+      "prem_base": 0.492,
+      "prem_diff": [
+        0.508,
+        0.47925,
+        0.53625
+      ],
+      "passes_acc": false,
+      "passes_premature": false,
+      "G3": false
+    },
+    "parity/ood_both": {
+      "best_ours": "done_post",
+      "best_baseline": "kl",
+      "seeds": [
+        0,
+        1
+      ],
+      "acc_ours": 0.0,
+      "acc_base": 0.5665,
+      "acc_diff": [
+        -0.5665,
+        -0.787,
+        -0.344
+      ],
+      "prem_ours": 1.0,
+      "prem_base": 0.285,
+      "prem_diff": [
+        0.7150000000000001,
+        0.6705000000000001,
+        0.7575000000000001
+      ],
+      "passes_acc": false,
+      "passes_premature": false,
+      "G3": false
+    }
+  },
+  "h4_auc_diff_points": {
+    "addition": {
+      "act": -33.347115321801255,
+      "base": 0.0,
+      "ponder": -0.09519234299659729
+    },
+    "parity": {
+      "act": NaN,
+      "base": 0.0,
+      "ponder": NaN
+    }
+  }
+}

@@ -1,0 +1,41 @@
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{Scale.} Every experiment runs on one consumer GPU (RTX 5070, 12\,GB). The preregistered grid
+(five seeds per cell, full maze grid) was cut to fit a five-hour training budget: two seeds per
+method, three single-seed ablations, and a smaller gate-tuning budget than pre-registered for PonderNet
+and the v1 gate (\texttt{PREREGISTRATION.md}, deviations). Our confidence intervals are bootstrapped over
+test instances within each run and therefore understate seed variance; several comparisons that we
+report as ties may separate with more seeds.
+
+\paragraph{Mazes.} We could not train a maze backbone that passes Gate G1 within the budget (3\% exact
+match on training-size mazes when stopped), so we make no stopping-rule claims on mazes. Whether local
+completion heads help when information travels along corridors remains open.
+
+\paragraph{Tasks.} The exact theory covers one-dimensional tasks whose determining radius has a closed
+form. Addition and segmented parity are deliberately simple so that $\mathrm{LB}(x)$ is known for every
+instance; they are not representative of natural-language reasoning. Our conclusions are about recurrent models with a known,
+local growth rate; they do not transfer directly to models with global attention, whose light cone
+covers the whole input after one step.
+
+\paragraph{Backbone dependence.} A stopping rule can only be as good as the trajectory it reads. On
+segmented parity the backbone fails Gate G1 (its stable-oracle accuracy out of distribution is below the
+preregistered 95\%), so parity results measure stopping on an imperfect backbone. The progressive loss
+was seed-dependent on addition. Termination detection and
+depth extrapolation are entangled: a rule that looks premature may be reacting to a backbone that
+never resolves.
+
+\paragraph{What the theory does not say.} \Cref{thm:lb} rules out \emph{certified} early answers, not
+correct ones. A rule that halts before $\mathrm{LB}(x)$ can be right on the data distribution, and on
+addition global convergence detectors often are, because a carry wave keeps the hidden state moving
+until it lands. We therefore report premature halting and premature \emph{errors} separately, and we
+do not claim that premature halting is always harmful.
+
+\paragraph{Selection and thresholds.} Thresholds are tuned on ID-val, with the cheapest setting within
+0.5 points of the best. A different tolerance trades accuracy for steps differently, and gate
+hyperparameters (ACT $\tau$, PonderNet $\lambda_p$, the v1 gate $\lambda$) were tuned on a small grid with
+one seed. Stronger tuning of the jointly trained gates could narrow some of the gaps we report.
+
+\paragraph{Broader impact.} This is basic research on small synthetic tasks. Better termination
+detection lowers inference compute; we see no direct path to harm beyond that of adaptive-compute
+models in general.

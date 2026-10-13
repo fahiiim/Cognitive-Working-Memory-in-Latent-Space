@@ -1,0 +1,17 @@
+\begin{abstract}
+Recurrent latent reasoners can solve harder problems by iterating longer, but only if they know when
+to stop. We study termination detection in a setting where the answer is known. For local recurrent
+models, a light-cone argument gives each input a lower bound on the step at which its answer can be
+certified. The bound depends on the input's depth, not its length, and a local automaton attains it at
+every length. We build DepthShift, a benchmark with exact per-instance depth and splits that vary depth
+and length independently, and evaluate fifteen stopping rules on one backbone family. Jointly trained
+pooled gates (ACT, PonderNet, TRM-style heads) leak length: ACT is 99.8\% accurate on deeper addition
+inputs using fewer steps than the bound, through a global shortcut, and 35.6\% on inputs that are also
+longer. Global convergence rules halt before the bound on most deep inputs yet stay correct, so
+premature stopping and premature error must be measured separately. On addition, per-position
+confidence halts at exactly the bound on every split, and the local completion heads we introduce match
+it without improving on it. On segmented parity, every learned signal, completion heads included, learns
+the training clock and halts at the training depth. Termination detection beyond the training depth is
+limited less by the readout than by training data that never shows an unfinished computation at a late
+step. Code, frozen splits and every run are released.
+\end{abstract}

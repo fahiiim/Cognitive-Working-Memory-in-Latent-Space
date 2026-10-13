@@ -1,0 +1,218 @@
+{
+  "objective": {
+    "addition": "fixed_prior",
+    "parity": "fixed_prior"
+  },
+  "g1": [
+    {
+      "task": "addition",
+      "objective": "fixed_prior",
+      "mean": 0.9961368653421634,
+      "std": 0.0007804710609123474,
+      "count": 2
+    },
+    {
+      "task": "addition",
+      "objective": "progressive",
+      "mean": 0.8863134657836644,
+      "std": 0.16077703854793468,
+      "count": 2
+    },
+    {
+      "task": "parity",
+      "objective": "fixed_prior",
+      "mean": 0.839539978094195,
+      "std": 0.0859680752592626,
+      "count": 2
+    },
+    {
+      "task": "parity",
+      "objective": "progressive",
+      "mean": 0.8499452354874042,
+      "std": 0.004646922986987156,
+      "count": 2
+    }
+  ],
+  "g1_pass": {
+    "addition": true,
+    "parity": false
+  },
+  "table": [
+    {
+      "task": "addition",
+      "objective": "fixed_prior",
+      "rule": "fixed_T",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.495,
+      "ood_depth": 0.709,
+      "ood_length": 1.0,
+      "ood_val": 0.5485
+    },
+    {
+      "task": "addition",
+      "objective": "fixed_prior",
+      "rule": "oracle_iter",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 1.0,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "addition",
+      "objective": "fixed_prior",
+      "rule": "oracle_lb",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.9955,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "addition",
+      "objective": "fixed_prior",
+      "rule": "oracle_stable",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.9964999999999999,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "addition",
+      "objective": "progressive",
+      "rule": "fixed_T",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.486,
+      "ood_depth": 0.74375,
+      "ood_length": 1.0,
+      "ood_val": 0.5485
+    },
+    {
+      "task": "addition",
+      "objective": "progressive",
+      "rule": "oracle_iter",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 1.0,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "addition",
+      "objective": "progressive",
+      "rule": "oracle_lb",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.7464999999999999,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "addition",
+      "objective": "progressive",
+      "rule": "oracle_stable",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.897,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "parity",
+      "objective": "fixed_prior",
+      "rule": "fixed_T",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.0,
+      "ood_depth": 0.30925,
+      "ood_length": 1.0,
+      "ood_val": 0.2255
+    },
+    {
+      "task": "parity",
+      "objective": "fixed_prior",
+      "rule": "oracle_iter",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.8535,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "parity",
+      "objective": "fixed_prior",
+      "rule": "oracle_lb",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.2015,
+      "ood_depth": 0.79675,
+      "ood_length": 1.0,
+      "ood_val": 0.7050000000000001
+    },
+    {
+      "task": "parity",
+      "objective": "fixed_prior",
+      "rule": "oracle_stable",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.8535,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "parity",
+      "objective": "progressive",
+      "rule": "fixed_T",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.0,
+      "ood_depth": 0.2185,
+      "ood_length": 1.0,
+      "ood_val": 0.088
+    },
+    {
+      "task": "parity",
+      "objective": "progressive",
+      "rule": "oracle_iter",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.863,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    },
+    {
+      "task": "parity",
+      "objective": "progressive",
+      "rule": "oracle_lb",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.14450000000000002,
+      "ood_depth": 0.95875,
+      "ood_length": 1.0,
+      "ood_val": 0.9644999999999999
+    },
+    {
+      "task": "parity",
+      "objective": "progressive",
+      "rule": "oracle_stable",
+      "id_test": 1.0,
+      "id_val": 1.0,
+      "ood_both": 0.863,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_val": 1.0
+    }
+  ]
+}

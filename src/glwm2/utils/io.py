@@ -87,10 +87,17 @@ def git_commit() -> str | None:
         return None
 
 
+def _platform() -> str:
+    try:
+        return platform.platform()
+    except Exception:  # Windows WMI queries fail intermittently under load
+        return f"{platform.system()} {platform.release()}"
+
+
 def env_info() -> dict:
     info = {
         "python": platform.python_version(),
-        "platform": platform.platform(),
+        "platform": _platform(),
         "torch": torch.__version__,
         "cuda": torch.version.cuda,
         "cudnn": torch.backends.cudnn.version() if torch.cuda.is_available() else None,

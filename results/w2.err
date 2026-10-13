@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\scripts\run_sweep.py", line 94, in main
+    run(c, posthoc_iters=args.posthoc_iters)
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\src\glwm2\train\pipeline.py", line 83, in run
+    train(cfg, save=True, verbose=verbose)
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\src\glwm2\train\trainer.py", line 126, in train
+    g.set_state(st["gen"].to("cpu") if device.type == "cpu" else st["gen"])
+TypeError: RNG state must be a torch.ByteTensor

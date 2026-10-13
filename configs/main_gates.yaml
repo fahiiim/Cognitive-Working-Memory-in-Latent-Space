@@ -1,11 +1,16 @@
 # Jointly trained pooled gates (ACT, PonderNet, v1 GLWM gate). Their task loss is weighted by
 # their own halting distribution, so the backbone objective does not apply ("own").
+# ACT uses the tuned tau = 0.01 (tune_gates.yaml; the default 1e-3 never halts). PonderNet and the
+# v1 gate keep their defaults: their tuning runs were cut by the 5-hour compute limit.
 base:
   objective: own
   iters: 8000
   batch_size: 512
   t_train: 20
+runs:
+  - {method: act, act_tau: 0.01}
+  - {method: ponder}
+  - {method: v1gate}
 grid:
   task: [addition, parity]
-  method: [act, ponder, v1gate]
-  seed: [0, 1, 2, 3, 4]
+  seed: [0, 1]

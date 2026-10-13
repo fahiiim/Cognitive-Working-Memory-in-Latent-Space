@@ -1,0 +1,9 @@
+ablations: 3 runs, 0 finished
+[11:58:50] start addition-base-fixed_prior-s0-a56f86a9
+[11:58:52] error: TypeError('RNG state must be a torch.ByteTensor') addition-base-fixed_prior-s0-a56f86a9 (3s)
+[11:58:52] start addition-base-fixed_prior-s0-c1df2b74
+[12:22:11] ok addition-base-fixed_prior-s0-c1df2b74 (1398s)
+[12:22:11] start addition-base-fixed_prior-s0-647caf4a
+[12:41:27] ok addition-base-fixed_prior-s0-647caf4a (1156s)
+main_gates: 12 runs, 3 finished
+[12:41:27] start parity-v1gate-own-s1-bdf046a1

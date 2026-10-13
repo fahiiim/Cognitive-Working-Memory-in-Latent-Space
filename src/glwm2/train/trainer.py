@@ -123,7 +123,7 @@ def train(cfg: RunConfig, save: bool = True, deterministic: bool = False, device
             st = torch.load(last, map_location=device, weights_only=False)
             model.load_state_dict(st["model"])
             opt.load_state_dict(st["opt"])
-            g.set_state(st["gen"].to("cpu") if device.type == "cpu" else st["gen"])
+            g.set_state(st["gen"].cpu())  # generator states are CPU ByteTensors even for CUDA generators
             start_it = st["it"]
         write_json(res_dir / "config.json", cfg.to_dict())
     sampler = TrainSampler(cfg.task, device, g, cfg.train_len, cfg.train_depth, cfg.maze_train_size)

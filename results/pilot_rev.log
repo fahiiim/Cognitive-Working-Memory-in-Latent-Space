@@ -2,3 +2,6 @@ pilot_addition: 8 runs, 2 finished
 [10:00:57] start parity-base-progressive-s1-3d43a7fe
 [10:28:15] ok parity-base-progressive-s1-3d43a7fe (1638s)
 [10:28:15] start parity-base-progressive-s0-261c474f
+[10:58:36] ok parity-base-progressive-s0-261c474f (1821s)
+[10:58:36] start parity-base-fixed_prior-s1-e2e435a1
+[11:44:56] ok parity-base-fixed_prior-s1-e2e435a1 (2780s)

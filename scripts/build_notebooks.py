@@ -398,7 +398,7 @@ SPLITS = ["id_test", "ood_depth", "ood_length", "ood_both"]
     code("""
 # Gate tuning (equal budget, addition seed 0): pick per method the setting with the fewest ID-val
 # steps among those within 0.5 points of the best ID-val accuracy. The choice is copied into
-# configs/main_gates.yaml (and maze_gates.yaml) before the main gate runs.
+# configs/main_gates.yaml before the main gate runs.
 from glwm2.eval.results import configs_from_yaml, finished, metric_rows
 from glwm2.utils.io import write_json
 GATE_RULE = {"act": "act", "ponder": "ponder", "v1gate": "gate"}
@@ -408,7 +408,7 @@ tune = [c for f in ["configs/tune_gates.yaml", "configs/main_gates.yaml"] for c 
 tdf = metric_rows(finished(tune))
 tuning = {}
 if len(tdf):
-    tdf = tdf[[GATE_RULE.get(m) == r for m, r in zip(tdf.method, tdf.rule)] & (tdf.split == "id_val")]
+    tdf = tdf[np.array([GATE_RULE.get(m) == r for m, r in zip(tdf.method, tdf.rule)]) & (tdf.split == "id_val").to_numpy()]
     for m, sub in tdf.groupby("method"):
         ok = sub[sub.acc >= sub.acc.max() - 0.005].sort_values("mean_steps")
         best = ok.iloc[0]
@@ -607,8 +607,8 @@ reports progress and GPU-hours from the JSON logs.
 """),
     code("""
 # parameters
-CONFIGS = ["configs/main_addition.yaml", "configs/main_parity.yaml", "configs/main_gates.yaml",
-           "configs/main_mazes.yaml", "configs/ablations.yaml"]
+CONFIGS = ["configs/pilot_addition.yaml", "configs/tune_gates.yaml", "configs/main_addition.yaml",
+           "configs/main_parity.yaml", "configs/main_gates.yaml", "configs/ablations.yaml"]
 LAUNCH = False
 """),
     code(SETUP),
@@ -709,8 +709,7 @@ if len(r):
 NOTEBOOKS["08_ablations_and_probes"] = [
     md("""
 # 08 - Ablations, probes and measured compute
-1. Ablations on addition (`configs/ablations.yaml`): recall, norm, width, training depth, r = 2, and
-   the auxiliary-loss weight of the joint completion head.
+1. Ablations on addition (`configs/ablations.yaml`, seed 0): no recall, r = 2, width 64.
 2. Linear probes: is "position i is still pending" (t < rho_i) linearly decodable from h_i(t), and
    does a probe fitted on ID transfer to OOD-depth and OOD-both?
 3. Measured FLOPs (`torch.utils.flop_counter.FlopCounterMode`) and CUDA-event latency for every
@@ -820,6 +819,31 @@ for r_ in sub.itertuples():
     ax.annotate(r_.entry, (r_.kflops, r_.acc), fontsize=4.5)
 ax.set_xscale("log"); ax.set_xlabel("measured kFLOPs per instance"); ax.set_ylabel("accuracy (OOD-depth)")
 WRITTEN.append(savefig(fig, "fig8_compute"))
+
+# LaTeX: probes, ablations (OOD accuracy of the stable oracle and max-softmax) and latency
+lines = [r"\\begin{table}[h]", r"\\centering",
+         r"\\caption{Left: linear probe for the pending state (fitted on ID-val, seed-0 base model on addition). "
+         r"Middle: ablations on addition (seed 0; accuracy in \\%). Right: CUDA-event latency for 512 OOD-depth "
+         r"instances with online early exit (median ms).}",
+         r"\\label{tab:probes}", r"\\small",
+         r"\\begin{tabular}{lrr}", r"\\toprule", r"Split & Acc. & AUC \\\\", r"\\midrule"]
+for s, v in probe_res.items():
+    lines.append(f"{s.replace('_', '-')} & {100 * v['acc']:.1f} & {v['auc']:.3f} \\\\\\\\")
+lines += [r"\\bottomrule", r"\\end{tabular}\\quad"]
+if len(A):
+    t = abl_tab.reset_index()
+    t = t[t.rule.isin(["oracle_stable", "max_softmax"])]
+    lines += [r"\\begin{tabular}{llrr}", r"\\toprule", r"Ablation & Rule & OOD-depth & OOD-both \\\\", r"\\midrule"]
+    for r_ in t.itertuples():
+        lines.append(f"{str(r_.ablation).replace('_', ' ')} & {r_.rule.replace('_', ' ')} & {100 * r_.ood_depth:.1f} & {100 * r_.ood_both:.1f} \\\\\\\\")
+    lines += [r"\\bottomrule", r"\\end{tabular}\\quad"]
+lines += [r"\\begin{tabular}{lr}", r"\\toprule", r"Rule & ms \\\\", r"\\midrule"]
+for k_, v in lat.items():
+    lines.append(f"{k_.replace('_', ' ')} & {v['median_ms']:.1f} \\\\\\\\")
+lines += [r"\\bottomrule", r"\\end{tabular}", r"\\end{table}"]
+p = PROJECT_ROOT / "paper" / "tables" / "probes_ablations.tex"
+p.write_text("\\n".join(lines) + "\\n", encoding="utf-8"); WRITTEN.append(p)
+
 WRITTEN.append(write_json(RESULTS_DIR / "compute_probes_ablations.json", {
     "probes": probe_res, "flops": flops_df.to_dict(orient="records"), "latency_ms": lat_df.reset_index().to_dict(orient="records"),
     "ablations": (abl_tab.reset_index().to_dict(orient="records") if len(A) else [])}))
@@ -911,15 +935,17 @@ lines += [r"\\bottomrule", r"\\end{tabular}"]
 p = PAPER_DIR / "tables" / "premature.tex"; p.write_text("\\n".join(lines)); WRITTEN.append(p)
 """),
     code("""
-# Fig. 1 (teaser): one deep addition instance; where max-softmax halts vs where the propagating completion head halts
+# Fig. 1 (teaser): one deep and long addition instance; where two global convergence rules halt
+# (hidden-state change: wrong; k-step stability: before the bound) vs the propagating completion head
 from glwm2.train.trainer import load_model
 from glwm2.data.splits import load_split
 from glwm2.eval.trajectory import per_position_rho
 from glwm2.eval.results import per_instance
 c = next(c for c in finished(cfgs["addition"]) if c.method == "base" and c.seed == 0)
-pi = per_instance(c)["per_instance"]["ood_depth"]
-data = load_split("addition", "ood_depth")
-cand = np.where((pi["max_softmax"]["correct"] == 0) & (pi["done_prop_post"]["correct"] == 1))[0]
+pi = per_instance(c)["per_instance"]["ood_both"]
+data = load_split("addition", "ood_both")
+short = data["length"].numpy() <= 96
+cand = np.where((pi["hidden_change"]["correct"] == 0) & (pi["done_prop_post"]["correct"] == 1) & short)[0]
 k = int(cand[np.argmax(data["depth"].numpy()[cand])]) if len(cand) else int(torch.argmax(data["depth"]))
 model = load_model(c)
 L = int(data["length"][k]); rho = per_position_rho("addition", {kk: v[k:k+1] for kk, v in data.items()})[0, :L+1].numpy()
@@ -930,7 +956,8 @@ with torch.no_grad():
 fig, ax = plt.subplots(figsize=(3.5, 2.4))
 ax.imshow(pc.T, aspect="auto", origin="lower", cmap="Greys_r", interpolation="nearest", extent=[0.5, T + 0.5, -0.5, L + 0.5], alpha=0.85)
 ax.plot(rho, np.arange(L + 1), color="#D55E00", lw=1.2, label=r"carry arrives ($\\rho_i$)")
-ax.axvline(pi["max_softmax"]["steps"][k], color="#56B4E9", lw=1.5, ls="--", label="max-softmax halts")
+ax.axvline(pi["hidden_change"]["steps"][k], color="#CC79A7", lw=1.5, ls="--", label="hidden-change halts (wrong)")
+ax.axvline(pi["stability"]["steps"][k], color="#56B4E9", lw=1.5, ls=":", label="stability halts")
 ax.axvline(pi["done_prop_post"]["steps"][k], color="#009E73", lw=1.5, label="completion head halts")
 ax.set_xlabel("step t"); ax.set_ylabel("output digit i"); ax.legend(fontsize=5.5, frameon=True, loc="lower right")
 ax.set_title(f"{L}-digit addition, $d^*$ = {int(data['depth'][k])} (white = correct)", fontsize=7)

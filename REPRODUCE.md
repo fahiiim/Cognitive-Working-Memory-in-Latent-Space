@@ -24,8 +24,9 @@ resumes from `checkpoints/<run_id>/last.pt`.
 | Environment check, v1 reproduction, frozen splits | `python scripts\build_notebooks.py --run 00 01 02` | `results/env.json`, `results/v1/`, `data/frozen/` |
 | Backbone pilot (G1) | `python scripts\run_sweep.py configs\pilot_addition.yaml`, then notebook 03 | `results/pilot_summary.json` |
 | Gate tuning (equal budget) | `python scripts\run_sweep.py configs\tune_gates.yaml` | chosen settings in notebook 04 |
-| Main grid | `python scripts\run_sweep.py configs\main_addition.yaml configs\main_parity.yaml configs\main_gates.yaml configs\headline_addition.yaml` | `results/runs/<run_id>/` |
-| Mazes | `python scripts\run_sweep.py configs\main_mazes.yaml` | maze runs |
+| Main grid | `python scripts\run_sweep.py configs\main_addition.yaml configs\main_parity.yaml configs\main_gates.yaml` | `results/runs/<run_id>/` |
+| Extra seeds (optional, not in the paper) | `python scripts\run_sweep.py configs\extra_seeds.yaml` | more base-model seeds |
+| Mazes (optional, negative result) | `python scripts\run_sweep.py configs\pilot_mazes.yaml`, then `configs\main_mazes.yaml` and notebook 07 | maze runs |
 | Ablations | `python scripts\run_sweep.py configs\ablations.yaml` | ablation runs |
 | Analysis, figures, tables | `python scripts\make_figures.py` (notebooks 02-05, 07-09) | `paper/figures/*.pdf`, `paper/tables/*.tex`, `results/paper_numbers.json` |
 | Bibliography | `python scripts\fetch_bib.py` then `python scripts\check_bib.py` | `paper/references.bib` |

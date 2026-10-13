@@ -1,0 +1,47 @@
+Traceback (most recent call last):
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 804, in get_win32
+    manufacturer, caption = _wmi_query('CPU', 'Manufacturer', 'Caption')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 327, in _wmi_query
+    data = _wmi.exec_query("SELECT {} FROM {}".format(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 258] The wait operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\scripts\run_sweep.py", line 94, in main
+    run(c, posthoc_iters=args.posthoc_iters)
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\src\glwm2\train\pipeline.py", line 83, in run
+    train(cfg, save=True, verbose=verbose)
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\src\glwm2\train\trainer.py", line 159, in train
+    "env": env_info()})
+           ^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\Downloads\When_to_Think__When_to_Act\src\glwm2\utils\io.py", line 93, in env_info
+    "platform": platform.platform(),
+                ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 1245, in platform
+    system, node, release, version, machine, processor = uname()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 865, in __iter__
+    (self.processor,)
+     ^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\functools.py", line 998, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 860, in processor
+    return _unknown_as_blank(_Processor.get())
+                             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 800, in get
+    return func() or ''
+           ^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 806, in get_win32
+    return os.environ.get('PROCESSOR_IDENTIFIER', _get_machine_win32())
+                                                  ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 776, in _get_machine_win32
+    [arch, *_] = _wmi_query('CPU', 'Architecture')
+    ^^^^^^^^^^
+  File "C:\Users\Md Fahim Sarker\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py", line 333, in <genexpr>
+    return (dict_data[k] for k in keys)
+            ~~~~~~~~~^^^
+KeyError: 'Architecture'

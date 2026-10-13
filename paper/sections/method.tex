@@ -10,8 +10,8 @@ pointwise initial state $H = \mathrm{LN}$, and the shared step
 \end{equation}
 with $r$ kernel-3 convolutions per step, input re-injection (``recall''), a residual connection, and a
 LayerNorm over channels at every position. The decoder is a pointwise two-layer MLP. The growth rate
-is therefore exactly $r$ positions per step (checked by the flip test). We use width 128 and $r=1$ on
-T1/T2, and width 64 with $r=4$ on mazes. The backbone is trained with a per-step cross-entropy
+is therefore exactly $r$ positions per step (checked by the flip test). We use width 128 and $r=1$.
+The backbone is trained with a per-step cross-entropy
 averaged uniformly over $T_{\text{train}}=20$ steps (``fixed prior'') or with the progressive loss of
 \citet{bansal2022endtoend}; the pilot (\cref{sec:experiments}) selects the objective per task.
 

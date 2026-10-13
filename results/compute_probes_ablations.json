@@ -1,0 +1,562 @@
+{
+  "probes": {
+    "id_test": {
+      "acc": 0.9997266530990601,
+      "auc": 0.9999990988836426,
+      "base_rate": 0.04704666666666667
+    },
+    "ood_depth": {
+      "acc": 0.9999266862869263,
+      "auc": 0.9999999796122344,
+      "base_rate": 0.1516
+    },
+    "ood_both": {
+      "acc": 0.9999600052833557,
+      "auc": 0.9999999955434555,
+      "base_rate": 0.13899333333333333
+    }
+  },
+  "flops": [
+    {
+      "split": "id_test",
+      "entry": "fixed_T",
+      "family": "reference",
+      "mean_steps": 10.0,
+      "kflops": 34411.52,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "oracle_lb",
+      "family": "reference",
+      "mean_steps": 5.093,
+      "kflops": 17525.787136,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "oracle_stable",
+      "family": "reference",
+      "mean_steps": 2.8735,
+      "kflops": 9888.150272,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "oracle_iter",
+      "family": "reference",
+      "mean_steps": 2.85475,
+      "kflops": 9823.628672,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "max_softmax",
+      "family": "posthoc",
+      "mean_steps": 5.093,
+      "kflops": 17525.787136,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "entropy",
+      "family": "posthoc",
+      "mean_steps": 5.093,
+      "kflops": 17525.787136,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "stability",
+      "family": "posthoc",
+      "mean_steps": 3.849,
+      "kflops": 13244.994048,
+      "acc": 0.99925
+    },
+    {
+      "split": "id_test",
+      "entry": "kl",
+      "family": "posthoc",
+      "mean_steps": 4.030749999999999,
+      "kflops": 13870.423423999999,
+      "acc": 0.99975
+    },
+    {
+      "split": "id_test",
+      "entry": "hidden_change",
+      "family": "posthoc",
+      "mean_steps": 6.197,
+      "kflops": 21324.818944000002,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "max_conf_fan",
+      "family": "posthoc",
+      "mean_steps": 26.0,
+      "kflops": 89469.952,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "trm_post",
+      "family": "posthoc",
+      "mean_steps": 3.59325,
+      "kflops": 12424.251167999999,
+      "acc": 0.99575
+    },
+    {
+      "split": "id_test",
+      "entry": "act",
+      "family": "joint",
+      "mean_steps": 2.372,
+      "kflops": 8162.412544,
+      "acc": 0.999
+    },
+    {
+      "split": "id_test",
+      "entry": "ponder",
+      "family": "joint",
+      "mean_steps": 4.9715,
+      "kflops": 17107.687167999997,
+      "acc": 1.0
+    },
+    {
+      "split": "id_test",
+      "entry": "done_post",
+      "family": "ours",
+      "mean_steps": 5.09225,
+      "kflops": 18616.288288,
+      "acc": 0.99975
+    },
+    {
+      "split": "id_test",
+      "entry": "done_prop_post",
+      "family": "ours",
+      "mean_steps": 5.092499999999999,
+      "kflops": 18668.045759999997,
+      "acc": 0.99975
+    },
+    {
+      "split": "ood_depth",
+      "entry": "fixed_T",
+      "family": "reference",
+      "mean_steps": 10.0,
+      "kflops": 42352.64,
+      "acc": 0.709
+    },
+    {
+      "split": "ood_depth",
+      "entry": "oracle_lb",
+      "family": "reference",
+      "mean_steps": 13.496,
+      "kflops": 57159.122943999995,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "oracle_stable",
+      "family": "reference",
+      "mean_steps": 4.881,
+      "kflops": 20672.323584,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "oracle_iter",
+      "family": "reference",
+      "mean_steps": 4.22625,
+      "kflops": 17899.284480000002,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "max_softmax",
+      "family": "posthoc",
+      "mean_steps": 13.496,
+      "kflops": 57159.122943999995,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "entropy",
+      "family": "posthoc",
+      "mean_steps": 13.496,
+      "kflops": 57159.122943999995,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "stability",
+      "family": "posthoc",
+      "mean_steps": 5.22675,
+      "kflops": 22136.666112,
+      "acc": 0.99875
+    },
+    {
+      "split": "ood_depth",
+      "entry": "kl",
+      "family": "posthoc",
+      "mean_steps": 5.32,
+      "kflops": 22531.60448,
+      "acc": 0.9982500000000001
+    },
+    {
+      "split": "ood_depth",
+      "entry": "hidden_change",
+      "family": "posthoc",
+      "mean_steps": 14.08125,
+      "kflops": 59637.811200000004,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "max_conf_fan",
+      "family": "posthoc",
+      "mean_steps": 36.0,
+      "kflops": 152469.504,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "trm_post",
+      "family": "posthoc",
+      "mean_steps": 5.382,
+      "kflops": 22883.058432,
+      "acc": 0.995
+    },
+    {
+      "split": "ood_depth",
+      "entry": "act",
+      "family": "joint",
+      "mean_steps": 2.1025,
+      "kflops": 8904.64256,
+      "acc": 0.9975
+    },
+    {
+      "split": "ood_depth",
+      "entry": "ponder",
+      "family": "joint",
+      "mean_steps": 6.477,
+      "kflops": 27431.804928,
+      "acc": 0.9915
+    },
+    {
+      "split": "ood_depth",
+      "entry": "done_post",
+      "family": "ours",
+      "mean_steps": 13.496,
+      "kflops": 60724.658176,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_depth",
+      "entry": "done_prop_post",
+      "family": "ours",
+      "mean_steps": 13.4895,
+      "kflops": 60861.170688,
+      "acc": 0.9982500000000001
+    },
+    {
+      "split": "ood_length",
+      "entry": "fixed_T",
+      "family": "reference",
+      "mean_steps": 10.0,
+      "kflops": 428820.48,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "oracle_lb",
+      "family": "reference",
+      "mean_steps": 5.472,
+      "kflops": 234650.566656,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "oracle_stable",
+      "family": "reference",
+      "mean_steps": 4.398,
+      "kflops": 188595.24710399998,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "oracle_iter",
+      "family": "reference",
+      "mean_steps": 4.398,
+      "kflops": 188595.24710399998,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "max_softmax",
+      "family": "posthoc",
+      "mean_steps": 5.473,
+      "kflops": 234693.448704,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "entropy",
+      "family": "posthoc",
+      "mean_steps": 5.472,
+      "kflops": 234650.566656,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "stability",
+      "family": "posthoc",
+      "mean_steps": 5.398,
+      "kflops": 231477.29510399996,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "kl",
+      "family": "posthoc",
+      "mean_steps": 5.6155,
+      "kflops": 240804.140544,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "hidden_change",
+      "family": "posthoc",
+      "mean_steps": 4.2535,
+      "kflops": 182398.791168,
+      "acc": 0.695
+    },
+    {
+      "split": "ood_length",
+      "entry": "max_conf_fan",
+      "family": "posthoc",
+      "mean_steps": 26.0,
+      "kflops": 1114933.248,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "trm_post",
+      "family": "posthoc",
+      "mean_steps": 3.3395,
+      "kflops": 143259.74112,
+      "acc": 0.5235000000000001
+    },
+    {
+      "split": "ood_length",
+      "entry": "act",
+      "family": "joint",
+      "mean_steps": 2.717,
+      "kflops": 116510.52441600001,
+      "acc": 0.437
+    },
+    {
+      "split": "ood_length",
+      "entry": "ponder",
+      "family": "joint",
+      "mean_steps": 5.255,
+      "kflops": 225345.16224,
+      "acc": 0.813
+    },
+    {
+      "split": "ood_length",
+      "entry": "done_post",
+      "family": "ours",
+      "mean_steps": 5.472,
+      "kflops": 249287.860224,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_length",
+      "entry": "done_prop_post",
+      "family": "ours",
+      "mean_steps": 5.472,
+      "kflops": 249968.664576,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_both",
+      "entry": "fixed_T",
+      "family": "reference",
+      "mean_steps": 10.0,
+      "kflops": 423526.4,
+      "acc": 0.495
+    },
+    {
+      "split": "ood_both",
+      "entry": "oracle_lb",
+      "family": "reference",
+      "mean_steps": 75.356,
+      "kflops": 3191525.5398399998,
+      "acc": 0.9955
+    },
+    {
+      "split": "ood_both",
+      "entry": "oracle_stable",
+      "family": "reference",
+      "mean_steps": 40.332499999999996,
+      "kflops": 1708187.8527999998,
+      "acc": 0.9964999999999999
+    },
+    {
+      "split": "ood_both",
+      "entry": "oracle_iter",
+      "family": "reference",
+      "mean_steps": 39.51,
+      "kflops": 1673352.8064,
+      "acc": 1.0
+    },
+    {
+      "split": "ood_both",
+      "entry": "max_softmax",
+      "family": "posthoc",
+      "mean_steps": 75.561,
+      "kflops": 3200207.8310400005,
+      "acc": 0.998
+    },
+    {
+      "split": "ood_both",
+      "entry": "entropy",
+      "family": "posthoc",
+      "mean_steps": 75.36500000000001,
+      "kflops": 3191906.7136000004,
+      "acc": 0.996
+    },
+    {
+      "split": "ood_both",
+      "entry": "stability",
+      "family": "posthoc",
+      "mean_steps": 40.4745,
+      "kflops": 1714201.92768,
+      "acc": 0.998
+    },
+    {
+      "split": "ood_both",
+      "entry": "kl",
+      "family": "posthoc",
+      "mean_steps": 40.619,
+      "kflops": 1720321.8841600001,
+      "acc": 0.998
+    },
+    {
+      "split": "ood_both",
+      "entry": "hidden_change",
+      "family": "posthoc",
+      "mean_steps": 4.185499999999999,
+      "kflops": 177266.97471999997,
+      "acc": 0.427
+    },
+    {
+      "split": "ood_both",
+      "entry": "max_conf_fan",
+      "family": "posthoc",
+      "mean_steps": 144.0,
+      "kflops": 6098780.16,
+      "acc": 0.9984999999999999
+    },
+    {
+      "split": "ood_both",
+      "entry": "trm_post",
+      "family": "posthoc",
+      "mean_steps": 50.035,
+      "kflops": 2119940.52032,
+      "acc": 0.5
+    },
+    {
+      "split": "ood_both",
+      "entry": "act",
+      "family": "joint",
+      "mean_steps": 2.932,
+      "kflops": 124177.94048,
+      "acc": 0.356
+    },
+    {
+      "split": "ood_both",
+      "entry": "ponder",
+      "family": "joint",
+      "mean_steps": 5.432,
+      "kflops": 230059.54048000003,
+      "acc": 0.475
+    },
+    {
+      "split": "ood_both",
+      "entry": "done_post",
+      "family": "ours",
+      "mean_steps": 75.356,
+      "kflops": 3390610.0633599996,
+      "acc": 0.9955
+    },
+    {
+      "split": "ood_both",
+      "entry": "done_prop_post",
+      "family": "ours",
+      "mean_steps": 75.3555,
+      "kflops": 3399847.24992,
+      "acc": 0.9955
+    }
+  ],
+  "latency_ms": [
+    {
+      "index": "fixed_T (val-selected)",
+      "median_ms": 24.665599822998047,
+      "q25_ms": 22.709199905395508,
+      "q75_ms": 27.445112705230713
+    },
+    {
+      "index": "fixed_T = T_max",
+      "median_ms": 78.50716781616211,
+      "q25_ms": 73.16238594055176,
+      "q75_ms": 80.11338233947754
+    },
+    {
+      "index": "max_softmax",
+      "median_ms": 95.24862670898438,
+      "q25_ms": 89.06570434570312,
+      "q75_ms": 96.54255104064941
+    },
+    {
+      "index": "done_post",
+      "median_ms": 97.1321907043457,
+      "q25_ms": 94.82890510559082,
+      "q75_ms": 99.82003211975098
+    },
+    {
+      "index": "done_prop_post",
+      "median_ms": 112.27006530761719,
+      "q25_ms": 110.83782958984375,
+      "q75_ms": 114.76075172424316
+    }
+  ],
+  "ablations": [
+    {
+      "ablation": "main",
+      "method": "base",
+      "rule": "done_prop_post",
+      "id_test": 0.99975,
+      "ood_depth": 0.9982500000000001,
+      "ood_length": 1.0,
+      "ood_both": 0.9955
+    },
+    {
+      "ablation": "main",
+      "method": "base",
+      "rule": "max_softmax",
+      "id_test": 1.0,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_both": 0.998
+    },
+    {
+      "ablation": "main",
+      "method": "base",
+      "rule": "oracle_stable",
+      "id_test": 1.0,
+      "ood_depth": 1.0,
+      "ood_length": 1.0,
+      "ood_both": 0.9964999999999999
+    }
+  ]
+}

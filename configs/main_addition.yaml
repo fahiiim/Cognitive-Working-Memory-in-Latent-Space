@@ -1,5 +1,5 @@
-# Main grid for T1 addition: backbone objective chosen in the pilot (notebook 03).
-# The pooled gates (ACT, PonderNet, v1 gate) are in main_gates.yaml.
+# Main grid for T1 addition. Objective from the pilot (notebook 03; tie on validation, see
+# PREREGISTRATION.md). Reduced scale (5-hour compute limit): seeds 0-1 for every method. The pooled gates (ACT, PonderNet, v1 gate) are in main_gates.yaml.
 base:
   task: addition
   objective: fixed_prior
@@ -8,8 +8,8 @@ base:
   t_train: 20
 runs:
   - {method: base}
-  - {method: trm_joint}
-  - {method: done_joint}
   - {method: done_prop_joint}
+  - {method: done_joint}
+  - {method: trm_joint}
 grid:
-  seed: [0, 1, 2, 3, 4]
+  seed: [0, 1]

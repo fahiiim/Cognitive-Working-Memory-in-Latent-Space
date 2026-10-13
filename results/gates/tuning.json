@@ -1,0 +1,9 @@
+{
+  "act": {
+    "act_tau": 0.01
+  },
+  "ponder": {
+    "ponder_beta": 0.01,
+    "ponder_lambda_p": 0.1
+  }
+}

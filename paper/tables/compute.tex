@@ -1,0 +1,19 @@
+\begin{table}[h]
+\centering
+\caption{Measured GPU time per sweep (RTX 5070; several runs shared the GPU, so wall-clock per run is higher than in isolation). Runs listed in more than one sweep are counted once per sweep.}
+\label{tab:compute}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Sweep & Runs & Train (h) & Eval (h) \\
+\midrule
+\texttt{main\_addition} & 2 & 0.3 & 0.1 \\
+\texttt{main\_gates} & 2 & 0.9 & 0.3 \\
+\texttt{main\_parity} & 2 & 0.7 & 0.6 \\
+\texttt{pilot\_addition} & 8 & 2.4 & 1.1 \\
+\texttt{tune\_gates} & 2 & 1.1 & 0.2 \\
+\midrule
+Total & 16 & 5.4 & 2.4 \\
+\bottomrule
+\end{tabular}
+\end{table}

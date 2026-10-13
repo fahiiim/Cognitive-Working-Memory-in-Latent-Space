@@ -57,7 +57,7 @@ def arxiv_meta(ids: list[str]) -> dict[str, dict]:
     for s in range(0, len(ids), 40):
         chunk = ids[s : s + 40]
         url = "http://export.arxiv.org/api/query?" + urllib.parse.urlencode({"id_list": ",".join(chunk), "max_results": len(chunk)})
-        root = ET.fromstring(http_get(url))
+        root = ET.fromstring(http_get(url, retries=8, pause=20.0))
         for e in root.findall(f"{ATOM}entry"):
             aid = e.find(f"{ATOM}id").text.rsplit("/abs/", 1)[-1]
             aid = re.sub(r"v\d+$", "", aid)

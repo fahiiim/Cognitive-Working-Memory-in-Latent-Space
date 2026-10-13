@@ -125,3 +125,37 @@ comparisons reported in one table.
   before the bound *and* answered wrongly, reported next to the premature-stop rate. G2 is still
   decided by the pre-registered premature-stop definition, and the paper reports both, so a G2
   pass that rests only on premature-but-correct halting is described as such.
+- **2026-10-13, pilot objective selection.** Both objectives reach 100% stable-oracle accuracy on
+  OOD-val and ID-val for both tasks, so the pre-registered selection is a tie. No tie-break was
+  pre-registered; we keep the first objective in the pre-registered config order
+  (`fixed_prior`) for both tasks and did not consult any test split for this choice. (For the
+  record, OOD-both, which was not used, favours fixed-prior on addition and progressive on parity.)
+- **2026-10-13, G1.** Addition passes (stable-oracle accuracy 99.7% on OOD-both instances with
+  d\* >= 40). Parity fails (about 78%); as pre-registered, parity claims are restricted to the depth
+  range where the backbone extrapolates, and accuracy is reported as a function of depth.
+- **2026-10-13, reduced scale (compute).** One RTX 5070 shared by up to five runs gives about
+  20 minutes per T1/T2 run. We run 3 seeds (0-2) for every method, 5 seeds (0-4) for the base model
+  on both tasks and 10 (0-9) for the addition base model (which carries every post-hoc rule,
+  including our post-hoc completion heads), 3 seeds for the pooled gates, 1 seed for ablations and
+  2 for mazes. The gate hyperparameters get an equal budget of 3 settings each
+  (`configs/tune_gates.yaml`). Every reported CI states its number of seeds.
+- **2026-10-13, mazes.** The first maze configuration (fixed-prior, width 64, T_train 32, 5000
+  iterations) reached 0% exact match on training-size mazes; a width-128 retry ran at 3.5 s per
+  iteration and was stopped. The maze backbone is re-piloted with the progressive loss
+  (alpha = 0.01, as in Bansal et al. 2022 for mazes) and T_train 40 (`configs/pilot_mazes.yaml`).
+- **2026-10-13, stability of global rules (observation, no change to analysis).** The ACT model
+  with tau = 0.01 halts at step 1 or 5 depending on whether any carry enters the long nine-run: the
+  pooled gate reads this from the whole sequence, and the backbone's default output switches from
+  "no carry" to "carry" around step 4. This beats the light-cone bound on OOD-depth (one long run)
+  but fails on OOD-length and OOD-both (many runs). The analysis reports it as a shortcut.
+- **2026-10-13, 5-hour compute limit (supersedes the reduced-scale entry above).** Under six
+  concurrent runs an 8000-iteration run took 1.5-3 h, so the remaining grid (about 83 runs) was cut
+  to fit a 5-hour budget, before any main-grid result was analysed: 2 seeds (0-1) per method on T1
+  and T2, pooled gates with 2 seeds on both tasks, 3 ablation runs (no recall, r = 2, width 64; seed
+  0), no extra base seeds. Training length stays at 8000 iterations so all runs are comparable.
+  Gate tuning was stopped after ACT: ACT uses tau = 0.01 (the default 1e-3 never halts); PonderNet
+  and the v1 gate use their defaults, which is a weaker tuning budget than pre-registered.
+- **2026-10-13, mazes dropped.** The progressive re-pilot reached 3% exact match on training-size
+  mazes after 1000 iterations (loss not decreasing) and was stopped under the compute limit. Mazes
+  are reported as a negative result: we could not train a maze backbone that passes G1 within the
+  budget, so no maze stopping-rule claims are made.

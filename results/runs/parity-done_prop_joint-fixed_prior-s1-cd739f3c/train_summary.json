@@ -1,0 +1,19 @@
+{
+  "train_seconds": 1257.332839012146,
+  "n_filtered": 659873,
+  "env": {
+    "python": "3.12.15",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "cudnn": 91900,
+    "git_commit": "0ef0a8b",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "capability": [
+      12,
+      0
+    ],
+    "gpu_mem_gb": 12.82,
+    "sm_120_in_arch_list": true
+  }
+}

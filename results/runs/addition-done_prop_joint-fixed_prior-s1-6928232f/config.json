@@ -1,0 +1,36 @@
+{
+  "task": "addition",
+  "method": "done_prop_joint",
+  "objective": "fixed_prior",
+  "seed": 1,
+  "width": 128,
+  "convs_per_step": 1,
+  "recall": true,
+  "norm": "layer",
+  "iters": 8000,
+  "batch_size": 512,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "warmup": 300,
+  "grad_clip": 1.0,
+  "t_train": 20,
+  "progressive_alpha": 0.5,
+  "bf16": false,
+  "act_tau": 0.001,
+  "ponder_beta": 0.01,
+  "ponder_lambda_p": 0.1,
+  "v1_lambda": 0.01,
+  "aux_weight": 1.0,
+  "train_len": [
+    4,
+    20
+  ],
+  "train_depth": [
+    1,
+    10
+  ],
+  "maze_train_size": 9,
+  "eval_n": 2000,
+  "t_max_extra": 16,
+  "tags": {}
+}

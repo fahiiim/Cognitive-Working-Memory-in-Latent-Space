@@ -87,5 +87,98 @@
    "name": "ArXiv",
    "volume": "abs/1611.00736"
   }
+ },
+ "2603.12529": {
+  "paperId": "f2e5242a241a45fd89eb9216a66ed4f8c1571a1d",
+  "publicationVenue": {
+   "id": "1901e811-ee72-4b20-8f7e-de08cd395a10",
+   "name": "arXiv.org",
+   "alternate_names": [
+    "ArXiv"
+   ],
+   "issn": "2331-8422",
+   "url": "https://arxiv.org"
+  },
+  "title": "TERMINATOR: Learning Optimal Exit Points for Early Stopping in Chain-of-Thought Reasoning",
+  "venue": "arXiv.org",
+  "year": 2026,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/2603.12529"
+  }
+ },
+ "2207.07061": {
+  "paperId": "2ef60a4ea4ea53056be811ff55679eb59fb4b586",
+  "publicationVenue": {
+   "id": "d9720b90-d60b-48bc-9df8-87a30b9a60dd",
+   "name": "Neural Information Processing Systems",
+   "type": "conference",
+   "alternate_names": [
+    "Neural Inf Process Syst",
+    "NeurIPS",
+    "NIPS"
+   ],
+   "url": "http://neurips.cc/"
+  },
+  "title": "Confident Adaptive Language Modeling",
+  "venue": "Neural Information Processing Systems",
+  "year": 2022,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/2207.07061"
+  }
+ },
+ "2207.02098": {
+  "paperId": "c6d38add1b7bbc10f0da37a90e3f1b51ee5fb617",
+  "publicationVenue": {
+   "id": "939c6e1d-0d17-4d6e-8a82-66d960df0e40",
+   "name": "International Conference on Learning Representations",
+   "type": "conference",
+   "alternate_names": [
+    "Int Conf Learn Represent",
+    "ICLR"
+   ],
+   "url": "https://iclr.cc/"
+  },
+  "title": "Neural Networks and the Chomsky Hierarchy",
+  "venue": "International Conference on Learning Representations",
+  "year": 2022,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/2207.02098"
+  }
+ },
+ "2405.17399": {
+  "paperId": "59cf4f0391430523cff7d7ca1819389476ff87a6",
+  "publicationVenue": {
+   "id": "d9720b90-d60b-48bc-9df8-87a30b9a60dd",
+   "name": "Neural Information Processing Systems",
+   "type": "conference",
+   "alternate_names": [
+    "Neural Inf Process Syst",
+    "NeurIPS",
+    "NIPS"
+   ],
+   "url": "http://neurips.cc/"
+  },
+  "title": "Transformers Can Do Arithmetic with the Right Embeddings",
+  "venue": "Neural Information Processing Systems",
+  "year": 2024,
+  "publicationTypes": [
+   "JournalArticle"
+  ],
+  "journal": {
+   "name": "ArXiv",
+   "volume": "abs/2405.17399"
+  }
  }
 }

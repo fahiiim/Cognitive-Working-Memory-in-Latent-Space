@@ -1,0 +1,18 @@
+# Extra seeds for the base model, which carries every post-hoc rule including our post-hoc
+# completion heads: seeds 3-4 for parity (5 in total) and 3-9 for addition (10 for headline numbers).
+base:
+  objective: fixed_prior
+  method: base
+  iters: 8000
+  batch_size: 512
+  t_train: 20
+runs:
+  - {task: addition, seed: 3}
+  - {task: parity, seed: 3}
+  - {task: addition, seed: 4}
+  - {task: parity, seed: 4}
+  - {task: addition, seed: 5}
+  - {task: addition, seed: 6}
+  - {task: addition, seed: 7}
+  - {task: addition, seed: 8}
+  - {task: addition, seed: 9}

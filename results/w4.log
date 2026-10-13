@@ -1,0 +1,6 @@
+main_gates: 12 runs, 2 finished
+[11:59:09] start addition-act-own-s1-65d904ab
+[12:29:17] ok addition-act-own-s1-65d904ab (1809s)
+[12:29:17] start parity-act-own-s0-4363ccbf
+[12:55:34] ok parity-act-own-s0-4363ccbf (1577s)
+[12:55:34] start parity-act-own-s1-e0d7f6b9

@@ -26,10 +26,9 @@ if (-not $FiguresOnly) {
     powercfg /change standby-timeout-ac 0
     & $py scripts\build_notebooks.py --run 00 01 02
     $grids = @(
-        "configs\pilot_addition.yaml",
+        "configs\pilot_addition.yaml", "configs\tune_gates.yaml",
         "configs\main_addition.yaml", "configs\main_parity.yaml", "configs\main_gates.yaml",
-        "configs\headline_addition.yaml",
-        "configs\main_mazes.yaml", "configs\ablations.yaml"
+        "configs\ablations.yaml"
     )
     $procs = @()
     for ($w = 0; $w -lt $Workers; $w++) {

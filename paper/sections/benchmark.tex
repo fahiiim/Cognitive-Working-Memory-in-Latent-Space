@@ -20,7 +20,9 @@ outputs keep flipping as information arrives, so the per-step predictions do not
 \paragraph{T3: mazes.} $n\times n$ mazes from a randomized depth-first generator (input channels:
 open cell, start, goal; output: the shortest path). Information travels along corridors, so the light
 cone gives only a loose bound. We record two empirical depth proxies: the optimal path length and
-the number of dead-end-filling iterations a local rule needs to isolate the path.
+the number of dead-end-filling iterations a local rule needs to isolate the path. The generator and
+splits are released, but within our compute budget no maze backbone passed Gate G1
+(\cref{sec:limitations}), so the experiments use T1 and T2 only.
 
 \paragraph{Splits.} For T1 and T2 (\cref{tab:splits}): in-distribution (ID) lengths 4--20 and depths
 1--10; OOD-depth keeps the lengths but uses depths 11--20; OOD-length uses lengths 64--256 at ID

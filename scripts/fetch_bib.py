@@ -35,7 +35,7 @@ def rekey(bib: str, key: str) -> str:
 def add_fields(bib: str, fields: dict[str, str]) -> str:
     bib = bib.rstrip()
     assert bib.endswith("}")
-    present = {f.lower() for f in re.findall(r"^\s*(\w+)\s*=", bib, re.M)}
+    present = {f.lower() for f in re.findall(r"[,{]\s*(\w+)\s*=", bib)}
     extra = "".join(f",\n  {k:<13}= {{{v}}}" for k, v in fields.items() if k.lower() not in present)
     body = bib[:-1].rstrip().rstrip(",")
     return body + extra + "\n}"

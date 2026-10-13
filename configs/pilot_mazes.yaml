@@ -1,0 +1,17 @@
+# Maze backbone pilot. The first main_mazes attempt (fixed-prior loss, width 64, T_train 32,
+# 5000 iterations) reached 0% exact match on 9x9 training mazes: 32 steps x r=4 = 128 pixels of
+# receptive field barely covers the largest dead-end-filling depth (126). This run adds slack
+# (T_train 40) and uses the progressive loss with alpha = 0.01 as Bansal et al. 2022 do for mazes.
+# (A width-128 attempt ran at 3.5 s/iteration on the shared GPU and was stopped.)
+base:
+  task: mazes
+  method: base
+  objective: progressive
+  progressive_alpha: 0.01
+  width: 64
+  convs_per_step: 4
+  t_train: 40
+  batch_size: 32
+  iters: 8000
+  lr: 0.001
+  seed: 0

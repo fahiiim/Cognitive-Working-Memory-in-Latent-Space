@@ -1,4 +1,4 @@
-# Main grid for T2 segmented parity: backbone objective chosen in the pilot (notebook 03).
+# Main grid for T2 segmented parity (same protocol as main_addition.yaml).
 base:
   task: parity
   objective: fixed_prior
@@ -7,8 +7,8 @@ base:
   t_train: 20
 runs:
   - {method: base}
-  - {method: trm_joint}
-  - {method: done_joint}
   - {method: done_prop_joint}
+  - {method: done_joint}
+  - {method: trm_joint}
 grid:
-  seed: [0, 1, 2, 3, 4]
+  seed: [0, 1]

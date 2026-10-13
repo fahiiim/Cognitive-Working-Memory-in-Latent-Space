@@ -1,0 +1,8 @@
+main_parity: 8 runs, 2 finished
+[11:45:33] start parity-done_prop_joint-fixed_prior-s0-33eee06d
+[12:08:03] error: KeyError('Architecture') parity-done_prop_joint-fixed_prior-s0-33eee06d (1350s)
+[12:08:03] start parity-done_prop_joint-fixed_prior-s1-cd739f3c
+[12:36:18] ok parity-done_prop_joint-fixed_prior-s1-cd739f3c (1695s)
+[12:36:18] start parity-done_joint-fixed_prior-s0-86b6b864
+[12:59:03] ok parity-done_joint-fixed_prior-s0-86b6b864 (1366s)
+[12:59:03] start parity-done_joint-fixed_prior-s1-a1d07249

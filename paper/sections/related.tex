@@ -3,57 +3,49 @@
 
 \paragraph{Adaptive computation.} ACT \citep{graves2016act} and PonderNet \citep{banino2021pondernet}
 learn a halting distribution that weights the task loss; Universal Transformers apply ACT per token
-\citep{dehghani2019universal}, and SACT halts spatially \citep{figurnov2017sact}. These gates are trained
-on the depths seen in training. We evaluate both as baselines on deeper-than-training inputs and
-separate their sensitivity to length from their sensitivity to depth.
+\citep{dehghani2019universal}, and SACT halts per spatial location \citep{figurnov2017sact}. These gates
+are trained on the depths that occur in training, and we test them beyond those depths while separating
+their sensitivity to length from their sensitivity to depth.
 
-\paragraph{Recurrent models that extrapolate.} Neural GPUs \citep{kaiser2016neuralgpu} learn
-long addition, but fail on long carry chains that random inputs rarely contain
-\citep{price2016extensions}; DepthShift turns this observation into a controlled split. Recurrent
-networks extrapolate to harder instances by running more iterations
-\citep{schwarzschild2021thinking,schwarzschild2021datasets,bansal2022endtoend}, with the iteration
-count chosen by the experimenter; path independence makes convergence a usable signal
-\citep{anil2022path}, and test-time training can choose per-sample compute \citep{bao2025stop}. Looped
-Transformers \citep{giannou2023looped,yang2024looped,saunshi2025latent} and the looped models of
-\citet{fan2025looped} need ground-truth step counts during training and stop by oracle or maximum
-confidence at test time. AdRNNs \citep{veerabadran2023adaptive} and ANIRA \citep{moosa2026anira} show
-halting that scales to harder inputs, but harder means larger, so depth and length are confounded.
-Implicit models \citep{bai2019deq} solve for a fixed point instead of choosing a step.
+\paragraph{Recurrent models that extrapolate.} Neural GPUs learn long addition
+\citep{kaiser2016neuralgpu} but fail on long carry chains that random inputs rarely contain
+\citep{price2016extensions}, an observation DepthShift turns into a controlled split. Recurrent networks
+extrapolate to harder instances by running more iterations
+\citep{schwarzschild2021thinking,schwarzschild2021datasets,bansal2022endtoend}, with the count chosen by
+the experimenter. Path independence makes convergence a usable signal \citep{anil2022path}, and
+test-time training can select compute per sample \citep{bao2025stop}. Looped Transformers
+\citep{giannou2023looped,yang2024looped,saunshi2025latent}, including those of \citet{fan2025looped}, need
+ground-truth step counts in training and stop by oracle or maximum confidence at test time. AdRNNs
+\citep{veerabadran2023adaptive} and ANIRA \citep{moosa2026anira} halt later on harder inputs, but there
+harder also means larger, so depth and length are confounded. Implicit models solve for a fixed point
+instead \citep{bai2019deq}.
 
 \paragraph{Latent reasoning and recursive models.} Recurrent-depth language models exit per token from
-the KL between steps \citep{geiping2025scaling}; Ouro learns an exit gate \citep{zhu2025ouro}; Coconut
+the KL between steps \citep{geiping2025scaling}, Ouro learns an exit gate \citep{zhu2025ouro}, and Coconut
 reasons in continuous latents \citep{hao2024coconut}. HRM \citep{wang2025hrm} and TRM
-\citep{jolicoeur2025trm} train a pooled halting or correctness head, and their behaviour has been
-analysed by \citet{ge2025hrm}. Several 2026 papers diagnose halting in such models:
-stochastic stopping schedules and the correlation between loop count and length
-\citep{kuo2026stochastic}, post-hoc confidence matching learned gates \citep{popescu2026halting},
-latent motion dropping after the first exact solution \citep{krishna2026finish}, and states that encode
-computational status but become less reliable at larger depth \citep{liang2026horizon}. We add a
-per-instance depth with a provable lower bound, splits that separate depth from length, and a
-local completion target.
+\citep{jolicoeur2025trm} train a pooled halting or correctness head, and HRM has been analysed by
+\citet{ge2025hrm}. Recent diagnoses of halting in such models examine stochastic stopping schedules and
+the link between loop count and length \citep{kuo2026stochastic}, post-hoc confidence that matches learned
+gates \citep{popescu2026halting}, latent motion that drops after the first exact solution
+\citep{krishna2026finish}, and states that encode computational status but grow less reliable with depth
+\citep{liang2026horizon}. We add a per-instance depth with a provable lower bound, splits that separate
+depth from length, and a local completion target.
 
-\paragraph{Early exit and knowing when an answer is final.} Early-exit networks halt on confidence or
-patience \citep{teerapittayanon2016branchynet,elbayad2020depth,xin2020deebert,zhou2020pabee}, with
-calibrated guarantees in CALM \citep{schuster2022calm}; language models can predict their own
-correctness \citep{kadavath2022know}. For reasoning models, early exit uses answer convergence or
-dedicated predictors \citep{yang2025dynamic,liu2025convergence,nagle2026terminator,brown2026settle}. These
-signals are pooled over the whole answer; ours is per position and is tested beyond the training
-depth.
+\paragraph{Early exit, length generalisation and termination detection.} Early-exit networks halt on
+confidence or patience \citep{teerapittayanon2016branchynet,elbayad2020depth,xin2020deebert,zhou2020pabee},
+CALM adds calibrated guarantees \citep{schuster2022calm}, and language models can predict their own
+correctness \citep{kadavath2022know}. Early exit for reasoning models relies on answer convergence or
+dedicated predictors \citep{yang2025dynamic,liu2025convergence,nagle2026terminator,brown2026settle}. All of
+these signals are pooled over the whole answer, whereas ours is per position and tested beyond the
+training depth. Arithmetic and algorithmic tasks are standard probes of length generalisation
+\citep{nogueira2021arithmetic,anil2022length,deletang2023chomsky,zhou2024raspl,mcleish2024embeddings}, and
+shortcut solutions tie the depth a model needs to its architecture \citep{liu2023shortcuts}. Finally,
+deciding from local information that a distributed computation has finished is a classic problem
+\citep{dijkstra1980termination}; our completion heads learn such a detector for a neural computation, and
+\cref{prop:automaton} shows that a local, size-invariant one exists for our tasks. \Cref{tab:related} in
+\cref{app:results} compares the closest works property by property.
 
-\paragraph{Length generalisation.} Arithmetic and algorithmic tasks are standard probes of length
-generalisation \citep{nogueira2021arithmetic,anil2022length,deletang2023chomsky,zhou2024raspl,mcleish2024embeddings},
-and shortcut solutions tie the depth a model needs to its architecture \citep{liu2023shortcuts}. We
-separate depth from length explicitly.
-
-\paragraph{Termination detection.} Deciding that a distributed computation has finished from local
-information is a classic problem \citep{dijkstra1980termination}. Our completion heads learn a
-termination detector for a neural computation, and \cref{prop:automaton} shows that a local,
-size-invariant one exists for our tasks.
-
-\Cref{tab:related} in \cref{app:results} compares the closest works property by property.
-
-\paragraph{Limitations.} All runs use one consumer GPU and a five-hour training budget: two seeds per
-method, single-seed ablations, and a reduced tuning budget for PonderNet and the v1 gate. The exact
-theory covers one-dimensional tasks with closed-form depth; no maze backbone passed G1 within the
-budget, and the parity backbone fails G1 on OOD-both. \Cref{sec:limitations} discusses these points and
-what the theory does not claim.
+\paragraph{Limitations.} All runs use one consumer GPU and a five-hour training budget, which allowed two
+seeds per method, single-seed ablations and a reduced tuning budget for PonderNet and the v1 gate. The
+exact theory covers one-dimensional tasks with closed-form depth, no maze backbone passed G1, and the
+parity backbone fails G1 on OOD-both; \cref{sec:limitations} discusses these points further.

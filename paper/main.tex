@@ -2,6 +2,7 @@
 
 % Official NeurIPS 2025 style (the 2027 style is not released yet; swap the file and the
 % option when it is). Anonymous submission by default; use [final] or [preprint] otherwise.
+\PassOptionsToPackage{numbers,sort&compress}{natbib}
 \usepackage[preprint]{neurips_2025}
 
 \usepackage[utf8]{inputenc}
@@ -19,12 +20,31 @@
 \usepackage{algpseudocode}
 \usepackage[capitalise,noabbrev]{cleveref}
 
+\usepackage{mathtools}
+\usepackage{dsfont}
+
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 \newtheorem{proposition}{Proposition}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% notation
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ind}{\mathds{1}}
+\newcommand{\pad}{\bot}
+\newcommand{\LB}{\operatorname{LB}}
+\newcommand{\dstar}{d^{*}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Ttrain}{T_{\mathrm{train}}}
+\newcommand{\Tmax}{T_{\max}}
+\newcommand{\tauact}{\tau_{\mathrm{ACT}}}
+\newcommand{\Win}[2]{W_{#1}^{#2}}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
 \title{Knowing When You're Done: Termination Detection for\\Recurrent Latent Reasoners under Depth Shift}
 
@@ -49,7 +69,7 @@
 Compute: one NVIDIA RTX 5070. GPU-hours are reported in \cref{app:details}.
 \end{ack}
 
-\bibliographystyle{plainnat}
+\bibliographystyle{unsrtnat}
 \bibliography{references}
 
 \appendix

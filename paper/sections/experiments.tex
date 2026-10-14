@@ -1,26 +1,34 @@
 \section{Experiments}
 \label{sec:experiments}
 
-\paragraph{Protocol.} Every rule reads the same frozen backbone checkpoints, except the jointly trained
-methods, which train their own. Thresholds are selected on ID-val (\cref{sec:method}) and every OOD split
-is evaluated once. We report exact-match accuracy over all output positions, mean steps, and two
-error modes measured against the per-instance lower bound $\mathrm{LB}(x)$: the \emph{premature-stop
-rate} (halting before $\mathrm{LB}(x)$, i.e.\ returning an uncertified answer) and the
-\emph{premature-error rate} (halting before $\mathrm{LB}(x)$ \emph{and} being wrong). In the accuracy
-tables, brackets are percentile-bootstrap intervals over the two seeds' accuracies, so with two seeds they
-span roughly the seed range; premature rates use a bootstrap over test instances pooled over seeds.
-With two seeds a Wilcoxon test cannot reach significance (the smallest attainable $p$ is 0.5), so the
-pre-registered Holm-corrected tests are reported in \texttt{results/paper\_numbers.json} but no claim
-rests on them; the effects we discuss are tens of points, far larger than the seed-to-seed differences. The backbone objective is fixed-prior for both tasks (the pilot was a
-tie on validation; \texttt{PREREGISTRATION.md}).
+\paragraph{Protocol.} All rules read the same frozen backbone checkpoints, except the jointly trained
+methods, which train their own. Thresholds are selected on ID-val (\cref{sec:method}), and each OOD
+split is evaluated exactly once. For a test set $\{(x_n,y_n)\}_{n=1}^N$ and a rule that halts input $x_n$
+at step $\tau_n$, we report exact-match accuracy over all output positions, the mean number of steps,
+and two error modes measured against the per-instance bound of \cref{eq:lb}:
+\begin{equation}
+  \mathrm{PS} = \frac1N\sum_{n=1}^N \ind\bigl[\tau_n < \LB(x_n)\bigr],
+  \qquad
+  \mathrm{PE} = \frac1N\sum_{n=1}^N \ind\bigl[\tau_n < \LB(x_n)\bigr]\,
+  \ind\bigl[\yhat^{(\tau_n)}(x_n)\ne y_n\bigr].
+  \label{eq:premature}
+\end{equation}
+The \emph{premature-stop rate} PS counts uncertified answers, and the \emph{premature-error rate}
+$\mathrm{PE}\le\mathrm{PS}$ counts those that are also wrong. The brackets in the accuracy tables are
+percentile-bootstrap intervals over the two seeds, so they span roughly the seed range; premature rates
+use a bootstrap over test instances pooled across seeds. With two seeds a Wilcoxon signed-rank test
+cannot reach significance (the smallest attainable $p$ is $0.5$), so the pre-registered Holm-corrected
+tests are reported in \texttt{results/paper\_numbers.json} but no claim rests on them; the effects we
+discuss are tens of points, far above seed-to-seed variation. The objective pilot was a tie, so both
+backbones use the fixed prior (\texttt{PREREGISTRATION.md}).
 
-\paragraph{Backbones (Gate G1).} With the stable oracle as the stopping rule, the addition backbone is
-correct on 99.6\% of OOD-both instances, whose depths reach $12.8\times$ the training maximum
-(\cref{fig:oracle}); it passes G1. The parity backbone reaches 100\% on OOD-depth and OOD-length but only
-85\% on OOD-both, and its per-step accuracy decays after the peak (\cref{fig:stepacc}); it fails G1, so
-on parity we measure how stopping rules behave on an imperfect backbone. A fixed step count chosen on
-ID-val is correct on 71\% (addition) and 31\% (parity) of OOD-depth instances: depth shift needs
-adaptive halting.
+\paragraph{Backbones (Gate G1).} We first check that the backbones can solve the deep splits at all, by
+stopping them with the stable oracle. The addition backbone is then correct on 99.6\% of OOD-both
+instances, whose depths reach $12.8\times$ the training maximum (\cref{fig:oracle}), so it passes G1. The
+parity backbone reaches 100\% on OOD-depth and OOD-length but only 85\% on OOD-both, and its per-step
+accuracy decays after the peak (\cref{fig:stepacc}). It fails G1, and on parity we therefore measure how
+stopping rules behave on an imperfect backbone. Adaptive halting is clearly needed: a fixed step count
+chosen on ID-val is correct on only 71\% (addition) and 31\% (parity) of OOD-depth instances.
 
 \begin{table}[t]
   \centering
@@ -44,18 +52,19 @@ adaptive halting.
 \end{table}
 
 \paragraph{Pooled gates leak length (H1).} The jointly trained pooled gates look excellent in
-distribution and even on OOD-depth, and collapse once inputs get longer (\cref{tab:main_addition}). On
-addition, ACT (with the tuned $\tau=0.01$) is correct on 99.8\% of OOD-depth instances in 2.4 steps,
-far below the light-cone bound, yet on 43.2\% of OOD-length and 35.9\% of OOD-both instances. The
-model has found a shortcut: it halts at step 1 if no carry can enter the long run of nines and at
-step 5 otherwise, and the backbone's default output switches from ``no carry'' to ``carry'' around
-step 4. The pooled gate reads a global bit that a single long run makes reliable and many runs make
-useless. PonderNet, the v1 gate, and both pooled correctness heads in the style of TRM fail the same way
-(47.6\%, 69.7\%, 50.0\% post hoc and 31.9\% joint on OOD-both). Their step counts are nearly flat in
-depth (\cref{fig:steps}): they spend what they spent in training. On parity, ACT and PonderNet do
-scale their steps with depth on OOD-depth (98.9\% and 96.7\% accuracy) but are below 1\% on OOD-both.
-The v1 gate did not train on parity (3\% ID accuracy; it never halts and its halting-weighted loss
-degrades the backbone).
+distribution, and even on OOD-depth, but collapse as soon as the inputs grow longer
+(\cref{tab:main_addition}). On addition, ACT with the tuned ponder weight $\tauact=0.01$ is correct on
+99.8\% of OOD-depth instances in only 2.4 steps, far below the light-cone bound, yet on just 43.2\% of
+OOD-length and 35.9\% of OOD-both instances. Inspecting its decisions reveals a shortcut. ACT halts at
+step~1 when no carry can enter the long run of nines and at step~5 otherwise, and the backbone's default
+output for a pending position switches from ``no carry'' to ``carry'' at around step~4. A pooled gate can
+read this global bit reliably when the input contains a single long run, but the bit becomes useless
+once there are many runs. PonderNet, the v1 gate and both TRM-style pooled correctness heads fail in the
+same way, reaching 47.6\%, 69.7\%, 50.0\% (post hoc) and 31.9\% (joint) on OOD-both. Their step counts are
+nearly flat in depth (\cref{fig:steps}): out of distribution they spend what they spent in training.
+Parity is more forgiving in depth, where ACT and PonderNet do scale their steps and reach 98.9\% and
+96.7\% on OOD-depth, but both fall below 1\% on OOD-both. The v1 gate did not train on parity at all
+(3\% ID accuracy): it never halts, and its halting-weighted loss degrades the backbone.
 
 \begin{figure}[t]
   \centering
@@ -65,71 +74,71 @@ degrades the backbone).
   \label{fig:steps}
 \end{figure}
 
-\paragraph{Premature stopping is not premature error (H2).} Global convergence rules ($k$-step
-stability and the KL divergence between steps) halt before $\mathrm{LB}(x)$ on 75\% of OOD-depth and
-50\% of OOD-both addition instances (\cref{tab:premature}), yet remain 99.8\% accurate; their
-premature-\emph{error} rate, pooled over the deep splits, is 0.1\%, against 18--23\% for ACT, PonderNet
-and the joint pooled head. This is exactly the gap \cref{thm:lb} leaves open: the answers are
-uncertified, but the data do not contain the flip partner. The backbone's default guess for a pending
-digit is usually right, and while a carry wave is still travelling the hidden state keeps changing, so
-convergence is a good proxy for completion. Parity shows the same effect in its sharpest form: one step
-before the bound, a position has seen every bit of its segment and only the closing delimiter is
-outside its window, so the natural guess (``no further bits'') is right on the actual input. This is
-why the stable oracle and ACT can be accurate on parity OOD-depth while halting before the bound. The hidden-state-change rule, whose threshold is set on
-short inputs, halts after about four steps on OOD-both and is correct on 42.7\%. On parity, where outputs
-keep flipping as information arrives, confidence is misleading: max-softmax halts before the bound on
-91\% of OOD-depth instances and is correct on 51\%; on OOD-both it is correct on 0.8\%. Only the KL rule
-partly survives (94\% on OOD-depth, 57\% on OOD-both). Both H1 and H2 hold, so Gate G2 passes.
+\paragraph{Premature stopping is not premature error (H2).} The convergence rules, $k$-step stability
+and the KL between steps, halt before $\LB(x)$ on 75\% of OOD-depth and 50\% of OOD-both addition
+instances (\cref{tab:premature}), and yet they remain 99.8\% accurate. Pooled over the deep splits,
+their premature-error rate is 0.1\%, compared with 18--23\% for ACT, PonderNet and the joint pooled head.
+This is precisely the gap that \cref{thm:lb} leaves open: the answers are uncertified, but the test data
+do not contain the flip partner. The backbone's default guess for a pending digit is usually right, and
+while a carry wave is still travelling the hidden state keeps changing, so convergence is a good proxy
+for completion. Parity shows the effect in its sharpest form: one step before the bound a position has
+seen every bit of its segment, only the closing delimiter lies outside its window, and the natural
+guess that no further bits follow is correct on the actual input. This is why the stable oracle and ACT
+can be accurate on parity OOD-depth while halting before the bound. The hidden-state-change rule, whose threshold is fitted on short inputs,
+halts after about four steps on OOD-both and is correct on 42.7\% of instances. On parity, where outputs
+keep flipping as information arrives, confidence is actively misleading: max-softmax halts before the
+bound on 91\% of OOD-depth instances and is correct on only 51\%, and on OOD-both on 0.8\%. Only the KL
+rule partly survives, with 94\% on OOD-depth and 57\% on OOD-both. Since both H1 and H2 hold, Gate G2
+passes.
 
 \begin{table}[t]
   \centering
-  \caption{Premature-stop rate (\%): fraction of instances halted before the light-cone bound
-  $\mathrm{LB}(x)$. Such answers are uncertified (\cref{thm:lb}), though not necessarily wrong.}
+  \caption{Premature-stop rate PS (\%), the fraction of instances halted before the light-cone bound
+  $\LB(x)$. Such answers are uncertified (\cref{thm:lb}), though not necessarily wrong.}
   \label{tab:premature}
   \scriptsize
   \setlength{\tabcolsep}{3pt}
   \resizebox{\linewidth}{!}{\input{tables/premature}}
 \end{table}
 
-\paragraph{Per-position certificates on addition (H3).} On addition every per-position rule halts at
-the light-cone bound on every split, with no premature stops and at least 99\% accuracy: max-softmax,
-entropy, and all four completion-head variants use 13.5 steps on OOD-depth and 75.4--75.6 on OOD-both,
-against 13.5 and 75.4 for the oracle $\mathrm{LB}(x)$. The reason is visible in the theory: a pending
-addition digit has two equally plausible outputs (carry or no carry), so a calibrated decoder is
-uncertain at exactly the positions that are not yet determined, and the minimum over positions is a
-local certificate in the sense of \cref{cor:local}. A linear probe recovers the pending bit from the
-hidden state with AUC above 0.999 on every split (\cref{tab:probes}). Per-position confidence on
-addition therefore already implements the automaton of \cref{prop:automaton}, and a learned completion
-head adds nothing: G3, which required a 10-point gain over the best baseline, fails on addition by
-construction.
+\paragraph{Per-position certificates on addition (H3).} On addition, every per-position rule halts at
+the light-cone bound on every split, with no premature stops and at least 99\% accuracy. Max-softmax,
+entropy and all four completion-head variants use 13.5 steps on OOD-depth and 75.4--75.6 steps on
+OOD-both, against 13.5 and 75.4 for the oracle $\LB(x)$. The theory explains why. A pending addition
+digit has two equally plausible outputs, carry or no carry, so a calibrated decoder is uncertain at
+exactly the positions that are not yet determined, and $S_{\mathrm{msp}}$ in \cref{eq:posthoc}, a
+minimum over positions, becomes a local certificate in the sense of \cref{cor:local}. A linear probe
+recovers the pending bit from the hidden state with AUC above 0.999 on every split (\cref{tab:probes}).
+Per-position confidence on addition therefore already implements the automaton of
+\cref{prop:automaton}, and a learned completion head has nothing to add. Gate G3, which required a
+10-point gain over the best baseline, fails on addition by construction.
 
-\paragraph{Completion heads on parity learn the clock.} On parity all completion heads halt after about
-nine steps regardless of depth, close to the largest training depth, and are correct on 31--34\% of
-OOD-depth and 0\% of OOD-both instances, well below ACT and PonderNet on OOD-depth. The joint and
-propagating variants behave the same. In training
-every position is done by step 10, so ``late'' and ``done'' are indistinguishable, and the parity
-backbone's hidden state encodes elapsed time well enough for the head to use it. The propagating head
-was designed to wait for its neighbours, but nothing in the training data forces it to: a neighbour is
-also always done by step 10. This is the same failure as the pooled gates, moved from the input length
-to the step count. G3 fails on parity as well. Following the pre-registered pivot, we read the results
-as a map of when simple signals suffice rather than as a win for a new halting method.
+\paragraph{Completion heads on parity learn the clock.} On parity, all completion heads halt after
+about nine steps regardless of depth, close to the largest training depth. They are correct on 31--34\%
+of OOD-depth and 0\% of OOD-both instances, well below ACT and PonderNet on OOD-depth, and the joint and
+propagating variants behave no differently. The cause lies in the training data. During training every
+position is done by step~10, so the targets in \cref{eq:done} make ``late'' and ``done''
+indistinguishable, and the parity backbone's hidden state encodes elapsed time well enough for the head
+to exploit it. The propagating head of \cref{eq:prop} was designed to wait for its neighbours, but
+nothing in the data forces it to, since a neighbour is also always done by step~10. This is the failure
+of the pooled gates in another guise, with the shortcut moved from the input length to the step count.
+G3 fails on parity as well, and following the pre-registered pivot we read the results as a map of when
+simple signals suffice rather than as a win for a new halting method.
 
 \paragraph{Decoupling (H4) and compute.} Training a completion head jointly changes the backbone's
-step-averaged ID-val accuracy by less than 0.02 points on both tasks, so the auxiliary target does not
-distort the task solution. Gates that reweight the task loss do: relative to the base model, ACT lowers
-it by 34 points and the v1 gate by 17 points on addition (86 points for the v1 gate on parity), because
-steps after the learned halting point receive little task gradient. In
-FLOPs, a completion head costs one pointwise MLP per position and step, and the cost of every rule is
-dominated by the number of steps it takes (\cref{fig:compute}). Wall-clock savings are smaller at our scale:
-with online early exit on 512 OOD-depth instances, max-softmax takes 19.8\,ms against 23.8\,ms for the
-full budget, while the completion heads take 23.8 and 28.3\,ms, because checking a rule after every step
-(a host synchronisation plus re-batching) costs about as much as the steps it saves
-(\cref{tab:probes}). Turning certified halting into latency savings needs fused halting checks or
-larger models whose step cost dominates.
+step-averaged ID-val accuracy by less than 0.02 points on both tasks, so the auxiliary target leaves the
+task solution undisturbed. Gates that reweight the task loss do disturb it. Relative to the base model,
+ACT lowers this accuracy by 34 points and the v1 gate by 17 points on addition (86 points for the v1 gate
+on parity), because steps after the learned halting point receive little task gradient. In FLOPs, a
+completion head costs one pointwise MLP per position and step, and the cost of every rule is dominated
+by the number of steps it takes (\cref{fig:compute}). Wall-clock savings are smaller at our scale. With
+online early exit on 512 OOD-depth instances, max-softmax takes 19.8\,ms against 23.8\,ms for the full
+budget, while the completion heads take 23.8 and 28.3\,ms (\cref{tab:probes}), because the host
+synchronisation and re-batching after every step cost about as much as the steps saved. Converting
+certified halting into latency will need fused halting checks or larger models.
 
-\paragraph{Ablations.} Removing input re-injection (recall) leaves OOD-depth intact but destroys
-OOD-both (stable oracle 0.6\%). Halving the width to 64 lowers the stable oracle to 95.2\% but
-max-softmax to 48.0\%: with less capacity the decoder's confidence stops tracking the pending state.
-Two convolutions per step ($r=2$) reach 100\% on both (\cref{tab:probes}). Single seed each.
-The accuracy-versus-steps trade-off of every threshold is shown in \cref{fig:tradeoff}, and premature stopping as a function of depth in
-\cref{fig:premature_depth} (\cref{app:results}).
+\paragraph{Ablations.} Removing input re-injection leaves OOD-depth intact but destroys OOD-both (stable
+oracle 0.6\%). Halving the width to 64 lowers the stable oracle only to 95.2\% but max-softmax to 48.0\%:
+with less capacity, the decoder's confidence stops tracking the pending state. Two convolutions per step
+($r=2$) reach 100\% on both (\cref{tab:probes}); each ablation uses a single seed. Trade-off curves
+and premature stopping by depth are in \cref{fig:tradeoff,fig:premature_depth}.

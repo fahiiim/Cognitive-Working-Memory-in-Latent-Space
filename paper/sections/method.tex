@@ -1,65 +1,73 @@
 \section{Backbone and completion heads}
 \label{sec:method}
 
-\paragraph{Backbone.} GLWM-2 is an instance of \cref{eq:local}: a pointwise embedding $E$, a
-pointwise initial state $H = \mathrm{LN}$, and the shared step
+\paragraph{Backbone.} Our backbone, GLWM-2, instantiates \cref{eq:local} with a pointwise embedding $E$,
+the initial state $H=\mathrm{LN}$, a pointwise two-layer MLP decoder $D$, and the shared step
 \begin{equation}
-  h^{(t+1)} = \mathrm{LN}\Big(h^{(t)} + W_{\mathrm{out}}\,
-  \mathrm{GELU}\big(\mathrm{Conv}^{(r)}_{3}\cdots \mathrm{GELU}(\mathrm{Conv}^{(1)}_{3}[h^{(t)}; e])\big)\Big),
+  h^{(t+1)} = \mathrm{LN}\Bigl(h^{(t)} + W_{\mathrm{out}}\,
+  \mathrm{GELU}\bigl(\mathrm{Conv}^{(r)}_{3}\circ\cdots\circ\mathrm{GELU}\circ\mathrm{Conv}^{(1)}_{3}\,[h^{(t)}; e]\bigr)\Bigr).
   \label{eq:step}
 \end{equation}
-with $r$ kernel-3 convolutions per step, input re-injection (``recall''), a residual connection, and a
-LayerNorm over channels at every position. The decoder is a pointwise two-layer MLP. The growth rate
-is therefore exactly $r$ positions per step (checked by the flip test). We use width 128 and $r=1$.
-The backbone is trained with a per-step cross-entropy
-averaged uniformly over $T_{\text{train}}=20$ steps (``fixed prior'') or with the progressive loss of
-\citet{bansal2022endtoend}; the pilot (\cref{sec:experiments}) selects the objective per task.
+Each step applies $r$ kernel-3 convolutions to the current state concatenated with the input embedding
+(input re-injection, or ``recall''), adds a residual connection, and normalises over channels at every
+position. Each convolution widens the receptive field by one position on either side, so the growth rate
+is exactly $r$, which we verify with the flip test. We use width $C=128$ and $r=1$. The backbone is
+trained with the per-step cross-entropy averaged uniformly over $\Ttrain=20$ steps (the ``fixed prior''
+objective) or with the progressive loss of \citet{bansal2022endtoend}; a pilot (\cref{sec:experiments})
+selects the objective for each task.
 
-\paragraph{Completion heads.} A completion head reads each position's latent state and predicts
-whether that position is \emph{done}: correct now and at every later step. The target is computed from
-the model's own trajectory,
+\paragraph{Completion heads.} A completion head reads the latent state of each position and predicts
+whether that position is \emph{done}, meaning that its prediction is correct now and will remain correct
+at every later step. The target comes from the model's own trajectory up to a horizon $T$:
 \begin{equation}
-  z_i^{(t)} = \prod_{s=t}^{T} \mathbb{1}\big[\hat y_i^{(s)} = y_i\big],
+  z_i^{(t)} = \prod_{s=t}^{T}\ind\bigl[\yhat_i^{(s)} = y_i\bigr]
+  = \min_{t\le s\le T}\ind\bigl[\yhat_i^{(s)} = y_i\bigr],
   \label{eq:done}
 \end{equation}
-i.e.\ a reversed cumulative minimum of per-position correctness, and the head is trained with binary
-cross-entropy. We study three variants. \emph{Post hoc}: a pointwise MLP on $h_i^{(t)}$, fitted after the
-backbone is frozen (rollouts to $2T_{\text{train}}$). \emph{Joint}: the same head trained alongside the
-backbone with an auxiliary binary cross-entropy (weight 1). Unlike ACT and PonderNet, the head never
-reweights the per-step task loss: the backbone still receives the same task gradient at every step,
-so the head is a separate prediction problem rather than a halting distribution over the task loss. \emph{Propagating}: the head also reads its
-neighbours' previous done probabilities through a kernel-3 convolution,
-$p_i^{(t)} = \sigma\big(g(h_i^{(t)}) + \mathrm{Conv}_3[p^{(t-1)}, \mathbf 1]_i\big)$, which mirrors the
-pending-bit automaton of \cref{prop:automaton}: a position can learn to wait until its left neighbour
-reports done.
+that is, a reversed cumulative minimum of per-position correctness, and the head is trained with binary
+cross-entropy against $z_i^{(t)}$. We study three variants. The \emph{post-hoc} head is a pointwise MLP
+$p_i^{(t)} = \sigma\bigl(g(h_i^{(t)})\bigr)$ fitted after the backbone has been frozen, on rollouts of
+length $2\Ttrain$. The \emph{joint} head has the same form but is trained alongside the backbone with an
+auxiliary binary cross-entropy of weight 1. Unlike ACT and PonderNet, it never reweights the per-step
+task loss: the backbone receives the same task gradient at every step, so predicting completion is a
+separate problem rather than a halting distribution laid over the task loss. Finally, the
+\emph{propagating} head also reads its neighbours' previous done probabilities,
+\begin{equation}
+  p_i^{(t)} = \sigma\Bigl(g\bigl(h_i^{(t)}\bigr) + \mathrm{Conv}_3\bigl[p^{(t-1)}, \mathbf 1\bigr]_i\Bigr),
+  \label{eq:prop}
+\end{equation}
+which mirrors the pending-bit automaton of \cref{prop:automaton}: a position can learn to wait until
+its left neighbour reports that it is done.
 
-\paragraph{Halting rule.} An instance halts at the first step where every valid position is done with
-probability above $\tau$ (\cref{alg:halt}); $\tau$ is selected on ID-val as the cheapest threshold whose
-accuracy is within 0.5 points of the best. Because the rule takes a minimum over positions, its cost
-grows with the slowest position, not with the input length.
+\paragraph{Halting rule.} An instance halts at the first step at which every valid position is done with
+probability above a threshold $\theta$, or at the budget $\Tmax$:
+\begin{equation}
+  \tau_\theta(x) = \min\Bigl(\bigl\{\,t\ge 1 : \min_{0\le i<P} p_i^{(t)}(x) > \theta\,\bigr\}\cup\{\Tmax\}\Bigr),
+  \label{eq:halt}
+\end{equation}
+and returns $\yhat^{(\tau_\theta(x))}(x)$ (\cref{alg:halt} in \cref{app:details}). We select $\theta$ on
+ID-val as the cheapest threshold whose accuracy is within 0.5 points of the best. Because the rule takes a
+minimum over positions, its cost is set by the slowest position rather than by the input length.
 
-\begin{algorithm}[t]
-  \caption{Halting with local completion heads (batched; halted instances leave the batch).}
-  \label{alg:halt}
-  \begin{algorithmic}[1]
-    \Require input $x$, backbone $(E,H,U,D)$, completion head $c$, threshold $\tau$, budget $T_{\max}$
-    \State $e \gets E(x)$;\quad $h \gets H(e)$;\quad $p \gets \mathbf 0$
-    \For{$t = 1,\dots,T_{\max}$}
-      \State $h \gets U(h, e)$;\quad $\hat y \gets \arg\max D(h)$
-      \State $p \gets \sigma\big(c(h, p)\big)$ \Comment{per position; the pointwise head ignores $p$}
-      \If{$\min_{i\ \text{valid}} p_i > \tau$ \textbf{or} $t = T_{\max}$}
-        \State \Return $(\hat y, t)$
-      \EndIf
-    \EndFor
-  \end{algorithmic}
-\end{algorithm}
-
-\paragraph{Baselines.} All baselines use the same backbone and selection protocol. \emph{References}:
-fixed $T$ (selected on ID-val), the oracle lower bound $\mathrm{LB}(x)$, the any-step oracle (first
-step with the right answer), and the stable oracle (first step from which the answer stays right).
-\emph{Post hoc}: max-softmax and entropy (minimum confidence over positions), $k$-step prediction
-stability \citep{zhou2020pabee}, KL between consecutive steps and hidden-state change (maxima over
-positions), maximum confidence over steps \citep{fan2025looped}, and a pooled correctness head in the
-style of TRM \citep{jolicoeur2025trm} fitted post hoc. \emph{Jointly trained}: ACT
-\citep{graves2016act}, PonderNet with its KL to a geometric prior \citep{banino2021pondernet}, a joint
-pooled correctness head, and the v1 GLWM pooled gate with its initialisation fixed.
+\paragraph{Baselines.} Every baseline uses the same backbone and the same selection protocol. As
+references we report a fixed step count $T$ selected on ID-val, the oracle lower bound $\LB(x)$, the
+any-step oracle (the first step with the right answer) and the stable oracle (the first step from which
+the answer stays right). Writing $\pi_i^{(t)} = \operatorname{softmax}D(h_i^{(t)})$ for the predictive
+distribution at position $i$, four post-hoc rules halt once a scalar statistic crosses a threshold:
+\begin{equation}
+  \begin{aligned}
+    S_{\mathrm{msp}}^{(t)} &= \min_i \max_\gamma \pi_{i\gamma}^{(t)}, &\quad
+    S_{\mathrm{ent}}^{(t)} &= \max_i \mathrm{H}\bigl(\pi_i^{(t)}\bigr),\\
+    S_{\mathrm{KL}}^{(t)} &= \max_i \mathrm{KL}\bigl(\pi_i^{(t)}\,\big\|\,\pi_i^{(t-1)}\bigr), &\quad
+    S_{\Delta h}^{(t)} &= \frac{\lVert h^{(t)}-h^{(t-1)}\rVert_F}{\lVert h^{(t)}\rVert_F},
+  \end{aligned}
+  \label{eq:posthoc}
+\end{equation}
+where the first halts when it rises above its threshold and the other three when they fall below it.
+Note that max-softmax and entropy are per-position statistics combined by a worst case, whereas the
+hidden-state change pools over the whole input. We further include $k$-step prediction stability
+\citep{zhou2020pabee}, maximum confidence over steps \citep{fan2025looped}, and a pooled correctness head
+in the style of TRM \citep{jolicoeur2025trm} fitted post hoc. The jointly
+trained rules are ACT \citep{graves2016act}, PonderNet with its KL term towards a geometric prior
+\citep{banino2021pondernet}, a joint pooled correctness head, and the pooled gate of our earlier GLWM
+model (v1) with its initialisation fixed.

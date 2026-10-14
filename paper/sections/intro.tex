@@ -1,50 +1,48 @@
 \section{Introduction}
 \label{sec:intro}
 
-Recurrent and looped models solve harder problems by thinking longer: the same block is applied again
-and again, and more iterations buy more reasoning
+A recurrent or looped model applies the same block again and again, and every extra iteration buys more
+computation on the same input. This lets small networks extrapolate to instances harder than any seen
+in training, provided they are allowed to think for longer
 \citep{schwarzschild2021thinking,bansal2022endtoend,geiping2025scaling,jolicoeur2025trm}. The promise is
-adaptive compute, spending few steps on easy inputs and many on hard ones. Keeping it requires a
-stopping rule, and the rules in use (learned halting gates \citep{graves2016act,banino2021pondernet},
-confidence thresholds, and convergence tests \citep{zhou2020pabee,geiping2025scaling}) are fitted on the
-difficulty seen in training. The interesting inputs are the ones that are harder than anything seen in
-training, and there a stopping rule has to decide, from information the model has never been rewarded
-for reading, that the computation is finished.
+adaptive compute, with few steps on easy inputs and many on hard ones, and keeping it requires a
+stopping rule. The rules in common use, learned halting gates \citep{graves2016act,banino2021pondernet},
+confidence thresholds and convergence tests \citep{zhou2020pabee,geiping2025scaling}, are all fitted on
+the difficulty seen in training. Yet the inputs that matter most are the ones harder than anything in
+the training set, and on them the rule must decide that the computation is finished from information it
+was never rewarded for reading.
 
-We study this decision in a setting where the right answer to ``when is it finished?'' is known. For a
-local recurrent reasoner, where each step moves information a fixed number of positions, a light-cone
-argument gives every input a lower bound $\mathrm{LB}(x)$ on the step at which its answer can be
-certified (\cref{thm:lb}). Halting earlier returns an answer that the model's own information does not
-determine, which is correct only by luck of the data. The bound depends on the input's \emph{depth}, not
-its length, so it separates two kinds of distribution shift that are usually confounded: longer inputs
-and deeper ones. A local, size-invariant automaton can halt exactly at the bound for every length
-(\cref{prop:automaton}), so the bound is achievable, and we can ask which learned or post-hoc rules
-achieve it.
+We study this decision in a setting where the right answer is known. In a \emph{local} recurrent
+reasoner, one step moves information by at most $r$ positions, so after $t$ steps position $i$ depends
+only on the input within radius $rt$, its light cone. If that window does not yet determine the target,
+some other input agrees on the window but has a different answer, and the model must be wrong on one of
+the two. Every input therefore has a lower bound $\LB(x)=\ceil{\dstar(x)/r}$ on the first step at which
+its answer can be certified (\cref{thm:lb}), where the \emph{depth} $\dstar(x)$ is the largest radius any
+position needs. Halting earlier returns an answer that the model's own state does not determine, correct
+only by luck of the data. Because the bound depends on depth and not on length, it separates two shifts
+that are usually confounded, longer inputs and deeper ones. For the tasks we study, a constant-size local
+automaton halts at exactly $\LB(x)$ at every length (\cref{prop:automaton}), so the bound is attainable
+and we can ask which stopping rules attain it.
 
-\paragraph{Contributions.}
-\begin{itemize}
-  \item \textbf{Theory.} A light-cone lower bound for local recurrent reasoners that turns ``halting too
-  early'' into a per-instance, checkable quantity, with corollaries for local commit-on-done rules and
-  for rules that see only the input length, and closed-form depth oracles plus a matching automaton for
-  addition and segmented parity (\cref{sec:theory}). Every statement has an executable test.
-  \item \textbf{Benchmark.} DepthShift: tasks with exact per-instance depth, and frozen splits that vary
-  depth and length independently, up to $12.8\times$ the training depth (\cref{sec:benchmark}).
-  \item \textbf{Evaluation.} Fifteen stopping rules and four references on one backbone family (post-hoc
-  confidence and convergence rules, ACT, PonderNet, TRM-style and v1 pooled heads, and local completion
-  heads that we introduce), scored by accuracy, steps, and premature stops and errors relative to
-  $\mathrm{LB}(x)$ (\cref{sec:method,sec:experiments}).
-\end{itemize}
+Our contributions are threefold. We prove the light-cone bound, which turns ``halting too early'' into a
+checkable per-instance quantity, derive its consequences for local commit-on-done rules and for rules
+that see only the length, and give closed-form depth oracles and a matching automaton for addition and
+segmented parity, each with an executable test (\cref{sec:theory}). We introduce DepthShift, whose
+frozen splits vary depth and length independently up to $12.8\times$ the training depth
+(\cref{sec:benchmark}). And we evaluate fifteen stopping rules and four references on one backbone family,
+from post-hoc confidence and convergence tests through ACT, PonderNet and pooled TRM-style and v1 heads to
+a family of local \emph{completion heads} that we introduce, scoring each by accuracy, steps, and how often
+it stops or errs before $\LB(x)$ (\cref{sec:method,sec:experiments}).
 
-\paragraph{Findings.} (i) Jointly trained pooled gates leak length: on addition, ACT is 99.8\% accurate on
-deeper inputs while using fewer steps than the bound allows, by reading a global shortcut, and falls to
-35.9\% once inputs are both deeper and longer. (ii) Premature stopping and premature error are different
-things: global convergence rules halt before the bound on most deep addition inputs and are still
-right, because a travelling carry keeps the state moving. (iii) When pending positions are genuinely
-ambiguous, as in addition, per-position confidence is already a certificate: max-softmax halts at
-exactly $\mathrm{LB}(x)$ on every split, and our completion heads match it without improving on it.
-(iv) When they are not, as in parity, the completion heads, although designed after the automaton,
-learn the training clock and halt at the training depth, and pooled gates extrapolate in depth but
-fall below 1\% once inputs are also longer. (v) Jointly trained completion heads leave the backbone's
-solution unchanged, whereas gates that reweight the task loss degrade it. Taken together, the results
-say that the difficulty of termination detection lies less in the readout architecture than in
-training data that never shows a computation unfinished at a late step.
+The results tell a consistent story. Jointly trained pooled gates leak length: on addition, ACT is
+99.8\% accurate on deeper inputs with fewer steps than the bound allows, because it reads a global
+shortcut, and falls to 35.9\% once inputs are both deeper and longer. Premature stopping and premature
+error are different things: convergence rules halt before the bound on most deep addition inputs and
+are still right, because a travelling carry keeps the hidden state moving until it lands. When pending
+positions are genuinely ambiguous, as in addition, per-position confidence is already a certificate;
+max-softmax halts at exactly $\LB(x)$ on every split, and our completion heads match it without improving
+on it. When they are not, as in parity, the completion heads learn the training clock, while pooled gates
+extrapolate in depth but fall below 1\% once inputs are also longer. Finally, jointly trained completion
+heads leave the backbone's solution intact, whereas gates that reweight the task loss degrade it. The
+difficulty of termination detection thus lies less in the readout than in training data that never show
+a computation still unfinished at a late step.

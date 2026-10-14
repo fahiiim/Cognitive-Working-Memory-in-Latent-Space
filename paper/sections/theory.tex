@@ -1,103 +1,126 @@
-\section{Setup and theory}
+\section{When can an answer be certified?}
 \label{sec:theory}
 
+We first make precise what it means for a recurrent model to be ``done''. The argument is a light-cone
+argument: when information travels at bounded speed, a position cannot know about input it has not yet
+had time to see.
+
 \paragraph{Local recurrent reasoners.}
-An input is a sequence $x = (x_0,\dots,x_{P-1})$ over an alphabet $\Sigma$, and the task assigns an
-output $y_i(x)\in\Gamma$ to every position. Positions outside $\{0,\dots,P-1\}$ hold a fixed padding
-symbol $\bot$; we write $\tilde x$ for the padded sequence. A \emph{local recurrent reasoner} with
-growth rate $r$ keeps one latent vector per position and computes
+An input is a sequence $x = (x_0,\dots,x_{P-1})\in\Sigma^P$, and the task assigns a target
+$y_i(x)\in\Gamma$ to every position. We pad the input with a symbol $\pad\notin\Sigma$, writing
+$\tilde x_j = x_j$ for $0\le j<P$ and $\tilde x_j=\pad$ otherwise. A \emph{local recurrent reasoner}
+with growth rate $r\in\N$ keeps one latent vector $h_i^{(t)}\in\R^C$ per position and step and computes
 \begin{equation}
-  e_i = E(x_i),\quad h_i^{(0)} = H(e_i),\quad
-  h_i^{(t+1)} = U\big(h^{(t)}_{i-r:i+r},\, e_{i-r:i+r}\big),\quad
-  \hat y_i^{(t)} = D\big(h_i^{(t)}\big),
+  \begin{aligned}
+    e_i &= E(\tilde x_i), &\qquad h_i^{(0)} &= H(e_i),\\
+    h_i^{(t+1)} &= U\bigl(h^{(t)}_{i-r:i+r},\; e_{i-r:i+r}\bigr), &\qquad
+    \yhat_i^{(t)} &= \operatorname*{arg\,max}_{\gamma\in\Gamma} D_\gamma\bigl(h_i^{(t)}\bigr),
+  \end{aligned}
   \label{eq:local}
 \end{equation}
-where $E, H, D$ are pointwise, $U$ is shared across positions and steps, and $h_j, e_j$ outside the
-input take fixed padding values. Our backbone (\cref{sec:method}) is an instance with
-$r$ kernel-3 convolutions per step. Write $W_i^{\rho}(x) = (\tilde x_{i-\rho},\dots,\tilde x_{i+\rho})$
-for the window of radius $\rho$ around $i$, including padding symbols.
+where the embedding $E$, the initial map $H$ and the decoder $D$ act pointwise, and the update $U$ is
+shared across positions and steps. Our backbone (\cref{sec:method}) is an instance with $r$ kernel-3
+convolutions per step. The information available to position $i$ is described by the window of radius
+$\rho$ around it, padding included:
+\begin{equation}
+  \Win{i}{\rho}(x) = \bigl(\tilde x_{i-\rho},\dots,\tilde x_{i+\rho}\bigr)\in(\Sigma\cup\{\pad\})^{2\rho+1}.
+  \label{eq:window}
+\end{equation}
 
 \begin{lemma}[Light cone]\label{lem:cone}
-For every $t\ge 0$, $h_i^{(t)}$ is a function of $W_i^{rt}(x)$ only, and this function does not
-depend on $i$. Hence if $W_i^{rt}(x) = W_{i'}^{rt}(x')$ then $\hat y_i^{(s)}(x) = \hat y_{i'}^{(s)}(x')$
-for all $s\le t$.
+For every $t\ge 0$ there is a function $\Phi_t$, independent of $i$, with
+$h_i^{(t)} = \Phi_t\bigl(\Win{i}{rt}(x)\bigr)$. Consequently, if $\Win{i}{rt}(x) = \Win{i'}{rt}(x')$,
+then $\yhat_i^{(s)}(x) = \yhat_{i'}^{(s)}(x')$ for all $s\le t$.
 \end{lemma}
 
 \paragraph{Per-instance depth.}
-The window is all a position can have seen, so the right notion of difficulty is how large a window
-must be before the answer is pinned down.
+Since the window is all that a position can have seen, the natural measure of difficulty is how large
+the window must be before the answer is pinned down.
 
 \begin{definition}[Determining radius and depth]\label{def:depth}
 Position $i$ of $x$ is \emph{$\rho$-determined} if every pair $(x', i')$ with
-$W_{i'}^{\rho}(x') = W_i^{\rho}(x)$ has $y_{i'}(x') = y_i(x)$. The determining radius
-$\rho_i(x)$ is the smallest such $\rho$, and the depth of the instance is
-$d^*(x) = \max_i \rho_i(x)$.
+$\Win{i'}{\rho}(x') = \Win{i}{\rho}(x)$ satisfies $y_{i'}(x') = y_i(x)$. The determining radius and
+the depth of the instance are
+\begin{equation}
+  \rho_i(x) = \min\bigl\{\rho\in\N : i \text{ is $\rho$-determined in } x\bigr\},
+  \qquad
+  \dstar(x) = \max_{0\le i<P}\rho_i(x).
+  \label{eq:depth}
+\end{equation}
 \end{definition}
 
-Because windows are compared at any position $i'$, the definition matches what a
-translation-equivariant model can know: it can see the input boundary only once $\bot$ enters its
-window.
+The partner position $i'$ is arbitrary, which matches what a translation-equivariant model can know:
+it learns where the input boundary is only once $\pad$ has entered its window.
 
-\begin{theorem}[Light-cone lower bound and unsoundness]\label{thm:lb}
-Let $f$ be any local recurrent reasoner with growth rate $r$, and let $t < \lceil \rho_i(x)/r\rceil$.
-Then there is a pair $(x', i')$ with $\hat y_{i'}^{(t)}(x') = \hat y_i^{(t)}(x)$ but
-$y_{i'}(x') \ne y_i(x)$. So at step $t$ the model is wrong at position $i$ of $x$ or at position $i'$
-of $x'$. In particular, no local reasoner can be correct on every input at a step earlier than
-$\mathrm{LB}(x) = \lceil d^*(x)/r\rceil$.
+\begin{theorem}[Light-cone lower bound]\label{thm:lb}
+Let $f$ be a local recurrent reasoner with growth rate $r$, and let $t < \ceil{\rho_i(x)/r}$. Then
+there is a pair $(x', i')$ with
+\begin{equation*}
+  \yhat_{i'}^{(t)}(x') = \yhat_i^{(t)}(x)
+  \qquad\text{but}\qquad
+  y_{i'}(x') \ne y_i(x),
+\end{equation*}
+so at step $t$ the model is wrong at position $i$ of $x$ or at position $i'$ of $x'$. In particular,
+no local reasoner is correct on every input at a step earlier than
+\begin{equation}
+  \LB(x) = \ceil*{\frac{\dstar(x)}{r}}.
+  \label{eq:lb}
+\end{equation}
 \end{theorem}
 
-The theorem constrains what any \emph{stopping rule} can achieve: halting $x$ at step
-$\tau(x) < \mathrm{LB}(x)$ returns an answer that is not certified by the information the model holds.
-Whether that answer is wrong depends on which member of the pair the data contain. Two consequences
-make this concrete.
+The theorem constrains every \emph{stopping rule}. If a rule halts input $x$ at step $\tau(x)$ with
+$\tau(x) < \LB(x)$, it returns an answer that the information held by the model does not certify.
+Whether that answer happens to be wrong depends on which member of the pair the data contain. Two
+consequences make this concrete.
 
 \begin{corollary}[Commit-on-done local rules]\label{cor:local}
-Suppose each position $i$ raises a done flag that depends only on its own history
-$h_i^{(0)},\dots,h_i^{(t)}$, and commits $\hat y_i^{(t)}$ when it does. If the system is correct on
-every input, then position $i$ of $x$ commits no earlier than $\lceil \rho_i(x)/r\rceil$, and the input
-halts no earlier than $\mathrm{LB}(x)$.
+Suppose each position raises a done flag that depends only on its own history
+$h_i^{(0)},\dots,h_i^{(t)}$ and commits $\yhat_i^{(t)}$ when it does. If the system is correct on every
+input, then position $i$ of $x$ commits no earlier than $\ceil{\rho_i(x)/r}$, and the input halts no
+earlier than $\LB(x)$.
 \end{corollary}
 
 \begin{corollary}[Rules that see only the length]\label{cor:length}
-For addition, $d^*$ ranges over $\{1,\dots,L+1\}$ at length $L$. A rule whose halting step depends
-only on $L$ is correct on every input of length $L$ only if $\tau(L)\ge \lceil (L+1)/r\rceil$.
-It then spends $\lceil (L+1)/r\rceil - \mathrm{LB}(x)$ extra steps on every input; for uniformly random
-digits $d^* = O(\log L)$ with high probability, so the waste is $\Theta(L)$ steps.
-A length-only rule fitted on training depths ($\tau(L) < \lceil (L+1)/r\rceil$) is instead wrong on
-one member of every flip pair with $d^* > r\,\tau(L)$.
+For addition of $L$-digit numbers, $\dstar\in\{1,\dots,L+1\}$. A rule whose halting step $\tau(L)$
+depends only on $L$ is correct on every input of length $L$ only if $\tau(L)\ge\ceil{(L+1)/r}$, in
+which case it wastes $\ceil{(L+1)/r}-\LB(x)$ steps on input $x$. For uniformly random digits
+$\dstar = O(\log L)$ with high probability, so the waste is $\Theta(L)$ steps. Conversely, a
+length-only rule fitted on training depths, with $\tau(L) < \ceil{(L+1)/r}$, is wrong on one member of
+every flip pair with $\dstar > r\,\tau(L)$.
 \end{corollary}
 
-\paragraph{The bound is achievable with local, size-invariant signals.}
-For our two exact tasks, the determining radius has a closed form, and a local automaton reaches
-the bound for every input length.
+\paragraph{The bound is attainable with local, size-invariant signals.}
+For our two exact tasks the determining radius has a closed form, and a local automaton reaches the
+bound at every input length. For addition we write digits least-significant first, with outputs at
+positions $0,\dots,L$ (position $L$ holds the final carry), and call $j<L$ a \emph{stop} if
+$a_j+b_j\ne 9$. A stop either generates a carry or absorbs one, so it is the only kind of position
+whose carry-out is known without looking further left. Let
+\begin{equation}
+  s_i(x) = \max\bigl(\{-1\}\cup\{\,j<i : a_j+b_j\ne 9\,\}\bigr)
+  \label{eq:stop}
+\end{equation}
+be the nearest stop to the left of $i$, with $-1$ standing for the boundary.
 
 \begin{proposition}[Depth oracles]\label{prop:oracles}
-\emph{Addition} (digits least-significant first, outputs at positions $0,\dots,L$ with position $L$ the
-carry): let a \emph{stop} be a position $j<L$ with $a_j+b_j\ne 9$. Then
-$\rho_i(x) = i - s_i$, where $s_i$ is the nearest stop before $i$, or $-1$ if there is none.
-Thus $d^*(x)$ is the largest gap between consecutive elements of $\{-1\}\cup\{\text{stops}\}\cup\{L\}$.
-\emph{Segmented parity}: $\rho_i(x) = i - s_i$ for non-delimiter $i$, where $s_i$ is the previous
-delimiter or $-1$; $d^*(x)$ is the longest run of non-delimiters.
+For addition, $\rho_i(x) = i - s_i(x)$ for every output position $i$. Hence $\dstar(x)$ is the largest
+gap between consecutive elements of $\{-1\}\cup\{\text{stops}\}\cup\{L\}$, which equals one plus the
+longest run of digit pairs summing to~9. For segmented parity, $\rho_i(x) = i - s_i(x)$ for every
+non-delimiter position $i$, where $s_i(x)$ is now the previous delimiter (or $-1$), and $\dstar(x)$ is the
+length of the longest run of non-delimiters.
 \end{proposition}
 
 \begin{proposition}[Achievability]\label{prop:automaton}
-For addition and segmented parity there is a local reasoner with $r=1$ and a commit-on-done local
-flag such that, for every input of every length, every committed answer is correct and the input
-halts at exactly $\mathrm{LB}(x) = d^*(x)$ steps.
+For addition and segmented parity there is a local reasoner with $r=1$ and a commit-on-done local flag
+such that, for every input of every length, every committed answer is correct and the input halts at
+exactly $\LB(x)=\dstar(x)$ steps.
 \end{proposition}
 
-The automaton behind \cref{prop:automaton} stores one bit of \emph{pending} state per position (is my
-carry-in, or my segment prefix, known yet?) and flips it when a resolved neighbour passes its value
-along. Its done flag is a pointwise function of its state, and the same rule works at every length.
-This is the inductive bias our completion heads target. A pooled gate or a global confidence
-statistic, in contrast, has no reason to wait for the slowest pending chain. \Cref{sec:experiments}
-tests whether learned signals behave like the automaton beyond the training depth.
-
-\paragraph{Mazes.} For mazes the determining radius has no closed form, and information must travel
-along corridors rather than straight lines, so the light cone gives only a loose bound. We use the
-optimal path length and the dead-end-filling depth as empirical depth proxies.
-
-All proofs are in \cref{app:proofs}. Each result has an executable check in
-\texttt{tests/test\_theory.py}: the flip test for \cref{lem:cone} on random backbones, the pair
-construction of \cref{thm:lb}, brute-force verification of \cref{prop:oracles}, and the automata
-of \cref{prop:automaton} on lengths up to 512.
+The automaton behind \cref{prop:automaton} keeps a single bit of \emph{pending} state per position,
+recording whether its carry-in (or its segment prefix parity) is known yet, and resolves it as soon as
+a resolved neighbour passes its value along. The done flag is a pointwise function of this state, and
+the same rule works at every length. This is the inductive bias our completion heads aim for. A pooled
+gate or a global confidence statistic, by contrast, has no structural reason to wait for the slowest
+pending chain, and \cref{sec:experiments} tests whether learned signals behave like the automaton
+beyond the training depth. Proofs are in \cref{app:proofs}, and every result is checked in
+\texttt{tests/test\_theory.py} (flip tests, pair constructions, brute-force oracles, and the automata on
+lengths up to 512).

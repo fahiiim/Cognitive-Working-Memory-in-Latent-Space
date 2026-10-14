@@ -1,6 +1,18 @@
 \section{Additional results}
 \label{app:results}
 
+\paragraph{The DepthShift splits.} \Cref{fig:splits} plots the length and depth of every frozen test
+instance. Because OOD-depth and OOD-length each differ from ID in a single variable, the effect of one can
+be measured with the other held fixed.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_splits.pdf}
+  \caption{Length and depth of every frozen test instance. OOD-depth and OOD-length each differ from ID
+  in a single variable, so the effects of length and of depth can be measured separately.}
+  \label{fig:splits}
+\end{figure}
+
 \paragraph{The v1 model, re-evaluated.} The original GLWM paper reported a mean of 1.05 steps with a gate
 initialised to halt early. Re-running it with the evaluation of this paper (deduplicated test set,
 exact match over all positions, \cref{tab:v1}) shows that both initialisations reach full accuracy,

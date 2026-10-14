@@ -1,38 +1,70 @@
 \section{Implementation details}
 \label{app:details}
 
-\paragraph{Training.} AdamW, learning rate $10^{-3}$, weight decay $10^{-4}$, 300 warm-up steps then
-cosine decay, gradient clipping at 1.0, fp32 with TF32 matrix multiplies (faster than bf16 autocast
-for this launch-bound model on our GPU). T1/T2: width 128, $r=1$, batch 512, 8000 iterations,
-$T_{\text{train}}=20$. T3: width 64, $r=4$, batch 32 (with random dihedral augmentation), 5000
-iterations, $T_{\text{train}}=32$. Training batches are sampled on the GPU and filtered against the
-ID-val and ID-test hashes. Seeds 0--4 for the base models and 0--2 for the jointly trained methods
-(T1/T2); seeds 0--1 for mazes.
+\paragraph{Training.} We use AdamW with learning rate $10^{-3}$ and weight decay $10^{-4}$, 300 warm-up
+steps followed by cosine decay, and gradient clipping at 1.0. Training runs in fp32 with TF32 matrix
+multiplies, which was faster than bf16 autocast for this launch-bound model on our GPU. For T1 and T2 the
+backbone has width 128 and $r=1$ and is trained for 8000 iterations at batch size 512 with
+$\Ttrain=20$. For T3 it has width 64 and $r=4$ and is trained for 5000 iterations at batch size 32, with
+random dihedral augmentation and $\Ttrain=32$. Training batches are sampled on the GPU and filtered
+against the ID-val and ID-test hashes. Base models use seeds 0--4 and jointly trained methods seeds 0--2
+(T1/T2); mazes use seeds 0--1.
 
-\paragraph{Gate hyperparameters.} Every jointly trained gate gets the same budget of three settings
-on addition (seed 0), and the setting with the fewest mean ID-val steps among those within 0.5 points
-of the best ID-val accuracy is used everywhere (\texttt{configs/tune\_gates.yaml}). Settings: ACT
-ponder weight $\tau\in\{10^{-3},10^{-2},10^{-1}\}$; PonderNet $(\beta,\lambda_p)\in\{(0.01,0.1),(0.01,0.2),(0.1,0.05)\}$;
-v1 gate compute weight $\lambda\in\{10^{-3},10^{-2},10^{-1}\}$.
+\paragraph{Gate hyperparameters.} Every jointly trained gate receives the same budget of three settings
+on addition (seed 0). Among the settings within 0.5 points of the best ID-val accuracy, the one with the
+fewest mean ID-val steps is used everywhere (\texttt{configs/tune\_gates.yaml}). The grids are
+$\tauact\in\{10^{-3},10^{-2},10^{-1}\}$ for the ACT ponder weight,
+$(\beta,\lambda_p)\in\{(0.01,0.1),(0.01,0.2),(0.1,0.05)\}$ for PonderNet, and
+$\lambda\in\{10^{-3},10^{-2},10^{-1}\}$ for the compute weight of the v1 gate.
 
-\paragraph{Post-hoc heads.} Fitted on the frozen backbone for 1500 iterations (batch 256; mazes:
-batch 32) on fresh training-distribution batches rolled out to $2T_{\text{train}}$ steps (backbone in
-bf16 autocast, heads in fp32); Adam, learning rate $2\cdot 10^{-3}$ with cosine decay. The pooled correctness head (TRM-style) predicts exact match from the
-masked mean of the latent state; the completion heads predict \cref{eq:done} per position.
+\paragraph{Post-hoc heads.} The post-hoc heads are fitted on the frozen backbone for 1500 iterations
+(batch 256; batch 32 for mazes) on fresh training-distribution batches rolled out to $2\Ttrain$ steps,
+with the backbone in bf16 autocast and the heads in fp32. We use Adam with learning rate
+$2\cdot 10^{-3}$ and cosine decay. The pooled correctness head (TRM-style) predicts exact match from the
+masked mean of the latent state, and the completion heads predict the target of \cref{eq:done} per
+position.
 
-\paragraph{Threshold grids.} Probability rules: $\{0.5,0.6,0.7,0.8,0.9,0.95,0.98,0.99,0.995,0.999,0.9999\}$;
-entropy, KL and hidden-state change: 19 log-spaced values in $[10^{-6},1]$; stability $k\in\{2,3,5\}$;
-ACT cumulative halting $\{0.5,0.7,0.9,0.95,0.99\}$; PonderNet cumulative halting
-$\{0.3,0.5,0.7,0.9,0.95,0.99\}$; fixed $T\in\{1,\dots,T_{\max}\}$. Test-time budget
-$T_{\max} = \lceil \max d^*/r\rceil + 16$ per split.
+\paragraph{Halting loop.} \Cref{alg:halt} spells out the halting rule of \cref{eq:halt} as it runs at
+test time. Instances are processed in batches, and an instance leaves the batch as soon as it halts.
 
-\paragraph{Metrics.} Premature-stop rate: share of instances halted before $\mathrm{LB}(x)$;
-premature-error rate: share halted before $\mathrm{LB}(x)$ \emph{and} wrong; overthinking: steps beyond
-the first step from which the answer stays right, on correctly answered instances; regret: accuracy
-lost and extra steps spent relative to the stable oracle (steps on instances the oracle gets right);
-depth tracking: Spearman $\rho(\text{steps}, d^*)$; length leakage: partial Spearman
-$\rho(\text{steps}, L \mid d^*)$; calibration: 15-bin ECE of per-position done probabilities.
+\begin{algorithm}[h]
+  \caption{Halting with local completion heads (batched; halted instances leave the batch).}
+  \label{alg:halt}
+  \begin{algorithmic}[1]
+    \Require input $x$, backbone $(E,H,U,D)$, completion head $c$, threshold $\theta$, budget $\Tmax$
+    \State $e \gets E(x)$;\quad $h \gets H(e)$;\quad $p \gets \mathbf 0$
+    \For{$t = 1,\dots,\Tmax$}
+      \State $h \gets U(h, e)$;\quad $\yhat \gets \arg\max D(h)$
+      \State $p \gets \sigma\bigl(c(h, p)\bigr)$ \Comment{per position; the pointwise head ignores $p$}
+      \If{$\min_{i\ \text{valid}} p_i > \theta$ \textbf{or} $t = \Tmax$}
+        \State \Return $(\yhat, t)$
+      \EndIf
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
 
-\paragraph{Compute.} \Cref{tab:compute} lists measured GPU time per sweep.
+\paragraph{Threshold grids.} Probability rules use the thresholds
+\begin{equation*}
+  \theta\in\{0.5,\,0.6,\,0.7,\,0.8,\,0.9,\,0.95,\,0.98,\,0.99,\,0.995,\,0.999,\,0.9999\}.
+\end{equation*}
+Entropy, KL and hidden-state change
+use 19 log-spaced values in $[10^{-6},1]$, stability uses $k\in\{2,3,5\}$, ACT thresholds its cumulative
+halting probability at $\{0.5,0.7,0.9,0.95,0.99\}$, PonderNet at $\{0.3,0.5,0.7,0.9,0.95,0.99\}$, and the
+fixed-step rule uses $T\in\{1,\dots,\Tmax\}$. The test-time budget of each split is
+\begin{equation*}
+  \Tmax = \ceil*{\frac{\max_x \dstar(x)}{r}} + 16.
+\end{equation*}
+
+\paragraph{Metrics.} Besides accuracy, mean steps and the premature rates of \cref{eq:premature}, we
+record several diagnostics. Let $t^{\mathrm{stab}}(x)$ be the first step from which the answer stays
+correct, the step chosen by the stable oracle. \emph{Overthinking} is
+$\tau(x)-t^{\mathrm{stab}}(x)$, averaged over correctly answered instances. \emph{Regret} is the accuracy
+lost and the extra steps spent relative to the stable oracle, the latter measured on instances that the
+oracle gets right. \emph{Depth tracking} is the Spearman correlation $\rho_S(\tau,\dstar)$, and
+\emph{length leakage} the partial Spearman correlation $\rho_S(\tau, L\mid\dstar)$; a rule that halts at
+$\LB(x)$ depends on depth alone and therefore leaks no length. Calibration is the 15-bin expected
+calibration error of the per-position done probabilities.
+
+\paragraph{Compute.} \Cref{tab:compute} lists the measured GPU time of each sweep.
 
 \IfFileExists{tables/compute.tex}{\input{tables/compute.tex}}{}

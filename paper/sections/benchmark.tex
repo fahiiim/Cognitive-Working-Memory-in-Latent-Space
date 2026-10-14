@@ -2,34 +2,40 @@
 \label{sec:benchmark}
 
 DepthShift pairs tasks that have an exact per-instance depth oracle with a split design that
-separates \emph{longer} inputs from \emph{deeper} ones (\cref{fig:splits}). All generators run on the
-GPU from fixed seeds; test sets are frozen and stored with SHA-256 hashes, and the training sampler
-drops any instance whose hash matches an in-distribution validation or test instance.
+separates \emph{longer} inputs from \emph{deeper} ones (\cref{fig:splits} in \cref{app:results}). All generators run on the GPU
+from fixed seeds. Test sets are frozen and stored with SHA-256 hashes, and the training sampler
+discards any instance whose hash matches an in-distribution validation or test instance.
 
-\paragraph{T1: addition.} Two $L$-digit numbers, least-significant digit first, one token
-$10a_i+b_i$ per position, plus one position for the final carry. By \cref{prop:oracles}, $d^*$ is
-the longest run of digit pairs summing to~9, plus one. To control $d^*$ independently of $L$, the
-generator inserts exactly one run of length $d^*-1$ between two stops, draws background runs with
-a random density, and caps them below $d^*-1$. Stops are uniform over the 90 pairs with $a+b\ne 9$,
-so a run receives a carry with probability $1/2$.
+\paragraph{T1: addition.} Each instance consists of two $L$-digit numbers $a$ and $b$, written
+least-significant digit first and encoded as one token $10a_i+b_i$ per position, plus one extra position
+for the final carry. By \cref{prop:oracles}, the depth is one plus the longest run of digit pairs that
+sum to~9, because a carry generated at a stop must ripple through the whole run before the positions
+behind it are determined. Uniformly random digits make long runs exponentially rare (each pair sums
+to~9 with probability $1/10$), so we control $\dstar$ directly. The generator inserts exactly one run of
+length $\dstar-1$ between two stops, draws background runs at a random density, and caps them below
+$\dstar-1$. Stops are drawn uniformly from the 90 pairs with $a+b\ne 9$, which means a run receives an
+incoming carry with probability $1/2$.
 
-\paragraph{T2: segmented parity.} Bits with delimiter tokens; the output at each position is the
-parity of the current segment so far. $d^*$ is the longest segment. Unlike addition, intermediate
-outputs keep flipping as information arrives, so the per-step predictions do not settle early.
+\paragraph{T2: segmented parity.} The input is a bit string interleaved with delimiter tokens, and the
+target at each position is the parity of the current segment up to that position. The depth is the
+length of the longest segment. Parity differs from addition in a way that turns out to matter: as
+information arrives from the left, the intermediate predictions keep flipping, so the per-step outputs
+do not settle early.
 
-\paragraph{T3: mazes.} $n\times n$ mazes from a randomized depth-first generator (input channels:
-open cell, start, goal; output: the shortest path). Information travels along corridors, so the light
-cone gives only a loose bound. We record two empirical depth proxies: the optimal path length and
-the number of dead-end-filling iterations a local rule needs to isolate the path. The generator and
-splits are released, but within our compute budget no maze backbone passed Gate G1
-(\cref{sec:limitations}), so the experiments use T1 and T2 only.
+\paragraph{T3: mazes.} We also generate $n\times n$ mazes with a randomized depth-first search; the
+input channels mark open cells, the start and the goal, and the target is the shortest path. We
+record the optimal path length and the number of dead-end-filling iterations a local rule needs to
+isolate the path as depth proxies. The generator and splits are released, but within our compute
+budget no maze backbone passed Gate G1 (\cref{sec:limitations}), so all experiments below use T1 and
+T2.
 
-\paragraph{Splits.} For T1 and T2 (\cref{tab:splits}): in-distribution (ID) lengths 4--20 and depths
-1--10; OOD-depth keeps the lengths but uses depths 11--20; OOD-length uses lengths 64--256 at ID
-depths; OOD-both uses lengths 64--256 and depths 32--128, up to $12.8\times$ the training maximum.
-A separate OOD-validation split (lengths 24--32, depths 12--16) is used only to tune the backbone.
-Thresholds of every stopping rule are chosen on ID-validation. For mazes we train on $9\times 9$ and
-test on $13\times13$ to $33\times33$.
+\paragraph{Splits.} \Cref{tab:splits} summarises the splits for T1 and T2. In-distribution (ID)
+instances have lengths 4--20 and depths 1--10. OOD-depth keeps these lengths and raises the depth to
+11--20; OOD-length raises the length to 64--256 at ID depths; OOD-both combines lengths 64--256 with
+depths 32--128, up to $12.8\times$ the training maximum. A separate OOD-validation split (lengths
+24--32, depths 12--16) is used only to tune the backbone, and the thresholds of every stopping rule are
+chosen on ID-validation. For mazes we train on $9\times 9$ grids and test on $13\times13$ up to
+$33\times33$.
 
 \begin{table}[t]
   \centering
@@ -39,7 +45,7 @@ test on $13\times13$ to $33\times33$.
   \small
   \begin{tabular}{lrrrl}
     \toprule
-    Split & Length & Depth $d^*$ & Instances & Purpose \\
+    Split & Length & Depth $\dstar$ & Instances & Purpose \\
     \midrule
     Train (sampled online) & 4--20 & 1--10 & -- & training \\
     ID-val / ID-test & 4--20 & 1--10 & 2000 / 2000 & thresholds / test \\
@@ -51,11 +57,3 @@ test on $13\times13$ to $33\times33$.
   \end{tabular}\\[2pt]
   {\footnotesize \textsuperscript{a}10--20 for addition and 11--20 for parity, the shortest lengths that admit the depth.}
 \end{table}
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth]{figures/fig2_splits.pdf}
-  \caption{Length and depth of every frozen test instance. OOD-depth and OOD-length differ from ID in
-  one variable each, so length effects and depth effects can be measured separately.}
-  \label{fig:splits}
-\end{figure}
